@@ -1,0 +1,34 @@
+{
+    "kurir": [
+        {
+            "nama": "Hans"
+        },
+        {
+            "nama": "Budi"
+        },
+        {
+            "nama": "Zoya"
+        },
+        {
+            "nama": "Gery"
+        },
+        {
+            "nama": "Ewill"
+        },
+        {
+            "nama": "Ananda"
+        },
+        {
+            "nama": "Hakim"
+        }
+        ,{
+            "nama":"Hans2"
+        }
+        ,{
+            "nama":"Hans3"
+        }
+        ,{
+            "nama":"Hans4"
+        }
+    ]
+}

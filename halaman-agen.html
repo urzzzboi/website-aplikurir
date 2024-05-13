@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style/agen-style.css">
+  <link rel="stylesheet" href="style/custom-style.css">
+  <script src="script/admin-script.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="navbar-left">
+      <img src="img/logo2.png" alt="Logo Perusahaan">
+    </div>
+    <div class="navbar-right">
+      <span id="welcome-message"></span>
+      <a onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <main>
+    <div class="left-panel">
+      <div class="info-top1">
+        <h1>Penerimaan Paket</h1>
+      </div>
+      <div class="info-top2">
+        <p>Masukkan data pengirim</p>
+      </div>
+      <div class="form1">
+        <form action="#">
+          <div class="label-horizontal">
+            <label for="nama-pengirim">Nama Pengirim</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="nama-pengirim" name="nama-pengirim">
+          </div>
+          <div class="label-horizontal">
+            <label for="nomor-pengirim">No. HP</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="nomor-pengirim" name="nomor-pengirim">
+          </div>
+          <div class="label-horizontal">
+            <label for="deskripsi">Deskripsi</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="deskripsi" name="deskripsi">
+          </div>
+          <div class="label-horizontal">
+            <label for="berat">Berat(kg)</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="berat" name="berat">
+          </div>
+          <div class="label-horizontal">
+            <label for="dimensi">Dimensi(kg)</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="dimensi" name="dimensi">
+          </div>
+          <div class="label-horizontal">
+            <label for="jlh-kirim">Jumlah Kiriman</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="jlh-kirim" name="jlh-kirim">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="line-center"></div>
+    <div class="right-panel">
+      <div class="btn-list">
+        <a href="#">List Paket</a>
+      </div>
+      <div class="info-top2">
+        <p>Masukkan data penerima</p>
+      </div>
+      <div class="form2">
+        <form action="#">
+          <div class="label-horizontal">
+            <label for="nama-penerima">Nama Penerima</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="nama-penerima" name="nama-penerima">
+          </div>
+          <div class="label-horizontal">
+            <label for="nomor-pengirim">No. HP</label>
+          </div>
+          <div class="input-horizontal">
+            <input type="text" id="nomor-pengirim" name="nomor-pengirim">
+          </div>
+          <div class="label-horizontal">
+            <label for="alamat">Alamat Tujuan</label>
+          </div>
+          <div class="input-horizontal">
+            <textarea id="alamat" name="alamat"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="info-top2">
+        <p>Memilih zona pengiriman</p>
+      </div>
+      <div class="opsi">
+        <form>
+          <select id="kecamatan" name="kecamatan">
+            <option value="">-- Pilih Kecamatan --</option>
+          </select>
+        </form>
+      </div>
+      <div class="opsi">
+        <form>
+          <select id="kelurahan" name="kelurahan">
+            <option value="">-- Pilih Kelurahan --</option>
+          </select>
+        </form>
+      </div>
+      <div class="button-konfirmasi">
+        <button type="button" class="button">Konfirmasi</button>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

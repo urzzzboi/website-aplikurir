@@ -1,0 +1,153 @@
+.list-paket{
+  align-self: center;
+}
+
+.list-paket a {
+  font-size: 14pt;
+  font-weight: bold;
+  color: rgb(134, 167, 137);
+  border: 3px solid rgb(134, 167, 137);
+  border-radius: 5px;
+  padding: 10px 40px;
+  margin: 20px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.list-paket a:hover {
+  background-color: rgb(134, 167, 137);
+  color: rgb(235, 243, 232);
+}
+
+main {
+  display: flex;
+  margin: 20px 60px;
+}
+
+.info-top,
+.left select {
+  margin-bottom: 10px;
+}
+
+#locationFields select,
+input,
+#button-add {
+  margin-top: 10px;
+  padding: 5px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.left {
+  float: left;
+}
+
+.line-center {
+  display: none;
+  width: 7px;
+  margin: 0 20px;
+  background-color: rgb(134, 167, 137);
+  border: 1px;
+  border-color: rgb(134, 167, 137);
+  border-radius: 20px;
+}
+
+.right {
+  float: right;
+  display: none;
+  justify-content: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.left,
+.right {
+  width: 100%;
+  height: 80vh;
+}
+
+.divider {
+  width: 7px;
+  background-color: rgb(134, 167, 137);
+  border: 1px;
+  border-color: rgb(134, 167, 137);
+  border-radius: 20px;
+}
+
+#titleText, .info-top, #locationHeader{
+  color: rgb(134, 167, 137);
+}
+
+#locationHeader{
+  margin-top: 46px;
+}
+
+#fieldsContainer input {
+  width: 100%;
+  border: 2px solid rgb(134, 167, 137);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#fieldsContainer input::placeholder {
+  color: rgb(30, 30, 30);
+  font-weight: bold;
+}
+
+#accountType,
+#locationFields select {
+  font-weight: bold;
+  padding: 10px 40px 10px 10px;
+  border-radius: 4px;
+  border: 2px solid rgb(134, 167, 137);
+  color: rgb(30, 30, 30);
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2386A789"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+}
+
+#accountType {
+  background-position: 95% 50%;
+}
+
+#locationFields select {
+  width: 100%;
+  background-position: 98% 50%;
+}
+
+#accountType option,
+#locationFields select option {
+  color: rgb(30, 30, 30);
+  font-weight: bold;
+}
+
+#accountType option:checked,
+#locationFields select option:checked {
+  margin-top: 20px;
+  background-color: rgb(134, 167, 137);
+  color: rgb(235, 243, 232);
+  font-weight: bold;
+}
+
+.button-add{
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(134, 167, 137);
+  color: rgb(235, 243, 232);
+  cursor: pointer;
+  font-size: 16pt;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-add:active{
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
