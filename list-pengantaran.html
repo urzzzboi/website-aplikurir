@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penentuan Kurir</title>
+    <title>List Pengantaran</title>
     <link rel="stylesheet" href="style/penentuan-style.css">
     <link rel="stylesheet" href="style/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -20,16 +20,13 @@
     </div>
     <div class="main">
         <div class="left-panel">
-            <h1>Penentuan Kurir</h1>
-            <h3>Menentukan zona pengiriman paket.</h3>
-            <div class="opsi-kecamatan">
-                <select id="kecamatan"></select>
-            </div>
-            <div class="opsi-kelurahan">
-                <select id="kelurahan"></select>
-            </div>
-            <h3>Menentukan kurir yang mengantar paket.</h3>
-            <div class="kurir-list" id="kurirList">
+            <div class="list-resi">
+                <h3>List Data Penerimaan Paket</h3>
+                <div class="resi-scroll-view" id="resiScrollView"></div>
+                <div class="checkbox">
+                    <input type="checkbox" id="checkAll" class="btn-checkbox">
+                    <label for="checkAll">Centang Semua</label>
+                </div>
             </div>
         </div>
         <div class="line-center"></div>

@@ -84,6 +84,7 @@ function goToPage(pageName) {
         case 'penentuan-kurir':
         case 'pendaftaran':
         case 'riwayat':
+            case 'list-pengantaran':
             window.location.href = url;
             break;
         default:
