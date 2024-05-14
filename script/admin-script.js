@@ -166,7 +166,21 @@ function showFields() {
             <input type="password" placeholder="Ulangi Password*">
         `;
     }
-    else if (accountType === "agen" || accountType === "karyawan") {
+    else if (accountType === "agen") {
+        lineCenter.style.display = "block";
+        rightForm.style.display = "inline-flex";
+        rightForm.style.justifyContent = "end";
+        titleText.textContent = "Menambahkan data akun"; // Menghapus teks di atas data
+        locationFields.style.display = "none";
+        locationHeader.style.display = "none";
+        button.style.display = "block"; // Menampilkan tombol "Tambah"
+        fieldsContainer.innerHTML = `
+            <input type="email" placeholder="Email*">
+            <input type="password" placeholder="Password*">
+            <input type="password" placeholder="Ulangi Password*">
+        `;
+    }
+    else if (accountType === "karyawan") {
         lineCenter.style.display = "block";
         rightForm.style.display = "inline-flex";
         rightForm.style.justifyContent = "end";
