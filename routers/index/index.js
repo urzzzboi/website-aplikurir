@@ -1,5 +1,5 @@
 import express from 'express';
-import forStatus from '../../controllers/auth.js';
+import forStatus from '../../controllers/user.js';
 
 const router = express.Router()
 
