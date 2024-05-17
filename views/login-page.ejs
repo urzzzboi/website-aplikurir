@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/login-style.css">
+    <link rel="stylesheet" href="style/custom-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="script/admin-script.js"></script>
+</head>
+<body>
+    <form action="/login" class="form-login" onsubmit="return validateLoginForm()" method="post">
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo Perusahaan">
+        </div>
+        <div class="input-container">
+            <label for="user-type">Status:</label>
+            <select id="user-type">
+                <option value="admin">Admin</option>
+                <option value="agen">Agen</option>
+                <option value="pegawai">Pegawai Gudang</option>
+            </select>
+        </div>
+        <div class="input-container">
+            <input type="email" placeholder="Email" value="<%= user != null ? user.email : "" %>" />
+        </div>
+        <div class="input-container">
+            <input type="password" id="password" placeholder="Password" value="<%= user != null ? user.password : "" %>" />
+            <span class="toggle-password" onclick="togglePassword()">
+                <i class="far fa-eye"></i>
+            </span>
+        </div>
+        <% if (message) { %>
+            <div class="alert-message">
+                Username atau Password yang dimasukkan salah!!!
+            </div>
+            <% } %>
+        <button class="green-btn">Masuk</button>
+    </form>
+</body>
+</html>
+</html>
