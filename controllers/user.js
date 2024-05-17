@@ -22,17 +22,17 @@ const auth = (req, res, next) => {
   User.findOne({ where: { email: data.Email_User } })
     .then((results) => {
       if (!results) {
-        req.session.err = "Incorrect email or password.";
+        req.session.err = "Email atau Password yang dimasukkan salah!.";
         req.session.user = {
           email: data.Email_User,
-        password: data.Password_User,
+          password: data.Password_User,
         };
         res.redirect("/login");
       } else if (data.Password_User != results.password) {
-        req.session.err = "Incorrect password.";
+        req.session.err = "Password yang dimasukkan salah!.";
         req.session.user = {
           email: data.Email_User,
-        password: data.Password_User,
+          password: data.Password_User,
         };
         res.redirect("/login");
       } else {

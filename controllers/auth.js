@@ -1,9 +1,9 @@
-const forStatus =(req,res,next) => {
+const valueStatus =(req,res,next) => {
     let user = req.session.user ||"";
-    if(user === user.Status_User) 
+    if(user && user.valueStatus) 
         next();
     else
-        res.redirect("Error Auth")
+        res.redirect("/forbidden")
 }
 
-export default forStatus;
+export default valueStatus;

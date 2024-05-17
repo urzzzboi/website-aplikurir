@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 
-import root_router from './routers/root.js'
+import rootrouter from './routers/root.js'
 
 const app = express()
 const hostname = '127.0.0.1'
@@ -21,9 +21,11 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
 }));
-app.use('/',root_router);
+
+app.use('/',rootrouter);
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
+app.set('views', './views');
 
 app.listen(port, () => {
 console.log(`Server running at ${hostname}:${port}`);

@@ -1,9 +1,10 @@
 import express from 'express';
-import user_controller from '../controllers/auth.js';
+import user_controller from '../controllers/user.js';
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('login', {user:req.session.user||"", message: "" });
+    res.render('login', { user: req.session.user || "", message: "" || ""});
 })
 router.get("/login", user_controller.login);
 router.get("/logout", user_controller.logout);

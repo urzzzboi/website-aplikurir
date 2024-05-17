@@ -1,8 +1,7 @@
 import express from 'express';
-import forStatus from '../../controllers/user.js';
+import valueStatus from '../../controllers/user.js';
 
-const router = express.Router()
+const router = express.Router();
 
-router.use('/login', forStatus)
-
+router.use('/login', valueStatus);
 export default router;
