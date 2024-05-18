@@ -23,9 +23,9 @@ app.use(session({
 }));
 
 app.use('/',rootrouter);
+
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
-app.set('views', './views');
 
 app.listen(port, () => {
 console.log(`Server running at ${hostname}:${port}`);

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - ApliKurir</title>
+    <link rel="icon" href="img/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="style/login-style.css">
     <link rel="stylesheet" href="style/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -14,7 +15,7 @@
 <body>
     <form action="/login" class="form-login" onsubmit="return validateLoginForm()" method="post">
         <div class="logo">
-            <img src="img/logo.png" alt="Logo Perusahaan">
+            <img src="img/logo.png" alt="Logo_Perusahaan">
         </div>
         <div class="input-container">
             <label for="user-type">Status:</label>
@@ -25,7 +26,7 @@
             </select>
         </div>
         <div class="input-container">
-            <input type="email" placeholder="Email" value="<%= user != null ? user.email : "" %>" / >
+            <input type="email" placeholder="Email" value="<%= user != null ? user.email : "" %>" />
         </div>
         <div class="input-container">
             <input type="password" id="password" placeholder="Password"
@@ -39,7 +40,7 @@
                 <%= message %>
             </div>
             <% } %>
-                <button class="green-btn">Masuk</button>
+                <button class="green-btn" onclick="goToPage(this.value)" >Masuk</button>
     </form>
 </body>
 

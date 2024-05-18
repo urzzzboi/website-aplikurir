@@ -40,15 +40,15 @@ function validateLoginForm() {
     switch (userType) {
         case 'admin':
             sessionStorage.setItem('userType', userType);
-            window.location.href = 'halaman-admin.html';
+            window.location.href = 'halaman-admin.ejs';
             break;
         case 'agen':
             sessionStorage.setItem('userType', userType);
-            window.location.href = 'halaman-agen.html';
+            window.location.href = 'halaman-agen.ejs';
             break;
         case 'pegawai':
             sessionStorage.setItem('userType', userType);
-            window.location.href = 'halaman-karyawan.html';
+            window.location.href = 'halaman-karyawan.ejs';
             break;
         default:
             alert('Peran yang dipilih tidak valid.');
@@ -78,13 +78,14 @@ function logout() {
 
 //Fungsi ke halaman
 function goToPage(pageName) {
-    let url = pageName + '.html';
+    let url = pageName + '.ejs';
 
     switch (pageName) {
         case 'penentuan-kurir':
         case 'pendaftaran':
         case 'riwayat':
             case 'list-pengantaran':
+                case 'halaman-admin':
             window.location.href = url;
             break;
         default:
