@@ -3,5 +3,5 @@ import valueStatus from '../../controllers/user.js';
 
 const router = express.Router();
 
-router.use('/login', valueStatus);
+router.use('/', valueStatus);
 export default router;

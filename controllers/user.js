@@ -41,7 +41,7 @@ const auth = (req, res, next) => {
       }
     })
     .catch((err) => {
-      req.session.err = "err database";
+      req.session.err = "Database Bermasalah";
       req.session.user = {
         email: data.Email_User,
         password: data.Password_User,

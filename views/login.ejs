@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/login-style.css">
     <link rel="stylesheet" href="style/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <script src="script/admin-script.js"></script> -->
+    <script src="script/admin-script.js"></script>
 </head>
 
 <body>
@@ -25,11 +25,11 @@
             </select>
         </div>
         <div class="input-container">
-            <input type="email" placeholder="Email" value="<%= user != null ? user.email : "" required %>" / >
+            <input type="email" placeholder="Email" value="<%= user != null ? user.email : "" %>" / >
         </div>
         <div class="input-container">
             <input type="password" id="password" placeholder="Password"
-                value="<%= user != null ? user.password : "" required %>" />
+                value="<%= user != null ? user.password : "" %>" />
             <span class="toggle-password" onclick="togglePassword()">
                 <i class="far fa-eye"></i>
             </span>
