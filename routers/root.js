@@ -1,18 +1,34 @@
 import express from 'express';
-import user_controller from '../controllers/user.js';
+import userController from '../controllers/user.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('login', { user: req.session.user || "", message: req.session.err || "" });
+router.get('/login', userController.login);
+router.post('/login', userController.auth);
+router.get('/logout', userController.logout);
+
+router.get('/views/page/halaman-admin.ejs', (req, res) => {
+  if (req.session.user && req.session.user.Status_User === 'admin') {
+    res.render('page/halaman-admin');
+  } else {
+    res.redirect('/login');
+  }
 });
 
-router.get('/', (req, res) => {
-    res.render('halaman-admin', {user: req.session.user || ""});
+router.get('/views/page/halaman-agen.ejs', (req, res) => {
+  if (req.session.user && req.session.user.Status_User === 'agen') {
+    res.render('page/halaman-agen');
+  } else {
+    res.redirect('/login');
+  }
 });
 
-router.get("/login", user_controller.login);
-router.get("/logout", user_controller.logout);
-router.post("/login", user_controller.auth);
+router.get('/views/page/halaman-karyawan.ejs', (req, res) => {
+  if (req.session.user && req.session.user.Status_User === 'pegawai') {
+    res.render('page/halaman-karyawan');
+  } else {
+    res.redirect('/login');
+  }
+});
 
 export default router;

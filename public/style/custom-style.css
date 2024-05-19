@@ -157,6 +157,13 @@ h3 {
 }
 
 /* Button Style */
+
+.alert-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+
 .green-btn,
 .left-panel .green-btn,
 .right-panel .green-btn,

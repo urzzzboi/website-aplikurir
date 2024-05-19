@@ -1,32 +1,29 @@
 import express from 'express';
 import session from 'express-session';
+import bodyParser from 'body-parser';
+import userRoutes from './routers/root.js'
+import userController from './controllers/user.js'
 
-import rootrouter from './routers/root.js'
 
 const app = express()
 const hostname = '127.0.0.1'
 const port = 8081;
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/create-user', (req, res) => {
-    User.sync({force:true});
-        res.send('create db');
-})
-
-app.use(express.json());
-app.use(express.urlencoded({extended:false}));
 app.use(session({
-    secret: 'ini adalah kode secret###',
+    secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
-}));
+    cookie: { secure: false }
+  }));
 
-app.use('/',rootrouter);
-
+app.use('/', userRoutes);
+app.post('/login', userController.auth);
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 app.listen(port, () => {
-console.log(`Server running at ${hostname}:${port}`);
+console.log(`Server running at ${hostname}:${port}/login`);
 })

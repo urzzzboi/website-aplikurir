@@ -18,11 +18,11 @@ function togglePassword() {
 function redirectToPage() {
     const userType = document.getElementById('user-type').value;
     if (userType === 'admin') {
-        window.location.href = 'halaman-admin.html';
+        window.location.href = 'halaman-admin.ejs';
     } else if (userType === 'agen') {
-        window.location.href = 'halaman-agen.html';
+        window.location.href = 'halaman-agen.ejs';
     } else if (userType === 'karyawan') {
-        window.location.href = 'halaman-karyawan.html';
+        window.location.href = 'halaman-karyawan.ejs';
     }
 }
 
@@ -70,7 +70,7 @@ function logout() {
     const confirmation = confirm('Apakah Anda yakin akan logout?');
 
     if (confirmation) {
-        window.location.href = 'login-page.html';
+        window.location.href = '/';
     } else {
 
     }
@@ -84,8 +84,8 @@ function goToPage(pageName) {
         case 'penentuan-kurir':
         case 'pendaftaran':
         case 'riwayat':
-            case 'list-pengantaran':
-                case 'halaman-admin':
+        case 'list-pengantaran':
+        case 'halaman-admin':
             window.location.href = url;
             break;
         default:

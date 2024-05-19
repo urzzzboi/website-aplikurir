@@ -13,24 +13,23 @@
 </head>
 
 <body>
-    <form action="/login" class="form-login" onsubmit="return validateLoginForm()" method="post">
+    <form id="login-form" action="/login" class="form-login" method="post">
         <div class="logo">
             <img src="img/logo.png" alt="Logo_Perusahaan">
         </div>
         <div class="input-container">
             <label for="user-type">Status:</label>
-            <select id="user-type">
+            <select id="user-type" name="status" required>
                 <option value="admin">Admin</option>
                 <option value="agen">Agen</option>
                 <option value="pegawai">Pegawai Gudang</option>
             </select>
         </div>
         <div class="input-container">
-            <input type="email" placeholder="Email" value="<%= user != null ? user.email : "" %>" />
+            <input type="email" name="email" placeholder="Email" value="<%= user != null ? user.email : "" %>" required />
         </div>
         <div class="input-container">
-            <input type="password" id="password" placeholder="Password"
-                value="<%= user != null ? user.password : "" %>" />
+            <input type="password" id="password" name="password" placeholder="Password" value="<%= user != null ? user.password : "" %>" required />
             <span class="toggle-password" onclick="togglePassword()">
                 <i class="far fa-eye"></i>
             </span>
@@ -39,11 +38,40 @@
             <div class="alert-message">
                 <%= message %>
             </div>
-            <% } %>
-                <button class="green-btn" onclick="goToPage(this.value)" >Masuk</button>
+        <% } %>
+        <button class="green-btn" type="submit">Masuk</button>
     </form>
-</body>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            const form = event.target;
+            const formData = new FormData(form);
 
-</html>
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirectUrl;
+                } else {
+                    const alertMessage = document.querySelector('.alert-message');
+                    if (alertMessage) {
+                        alertMessage.textContent = data.message;
+                    } else {
+                        const newAlertMessage = document.createElement('div');
+                        newAlertMessage.className = 'alert-message';
+                        newAlertMessage.textContent = data.message;
+                        form.insertBefore(newAlertMessage, form.querySelector('.green-btn'));
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
 
 </html>

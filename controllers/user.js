@@ -13,40 +13,50 @@ const logout = (req, res, next) => {
   res.redirect("/");
 };
 
-const auth = (req, res, next) => {
+const auth = async (req, res, next) => {
   const data = {
     email: req.body.email,
     password: req.body.password,
+    status: req.body.status,
   };
   req.session.err = "";
-  User.findOne({ where: { email: data.Email_User } })
-    .then((results) => {
-      if (!results) {
-        req.session.err = "Email atau Password yang dimasukkan salah!.";
-        req.session.user = {
-          email: data.Email_User,
-          password: data.Password_User,
-        };
-        res.redirect("/login");
-      } else if (data.Password_User != results.password) {
-        req.session.err = "Password yang dimasukkan salah!.";
-        req.session.user = {
-          email: data.Email_User,
-          password: data.Password_User,
-        };
-        res.redirect("/login");
-      } else {
-        req.session.user = results;
-        res.redirect("/");
-      }
-    })
-    .catch((err) => {
-      req.session.err = "Database Bermasalah";
-      req.session.user = {
-        email: data.Email_User,
-        password: data.Password_User,
-      };
-      res.redirect("/login");
-    });
+
+  try {
+    console.log('Mencari user dengan email:', data.email, 'dan status:', data.status);
+    const user = await User.findOne({ where: { Email_User: data.email, Status_User: data.status } });
+    console.log('Hasil pencarian user:', user);
+
+    if (!user) {
+      return res.json({ success: false, message: "Username yang dimasukkan salah!" });
+    }
+
+    if (data.password !== user.Password_User) {
+      return res.json({ success: false, message: "Password yang dimasukkan salah!" });
+    }
+
+    req.session.user = user;
+    let redirectUrl = '/';
+
+    switch (user.Status_User) {
+      case 'admin':
+        redirectUrl = '/views/page/halaman-admin.ejs';
+        break;
+      case 'agen':
+        redirectUrl = '/views/page/halaman-agen.ejs';
+        break;
+      case 'pegawai':
+        redirectUrl = '/views/page/halaman-karyawan.ejs';
+        break;
+      default:
+        redirectUrl = '/';
+    }
+
+    return res.json({ success: true, redirectUrl: redirectUrl });
+
+  } catch (err) {
+    console.error('Database error:', err);
+    return res.json({ success: false, message: "Database Bermasalah" });
+  }
 };
+
 export default { login, logout, auth };
