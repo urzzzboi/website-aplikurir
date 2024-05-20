@@ -5,7 +5,7 @@ const login = (req, res, next) => {
   req.session.err = "";
   let user = req.session.user;
   req.session.user = null;
-  res.render("login", { user: user || "", message: msg });
+  res.render("/login", { user: user || "", message: msg });
 };
 
 const logout = (req, res, next) => {
@@ -14,6 +14,7 @@ const logout = (req, res, next) => {
 };
 
 const auth = async (req, res, next) => {
+  console.log('Request Body:', req.body);
   const data = {
     email: req.body.email,
     password: req.body.password,
@@ -23,10 +24,10 @@ const auth = async (req, res, next) => {
 
   try {
     console.log('Mencari user dengan email:', data.email, 'dan status:', data.status);
-    const user = await User.findOne({ where: { Email_User: data.email, Status_User: data.status } });
+    const user = await User.findOne({ where: { Email_User: data.email, Password_User: data.password, Status_User: data.status } });
     console.log('Hasil pencarian user:', user);
 
-    if (!user) {
+    if (data.email !== user.Password_User) {
       return res.json({ success: false, message: "Username yang dimasukkan salah!" });
     }
 

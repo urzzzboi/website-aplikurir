@@ -14,9 +14,8 @@
             <img src="img/logo2.png" alt="Logo Perusahaan">
         </div>
         <div class="navbar-right">
-            <span id="welcome-message"><%= user.email %></span>
-            <%= (!user?'<a href="/login" class="button is-light">Login</a>':'<a href="/logout"
-                                    class="button is-light">Logout</a>')%>
+            <span id="welcome-message"></span>
+            <a onclick="logout()">Logout</a>
         </div>
     </header>
     <main>

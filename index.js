@@ -1,16 +1,13 @@
 import express from 'express';
 import session from 'express-session';
-import bodyParser from 'body-parser';
-import userRoutes from './routers/root.js'
-import userController from './controllers/user.js'
-
+import userRoutes from './routers/root.js';
 
 const app = express()
 const hostname = '127.0.0.1'
 const port = 8081;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(session({
     secret: 'your-secret-key',
@@ -19,11 +16,14 @@ app.use(session({
     cookie: { secure: false }
   }));
 
+app.get('/', (req, res) => {
+    res.render('login-page');
+});
 app.use('/', userRoutes);
-app.post('/login', userController.auth);
+
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 app.listen(port, () => {
-console.log(`Server running at ${hostname}:${port}/login`);
+console.log(`Server running at ${hostname}:${port}`);
 })
