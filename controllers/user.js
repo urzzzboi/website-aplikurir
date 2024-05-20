@@ -1,37 +1,40 @@
+import bcrypt from 'bcrypt';
+import User from './models/User.js';
+
 const login = (req, res, next) => {
-  let msg = req.session.err || "";
+  const msg = req.session.err || "";
   req.session.err = "";
-  let user = req.session.user;
+  const user = req.session.user;
   req.session.user = null;
-  res.render("login-page", { user: user || "", message: msg });
+  res.render("halaman-admin", { user: user || "", message: msg });
 };
 
-// The other functions remain the same
 const logout = (req, res, next) => {
-  req.session.destroy();
-  res.redirect("/");
+  req.session.destroy((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 };
 
 const auth = async (req, res, next) => {
   console.log('Request Body:', req.body);
-  const data = {
-    email: req.body.email,
-    password: req.body.password,
-    status: req.body.status,
-  };
+  const { email, password, status } = req.body;
   req.session.err = "";
 
   try {
-    console.log('Mencari user dengan email:', data.email, 'dan status:', data.status);
-    const user = await User.findOne({ where: { Email_User: data.email, Password_User: data.password, Status_User: data.status } });
+    console.log('Mencari user dengan email:', email, 'dan status:', status);
+    const user = await User.findOne({ where: { Email_User: email, Status_User: status } });
     console.log('Hasil pencarian user:', user);
 
-    if (!user || data.email !== user.Email_User) {
+    if (!user) {
       req.session.err = "Username yang dimasukkan salah!";
       return res.redirect('/');
     }
 
-    if (data.password !== user.Password_User) {
+    const isPasswordValid = await bcrypt.compare(password, user.Password_User);
+    if (!isPasswordValid) {
       req.session.err = "Password yang dimasukkan salah!";
       return res.redirect('/');
     }

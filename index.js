@@ -24,10 +24,6 @@ app.use(express.static("public"));
 
 app.use('/', userRoutes);
 
-app.get('/', (req, res) => {
-  res.render('login-page');
-});
-
 app.listen(port, () => {
   console.log(`Server running at ${hostname}:${port}/login`);
 });
