@@ -15,7 +15,7 @@ const logout = (req, res, next) => {
 
 const auth = async (req, res, next) => {
   console.log('Request Body:', req.body);
-  const data = {
+  const User = {
     email: req.body.email,
     password: req.body.password,
     status: req.body.status,
