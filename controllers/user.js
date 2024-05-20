@@ -1,12 +1,12 @@
 import bcrypt from 'bcrypt';
-import User from './models/User.js';
+import User from '../models/user.js';
 
 const login = (req, res, next) => {
   const msg = req.session.err || "";
   req.session.err = "";
   const user = req.session.user;
   req.session.user = null;
-  res.render("halaman-admin", { user: user || "", message: msg });
+  res.render("login", { user: user || "", message: msg });
 };
 
 const logout = (req, res, next) => {
