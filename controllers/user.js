@@ -1,13 +1,12 @@
-import User from "../models/user.js";
-
 const login = (req, res, next) => {
   let msg = req.session.err || "";
   req.session.err = "";
   let user = req.session.user;
   req.session.user = null;
-  res.render("/login", { user: user || "", message: msg });
+  res.render("login-page", { user: user || "", message: msg });
 };
 
+// The other functions remain the same
 const logout = (req, res, next) => {
   req.session.destroy();
   res.redirect("/");
@@ -15,7 +14,7 @@ const logout = (req, res, next) => {
 
 const auth = async (req, res, next) => {
   console.log('Request Body:', req.body);
-  const User = {
+  const data = {
     email: req.body.email,
     password: req.body.password,
     status: req.body.status,
@@ -27,12 +26,14 @@ const auth = async (req, res, next) => {
     const user = await User.findOne({ where: { Email_User: data.email, Password_User: data.password, Status_User: data.status } });
     console.log('Hasil pencarian user:', user);
 
-    if (data.email !== user.Password_User) {
-      return res.json({ success: false, message: "Username yang dimasukkan salah!" });
+    if (!user || data.email !== user.Email_User) {
+      req.session.err = "Username yang dimasukkan salah!";
+      return res.redirect('/');
     }
 
     if (data.password !== user.Password_User) {
-      return res.json({ success: false, message: "Password yang dimasukkan salah!" });
+      req.session.err = "Password yang dimasukkan salah!";
+      return res.redirect('/');
     }
 
     req.session.user = user;
@@ -56,7 +57,8 @@ const auth = async (req, res, next) => {
 
   } catch (err) {
     console.error('Database error:', err);
-    return res.json({ success: false, message: "Database Bermasalah" });
+    req.session.err = "Database Bermasalah";
+    return res.redirect('/');
   }
 };
 

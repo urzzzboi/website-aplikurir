@@ -13,13 +13,13 @@
 </head>
 
 <body>
-    <form id="login-form" action="/login" class="form-login" method="post">
+    <form action="/login" class="form-login" method="post">
         <div class="logo">
             <img src="img/logo.png" alt="Logo_Perusahaan">
         </div>
         <div class="input-container">
             <label for="user-type">Status:</label>
-            <select id="user-type" name="status" required>
+            <select id="user-type" name="status">
                 <option value="admin">Admin</option>
                 <option value="agen">Agen</option>
                 <option value="pegawai">Pegawai Gudang</option>
@@ -41,37 +41,6 @@
         <% } %>
         <button class="green-btn" type="submit">Masuk</button>
     </form>
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-
-            fetch(form.action, {
-                method: form.method,
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = data.redirectUrl;
-                } else {
-                    const alertMessage = document.querySelector('.alert-message');
-                    if (alertMessage) {
-                        alertMessage.textContent = data.message;
-                    } else {
-                        const newAlertMessage = document.createElement('div');
-                        newAlertMessage.className = 'alert-message';
-                        newAlertMessage.textContent = data.message;
-                        form.insertBefore(newAlertMessage, form.querySelector('.green-btn'));
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
 </body>
 
 </html>
