@@ -1,7 +1,12 @@
-import { sequelize, DataTypes } from '../models/model.js';
+import { Sequelize, DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
 
-const User = sequelize.define('data_user', {
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'mysql',
+});
+
+const User = sequelize.define('User', {
   Email_User: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -15,11 +20,12 @@ const User = sequelize.define('data_user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-});
-
-// Hash password before saving it to the database
-User.beforeCreate(async (user) => {
-  user.Password_User = await bcrypt.hash(user.Password_User, 10);
+}, {
+  hooks: {
+    beforeCreate: async (user) => {
+      user.Password_User = await bcrypt.hash(user.Password_User, 10);
+    },
+  },
 });
 
 export default User;
