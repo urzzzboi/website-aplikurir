@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Beranda Admin</title>
-    <link rel="stylesheet" href="style/custom-style.css">
-    <script src="script/admin-script.js"></script>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <title>Halaman Beranda</title>
+   <link rel="stylesheet" href="css/custom-style.css">
 </head>
 
 <body>
-    <header>
-        <div class="navbar-left">
-            <img src="img/logo2.png" alt="Logo Perusahaan">
-        </div>
-        <div class="navbar-right">
-            <span id="welcome-message"></span>
-            <a onclick="logout()">Logout</a>
-        </div>
-    </header>
-    <main>
-        <div class="left-panel">
-            <div class="button-desc">
-                <h1>Penentuan Kurir</h1>
-                <h2>Menentukan kurir dan zona pada <br>pengiriman paket.</h2>
-            </div>
-            <button class="green-btn" value="penentuan-kurir" onclick="goToPage(this.value)">Penentuan Kurir</button>
-        </div>
-        <div class="right-panel">
-            <div class="button-desc">
-                <h1>Pendaftaran Akun </h1>
-                <h2>Mengelola akun agen, karyawan gudang<br>dan kurir</h2>
-            </div>
-            <button class="green-btn" value="pendaftaran" onclick="goToPage(this.value)">Pendaftaran</button>
-            <div class="button-desc">
-                <h1>Riwayat</h1>
-                <h2>Melihat riwayat pengiriman paket</h2>
-            </div>
-            <button class="green-btn" value="riwayat" onclick="goToPage(this.value)">Riwayat</button>
-        </div>
-    </main>
+   <header>
+      <div class="navbar-left">
+         <img src="img/logo2.png" alt="Logo Perusahaan">
+      </div>
+      <div class="navbar-right">
+        <span><%= user.email %></span>
+            <%- (!user?'<a href="/">Login</a>':'<a href="/logout">Logout</a>') %>
+      </div>
+   </header>
+   <main>
+      <div class="left-panel">
+         <div class="button-desc">
+            <h1>Penentuan Kurir</h1>
+            <h2>Menentukan kurir dan zona pada <br>pengiriman paket.</h2>
+         </div>
+         <a class="green-btn" href="/penentuan-kurir">Penentuan Kurir</a>
+      </div>
+      <div class="right-panel">
+         <div class="button-desc">
+            <h1>Pendaftaran Akun </h1>
+            <h2>Mengelola akun agen, karyawan gudang<br>dan kurir</h2>
+         </div>
+         <a class="green-btn" href="/pendaftaran">Pendaftaran</a>
+         <div class="button-desc">
+            <h1>Riwayat</h1>
+            <h2>Melihat riwayat pengiriman paket</h2>
+         </div>
+         <a class="green-btn" href="/riwayat">Riwayat</a>
+         <% if (user) { %>
+            <a href="/index/view-suplier">
+               Agen Perjalanan
+            </a>
+            <% } %>
+      </div>
+   </main>
 </body>
-
 </html>

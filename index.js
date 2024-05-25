@@ -25,5 +25,5 @@ app.use(express.static("public"));
 app.use('/', userRoutes);
 
 app.listen(port, () => {
-  console.log(`Server running at ${hostname}:${port}/login`);
+  console.log(`Server running at ${hostname}:${port}`);
 });

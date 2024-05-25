@@ -1,44 +1,33 @@
 import express from 'express';
-import userController from '../controllers/user.js';
+import user_controller from '../controllers/user.js';
 
 const router = express.Router();
 
-router.get('/login', userController.login);
-router.post('/login', userController.auth);
-router.get('/logout', userController.logout);
-router.post('/register', userController.register);
+router.get('/', user_controller.login);
 
-// Rute untuk menampilkan form register
-router.get('/register', (req, res) => {
-  res.render('register');
+router.get('/logout', user_controller.logout);
+
+router.get("/admin", (req, res) => {
+    res.render('page/halaman-admin', {user: req.session.user || "" });
 });
 
-// Rute untuk menangani registrasi user baru
-router.post('/register', userController.register);
-
-// Rute terlindungi untuk halaman dashboard berdasarkan status
-router.get('/admin/dashboard', (req, res) => {
-    if (req.session.user && req.session.user.Status_User === 'admin') {
-        res.render('page/halaman-admin'); // Mengarahkan ke halaman admin di folder view/page
-    } else {
-        res.redirect('/login');
-    }
+router.get("/forb", (req, res) => {
+    res.render('forbidden', {user: req.session.user || "" });
 });
 
-router.get('/agen/dashboard', (req, res) => {
-    if (req.session.user && req.session.user.Status_User === 'agen') {
-        res.render('page/halaman-agen'); // Mengarahkan ke halaman agen di folder view/page
-    } else {
-        res.redirect('/login');
-    }
+router.post("/login", user_controller.auth);
+
+router.get('/penentuan-kurir', (req, res) =>{
+    res.render('page/penentuan-kurir');
 });
 
-router.get('/pegawai/dashboard', (req, res) => {
-    if (req.session.user && req.session.user.Status_User === 'pegawai') {
-        res.render('page/halaman-karyawan'); // Mengarahkan ke halaman karyawan di folder view/page
-    } else {
-        res.redirect('/login');
-    }
+router.get('/pendaftaran', (req, res) =>{
+    res.render('page/pendaftaran');
 });
+
+router.get('/riwayat', (req, res) =>{
+    res.render('page/riwayat');
+});
+
 
 export default router;
