@@ -17,6 +17,7 @@ const auth = (req, res, next) => {
   const data = {
     email: req.body.email,
     password: req.body.password,
+    status: req.body.status,
   };
   req.session.err = "";
   User.findOne({ where: { email: data.email } })

@@ -7,12 +7,9 @@ router.get('/', user_controller.login);
 
 router.get('/logout', user_controller.logout);
 
+
 router.get("/admin", (req, res) => {
     res.render('page/halaman-admin', {user: req.session.user || "" });
-});
-
-router.get("/forb", (req, res) => {
-    res.render('forbidden', {user: req.session.user || "" });
 });
 
 router.post("/login", user_controller.auth);
