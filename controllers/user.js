@@ -6,6 +6,8 @@ const login = (req, res, next) => {
   let user = req.session.user;
   req.session.user = null;
   res.render('login', { user: user || "", message: msg });
+
+  
 };
 
 const logout = (req, res, next) => {

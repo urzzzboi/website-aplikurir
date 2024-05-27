@@ -12,6 +12,10 @@ router.get("/admin", (req, res) => {
     res.render('page/halaman-admin', {user: req.session.user || "" });
 });
 
+router.get("/agen", (req, res) => {
+    res.render('page/halaman-agen', {user: req.session.user || "" });
+});
+
 router.post("/login", user_controller.auth);
 
 router.get('/penentuan-kurir', (req, res) =>{
