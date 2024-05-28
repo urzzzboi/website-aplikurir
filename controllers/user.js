@@ -25,12 +25,12 @@ const auth = (req, res, next) => {
 
   User.findOne({ where: { email: data.email } })
     .then((results) => {
-      if (!results) {
-        req.session.err = "Email atau Password yang dimasukkan salah!";
+      if (!results || results.password !== data.password) {
+        // Hanya atur email pada session jika autentikasi gagal
         req.session.user = {
           email: data.email,
-          password: data.password,
         };
+        req.session.err = "Email atau Password yang dimasukkan salah!";
         res.redirect("/");
       } else {
         req.session.user = results;
