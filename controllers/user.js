@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import { sequelize, DataTypes } from "./models/model.js";
 
 const login = (req, res, next) => {
   let msg = req.session.err || "";
@@ -46,5 +47,15 @@ const auth = (req, res, next) => {
     });
 };
 
+const getData = async (req, res) => {
+  try {
+      const results = await sequelize.query('SELECT * FROM data_users', { type: sequelize.QueryTypes.SELECT });
+      res.send(results);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server error');
+  }
+}
 
-export default { login, logout, auth };
+
+export default { login, logout, auth, getData };

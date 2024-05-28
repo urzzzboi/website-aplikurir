@@ -1,34 +1,21 @@
 import express from 'express';
 import user_controller from '../controllers/user.js';
+import path_controller from '../controllers/path.js';
 
 const router = express.Router();
 
 router.get('/', user_controller.login);
-
 router.get('/logout', user_controller.logout);
-
-
-router.get("/admin", (req, res) => {
-    res.render('page/halaman-admin', {user: req.session.user || "" });
-});
-
-router.get("/agen", (req, res) => {
-    res.render('page/halaman-agen', {user: req.session.user || "" });
-});
-
 router.post("/login", user_controller.auth);
 
-router.get('/penentuan-kurir', (req, res) =>{
-    res.render('page/penentuan-kurir');
-});
-
-router.get('/pendaftaran', (req, res) =>{
-    res.render('page/pendaftaran');
-});
-
-router.get('/riwayat', (req, res) =>{
-    res.render('page/riwayat');
-});
+router.get("/admin", path_controller.halamanAdmin);
+router.get("/agen", path_controller.halamanAgen);
+router.get('/karyawan', path_controller.halamanKaryawan);
+router.get('/penentuan-kurir', path_controller.halamanPenentuan);
+router.get('/pendaftaran', path_controller.halamanPendaftaran);
+router.get('/riwayat', path_controller.halamanRiwayat);
+router.get('/list-akun', path_controller.halamanAkun);
+router.get('/list-Pengantaran', path_controller.halamanPengantaran);
 
 
 export default router;
