@@ -1,3 +1,4 @@
+import Sequelize from "sequelize/lib/sequelize";
 import { sequelize, DataTypes } from "./model.js";
 
 const User = sequelize.define('data_users', {
