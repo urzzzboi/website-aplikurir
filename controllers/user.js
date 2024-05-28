@@ -6,8 +6,6 @@ const login = (req, res, next) => {
   let user = req.session.user;
   req.session.user = null;
   res.render('login', { user: user || "", message: msg });
-
-  
 };
 
 const logout = (req, res, next) => {
@@ -19,7 +17,7 @@ const auth = (req, res, next) => {
   const data = {
     email: req.body.email,
     password: req.body.password,
-    status: req.body.status, // Jika status sudah dikirimkan dari form login
+    status: req.body.status,
   };
   req.session.err = "";
 
@@ -35,7 +33,6 @@ const auth = (req, res, next) => {
       } else {
         req.session.user = results;
 
-        // Memeriksa status pengguna dan mengarahkan ke halaman yang sesuai
         switch (results.status) {
           case 'admin':
             res.redirect("/admin");
@@ -60,8 +57,5 @@ const auth = (req, res, next) => {
       res.redirect("/");
     });
 };
-
-
-
 
 export default { login, logout, auth};
