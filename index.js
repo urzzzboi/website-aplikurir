@@ -1,14 +1,21 @@
 import express from 'express';
 import session from 'express-session';
 import userRoutes from './routers/root.js';
-import actionData from './controllers/user.js;'
 
 const app = express();
 const hostname = '172.22.171.125';
 const port = 8081;
 
 
-app.get('/dataUser', actionData);
+app.get('/dataUser', async (req, res) => {
+  try {
+      const results = await sequelize.query('SELECT * FROM data_users', { type: sequelize.QueryTypes.SELECT });
+      res.send(results);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server error');
+  }
+});
 
 
 app.set('view engine', 'ejs');
