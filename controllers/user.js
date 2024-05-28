@@ -19,13 +19,14 @@ const auth = (req, res, next) => {
   const data = {
     email: req.body.email,
     password: req.body.password,
-    status: req.body.status,
+    status: req.body.status, // Jika status sudah dikirimkan dari form login
   };
   req.session.err = "";
+
   User.findOne({ where: { email: data.email } })
     .then((results) => {
       if (!results) {
-        req.session.err = "Email atau Passwordn yang dimasukkan salah!";
+        req.session.err = "Email atau Password yang dimasukkan salah!";
         req.session.user = {
           email: data.email,
           password: data.password,
@@ -33,11 +34,25 @@ const auth = (req, res, next) => {
         res.redirect("/");
       } else {
         req.session.user = results;
-        res.redirect("/admin");
+
+        // Memeriksa status pengguna dan mengarahkan ke halaman yang sesuai
+        switch (results.status) {
+          case 'admin':
+            res.redirect("/admin");
+            break;
+          case 'agen':
+            res.redirect("/agen");
+            break;
+          case 'karyawan':
+            res.redirect("/karyawan");
+            break;
+          default:
+            res.redirect("/");
+        }
       }
     })
     .catch((err) => {
-      req.session.err = "err database";
+      req.session.err = "Error database";
       req.session.user = {
         email: data.email,
         password: data.password,
@@ -45,6 +60,7 @@ const auth = (req, res, next) => {
       res.redirect("/");
     });
 };
+
 
 
 
