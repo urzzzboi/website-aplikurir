@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Karyawan Gedung</title>
+    <link rel="icon" href="img/logo-icon.png" type="image/x-icon">
     <script src="script/admin-script.js"></script>
+    <link rel="stylesheet" href="css/custom-style.css">
 </head>
 <body>
-    
+    <header>
+        <div class="navbar-left">
+            <img src="img/logo2.png" alt="Logo Perusahaan">
+          </div>
+        <div class="navbar-right">
+            <span><%= user.email %></span>
+                <%- (!user?'<a href="/">Login</a>':'<a href="/logout">Logout</a>') %>
+          </div>
+    </header>
 </body>
 </html>

@@ -6,7 +6,8 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-   <title>Halaman Beranda</title>
+   <title>Halaman Admin</title>
+   <link rel="icon" href="img/logo-icon.png" type="image/x-icon">
    <link rel="stylesheet" href="css/custom-style.css">
 </head>
 
@@ -24,26 +25,28 @@
       <div class="left-panel">
          <div class="button-desc">
             <h1>Penentuan Kurir</h1>
-            <h2>Menentukan kurir dan zona pada <br>pengiriman paket.</h2>
+            <p>Menentukan kurir dan zona pada <br>pengiriman paket.</p>
          </div>
-         <a class="green-btn" href="/penentuan-kurir">Penentuan Kurir</a>
+         <a class="green-btn1" href="/penentuan-kurir">Penentuan Kurir</a>
       </div>
       <div class="right-panel">
          <div class="button-desc">
             <h1>Pendaftaran Akun </h1>
-            <h2>Mengelola akun agen, karyawan gudang<br>dan kurir</h2>
+            <p>Mengelola akun agen, karyawan gudang<br>dan kurir</p>
+            <a class="green-btn1" href="/pendaftaran">Pendaftaran</a>
          </div>
-         <a class="green-btn" href="/pendaftaran">Pendaftaran</a>
-         <div class="button-desc">
+         
+         <div class="button-desc" id="riwayat">
             <h1>Riwayat</h1>
-            <h2>Melihat riwayat pengiriman paket</h2>
+            <p>Melihat riwayat pengiriman paket</p>
+            <a class="green-btn1" href="/riwayat">Riwayat</a>
          </div>
-         <a class="green-btn" href="/riwayat">Riwayat</a>
-         <% if (user) { %>
+         
+         <!-- <% if (user) { %>
             <a href="/index/view-suplier">
                Agen Perjalanan
             </a>
-            <% } %>
+            <% } %> -->
       </div>
    </main>
 </body>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendaftaran Agen & Karyawan</title>
+    <link rel="stylesheet" href="css/pendaftaran-styles.css" />
+    <link rel="stylesheet" href="css/custom-style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div class="back-btn">
+        <a href="/pendaftaran">
+          <i class="fas fa-arrow-left fa-lg"></i
+          ><span class="btn-text">Kembali</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="form-pendaftaran" action="/pendaftaran" method="get">
+      <p>Menambahkan akun agen & karyawan</p>
+
+      <input type="text" placeholder="Email" value="" />
+      <input type="text" placeholder="Password" value="" />
+      <select id="opsi-status">
+        <option value="">-- Opsi Status --</option>
+        <option value="agen">Agen</option>
+        <option value="Karyawan">Karyawan</option>
+      </select>
+      <button class="green-btn">Tambah</button>
+    </form>
+  </body>
+</html>

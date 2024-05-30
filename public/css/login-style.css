@@ -1,9 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .form-login {
     width: 500px;
     overflow: hidden;
     text-align: center;
     margin: auto;
-    margin: 20 0 0;
+    margin: 10 0 0;
     padding: 80px;
 }
 
@@ -16,10 +26,6 @@
     height: auto;
 }
 
-#user-type {
-    width: 200px;
-    margin-left: 20px;
-}
 
 .input-container {
     display: flex;
@@ -46,7 +52,7 @@
     color: rgb(134, 167, 137);
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 10px;
     transform: translateY(-50%);
 }

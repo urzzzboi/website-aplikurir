@@ -24,7 +24,6 @@ const auth = (req, res, next) => {
   User.findOne({ where: { email: data.email } })
     .then((results) => {
       if (!results || results.password !== data.password) {
-        // Hanya atur email pada session jika autentikasi gagal
         req.session.user = {
           email: data.email,
         };

@@ -15,7 +15,10 @@ router.get('/penentuan-kurir', path_controller.halamanPenentuan);
 router.get('/pendaftaran', path_controller.halamanPendaftaran);
 router.get('/riwayat', path_controller.halamanRiwayat);
 router.get('/list-akun', path_controller.halamanAkun);
-router.get('/list-Pengantaran', path_controller.halamanPengantaran);
+router.get('/list-pengantaran', path_controller.halamanPengantaran);
+router.get('/list-paket', path_controller.halamanPaket);
+router.get('/pendaftaran-kurir', path_controller.pilihkurir);
+router.get('/pendaftaran-agen-karyawan', path_controller.pilihagenkaryawan);
 
 
 export default router;

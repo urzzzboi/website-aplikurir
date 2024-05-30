@@ -1,6 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import userRoutes from './routers/root.js';
+import { sequelize } from "./models/model.js";
 
 const app = express();
 const hostname = '127.0.0.1';

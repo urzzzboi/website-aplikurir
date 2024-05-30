@@ -1,310 +1,350 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* Header */
 header {
-    background-color: rgb(134, 167, 137);
-    justify-content: space-between;
-    align-items: center;
+  background-color: rgb(134, 167, 137);
+  justify-content: space-between;
+  align-items: center;
 }
 
 header,
 .header {
-    height: 70px;
-    display: flex;
-
-    font-weight: bold;
-    padding: 0 20px;
+  height: 70px;
+  display: flex;
+  font-weight: bold;
+  padding: 0 20px;
 }
 
 .header {
-    justify-content: space-between;
-    justify-items: center;
-    font-size: 14pt;
+  justify-content: space-between;
+  justify-items: center;
+  font-size: 14pt;
+  align-items: center;
 }
 
 .header .back-btn a {
-    padding-left: 50px;
-    background-color: transparent;
-    color: rgb(30, 30, 30);
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-    text-decoration: none;
+  padding-left: 50px;
+  background-color: transparent;
+  color: rgb(30, 30, 30);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .header .back-btn a span {
-    font-size: 16pt;
-    font-weight: bold;
-    padding: 10px;
-    color: rgb(30, 30, 30);
-    
+  font-size: 16pt;
+  font-weight: bold;
+  padding: 10px;
+  color: rgb(30, 30, 30);
 }
 
-.back-btn{
-    align-content: center;
-    
+.back-btn {
+  align-content: center;
 }
 
 .navbar-right {
-    display: flex;
-    align-items: start;
+  display: flex;
+  align-items: start;
 }
 
 .navbar-left {
-    padding: 20px;
+  padding: 20px;
 }
 
 .navbar-left img {
-    width: 200px;
+  width: 200px;
 }
 
 .navbar-right span {
-    font-size: 14pt;
-    position: relative;
-    color: rgb(235, 243, 232);
+  font-size: 14pt;
+  position: relative;
+  color: rgb(235, 243, 232);
 }
 
 .navbar-right span::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -10px;
-    width: 1px;
-    height: 20px;
-    background-color: rgb(235, 243, 232);
-    transform: translateY(-50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  width: 1px;
+  height: 20px;
+  background-color: rgb(235, 243, 232);
+  transform: translateY(-50%);
 }
 
 .navbar-right a {
-    margin: 0 20px;
-    font-size: 14pt;
-    font-weight: bold;
-    color: rgb(255, 0, 0);
-    text-decoration: none;
-    cursor: pointer;
+  margin: 0 20px;
+  font-size: 14pt;
+  font-weight: bold;
+  color: rgb(255, 0, 0);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .navbar-right a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-
 
 /* Main */
 main {
-    padding: 0 50px;
-    background-color: rgb(255, 255, 255);
-    justify-content: space-evenly;
+  display: flex;
+  margin: 0 50px;
+  padding: 0 50px;
+  background-color: rgb(255, 255, 255);
+  justify-content: space-evenly;
 }
 
 .main {
-    background-color: aqua;
-    justify-content: center;
-    padding: 20px;
-
-}
-
-main,
-.main {
-    display: flex;
-    margin: 0 50px;
+  margin: 0 50px;
+  justify-content: center;
 }
 
 h1 {
-    font-size: 28pt;
-    color: rgb(134, 167, 137);
-    margin-bottom: 10px;
+  font-size: 28pt;
+  color: rgb(134, 167, 137);
+  margin-bottom: 5px;
 }
 
-h2 {
-    font-weight: bold;
-    font-size: 13pt;
-    color: rgb(30, 30, 30);
-    margin-bottom: 15px;
+.button-desc p {
+  font-weight: bold;
+  font-size: 13pt;
+  color: rgb(30, 30, 30);
+  margin-bottom: 20px;
 }
 
 h3 {
-    font-weight: 100;
-    font-size: 12pt;
-    color: rgb(134, 167, 137);
-    margin-bottom: 15px;
+  font-weight: 100;
+  font-size: 12pt;
+  color: rgb(134, 167, 137);
+  margin-bottom: 15px;
 }
 
 .button-desc {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .right-panel {
-    justify-content: center;
+  justify-content: center;
 }
 
 .right-panel2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
-
 
 .left-panel,
 .right-panel,
 .right-panel2,
 .confirmation button {
-    width: 100%;
+  width: 100%;
+}
+
+#riwayat {
+  margin-top: 60px;
 }
 
 /* Button Style */
 
 .alert-message {
-    color: red;
-    margin-bottom: 10px;
+  color: red;
+  margin-bottom: 10px;
 }
 
+a.green-btn1,
+.container-button a {
+  width: 250px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(134, 167, 137);
+  color: rgb(235, 243, 232);
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 2px;
+  text-align: center;
+  transition: transform 0.1s ease-in, box-shadow 0.8s ease-in-out;
+  text-decoration: none;
+}
+
+a.green-btn1:hover,
+.container-button a:hover {
+  transform: scale(0.99);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(30, 30, 30);
+}
 
 .green-btn,
-.left-panel .green-btn,
-.right-panel .green-btn,
-.right-panel2 .green-btn,
 .confirmation button {
-    padding: 10px 30px;
-    border: none;
-    background-color: rgb(134, 167, 137);
-    color: rgb(235, 243, 232);
-    cursor: pointer;
-    font-size: 16pt;
-    font-weight: bold;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
+    margin-top: 20px;
+  padding: 10px 40px;
+  border: none;
+  background-color: rgb(134, 167, 137);
+  color: rgb(235, 243, 232);
+  cursor: pointer;
+  font-size: 16pt;
+  font-weight: bold;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 
 .green-btn:active,
-.left-panel .green-btn:active,
-.right-panel .green-btn:active,
-.right-panel2 .green-btn:active,
 .confirmation button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(4px);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Line Center */
 .line-center {
-    width: 10px;
-    height: auto;
-    margin: 0 40px;
-    background-color: rgb(134, 167, 137);
-    border: 1px;
-    border-color: rgb(134, 167, 137);
-    border-radius: 20px;
+  width: 8px;
+  height: auto;
+  margin: 0 30px;
+  background-color: rgb(134, 167, 137);
+  border: 1px;
+  border-color: rgb(134, 167, 137);
+  border-radius: 20px;
 }
 
 /* Option Form Style*/
+.form-pendaftaran select,
 .opsi-kecamatan,
 .opsi-kelurahan,
-.input-container select {
-    margin-bottom: 10px;
+.input-container select,
+#opsi-status {
+  margin-bottom: 10px;
 }
 
 .opsi-kecamatan select,
 .opsi-kelurahan select,
-.input-container select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid rgb(134, 167, 137);
-    color: rgb(30, 30, 30);
-    font-size: 11pt;
-    font-weight: bold;
-    box-sizing: border-box;
-    outline: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2386A789"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-size: 24px 24px;
-    background-position: 98% 50%;
-    background-repeat: no-repeat;
-    padding-right: 10px;
+.input-container select,
+.form-pendaftaran select,
+#opsi-status {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid rgb(134, 167, 137);
+  color: rgb(30, 30, 30);
+  font-size: 11pt;
+  font-weight: bold;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2386A789"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-size: 24px 24px;
+  background-position: 98% 50%;
+  background-repeat: no-repeat;
+  padding-right: 10px;
 }
 
 /* Scroll-view Style*/
 .kurir-list {
-    max-height: 310px;
+  max-height: 310px;
 }
 
 .resi-scroll-view {
-    max-height: 400px;
+  max-height: 400px;
 }
 
 .resi-scroll-view,
 .kurir-list {
-    overflow-y: auto;
-    border: none;
-    margin-bottom: 10px;
+  overflow-y: auto;
+  border: none;
+  margin-bottom: 10px;
 }
 
 .resi-scroll-view::-webkit-scrollbar,
 .kurir-list::-webkit-scrollbar {
-    width: 10px;
-
+  width: 10px;
 }
 
 .resi-scroll-view::-webkit-scrollbar-track,
 .kurir-list::-webkit-scrollbar-track {
-    background: rgb(134, 167, 137);
-    border-radius: 10px;
+  background: rgb(134, 167, 137);
+  border-radius: 10px;
 }
 
 .resi-scroll-view::-webkit-scrollbar-thumb,
 .kurir-list::-webkit-scrollbar-thumb {
-    background: rgb(235, 243, 232);
-    border: 2px solid rgb(134, 167, 137);
-    border-radius: 10px;
-
+  background: rgb(235, 243, 232);
+  border: 2px solid rgb(134, 167, 137);
+  border-radius: 10px;
 }
 
 /* Checkbox Style */
 
 .checkbox-container {
-    position: absolute;
-    top: 25px;
-    right: 20px;
+  position: absolute;
+  top: 25px;
+  right: 20px;
 }
 
 .checkbox {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .checkbox label {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 input[type="checkbox"] {
-    width: 1.3em;
-    height: 1.3em;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(134, 167, 137);
-    border-radius: 50%;
-    vertical-align: middle;
-    appearance: none;
-    -webkit-appearance: none;
-    outline: none;
-    cursor: pointer;
+  width: 1.3em;
+  height: 1.3em;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(134, 167, 137);
+  border-radius: 50%;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:checked {
-    border: 1px solid rgb(134, 167, 137);
-    background-color: rgb(134, 167, 137);
+  border: 1px solid rgb(134, 167, 137);
+  background-color: rgb(134, 167, 137);
 }
 
 .btn-checkbox {
-    width: 60%;
-    height: 40%;
-    border: 3px solid red;
-    border-radius: 20px;
+  width: 60%;
+  height: 40%;
+  border: 3px solid red;
+  border-radius: 20px;
+}
+
+/* Button List Akun */
+
+.list-paket {
+  text-align: center;
+  margin-right: 30px;
+}
+
+.list-paket a {
+  font-size: 18pt;
+  font-weight: bold;
+  color: rgb(134, 167, 137);
+  border: 3px solid rgb(134, 167, 137);
+  border-radius: 5px;
+  padding: 10px 40px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.list-paket a:hover {
+  background-color: rgb(134, 167, 137);
+  color: rgb(235, 243, 232);
 }
