@@ -22,17 +22,16 @@
       </div>
     </div>
 
-    <form class="form-pendaftaran" action="/pendaftaran" method="get">
+    <form class="form-pendaftaran" action="/tambahagen" method="post">
       <p>Menambahkan akun agen & karyawan</p>
-
-      <input type="text" placeholder="Email" value="" />
-      <input type="text" placeholder="Password" value="" />
-      <select id="opsi-status">
+      <input type="text" id="email" name="email" placeholder="Email" value="" />
+      <input type="text" id="password" name="password" placeholder="Password" value="" />
+      <select id="status" name="status">
         <option value="">-- Opsi Status --</option>
-        <option value="agen">Agen</option>
-        <option value="Karyawan">Karyawan</option>
+        <option>agen</option>
+        <option>karyawan</option>
       </select>
-      <button class="green-btn">Tambah</button>
+      <button type="submit" class="green-btn">Tambah</button>
     </form>
   </body>
 </html>

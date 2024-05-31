@@ -19,7 +19,42 @@
         </div>
     </div>
     <main>
-      
+        <div class="container">
+            <div class="info">
+                <h1>List of Deliveries</h1>
+                <a class="btn-paket" href="/">Create New Delivery</a>
+            </div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Pengirim</th>
+                    <th>No HP Pengirim</th>
+                    <th>Deskripsi</th>
+                    <th>Berat</th>
+                    <th>Dimensi</th>
+                    <th>Jumlah Kiriman</th>
+                    <th>Nama Penerima</th>
+                    <th>No HP Penerima</th>
+                    <th>Alamat Tujuan</th>
+                    <th>Created At</th>
+                </tr>
+                <% deliveries.forEach(function(delivery) { %>
+                    <tr>
+                        <td><%= delivery.id %></td>
+                        <td><%= delivery.nama_pengirim %></td>
+                        <td><%= delivery.no_hp_pengirim %></td>
+                        <td><%= delivery.deskripsi %></td>
+                        <td><%= delivery.berat %></td>
+                        <td><%= delivery.dimensi %></td>
+                        <td><%= delivery.jumlah_kiriman %></td>
+                        <td><%= delivery.nama_penerima %></td>
+                        <td><%= delivery.no_hp_penerima %></td>
+                        <td><%= delivery.alamat_tujuan %></td>
+                        <td><%= delivery.created_at %></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
     </main>
 
 </html>

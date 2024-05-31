@@ -1,92 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halaman Agen</title>
-  <link rel="icon" href="img/logo-icon.png" type="image/x-icon">
-  <link rel="stylesheet" href="css/agen-style.css">
-  <link rel="stylesheet" href="css/custom-style.css">
-  <script src="script/admin-script.js"></script>
+  <link rel="icon" href="/img/logo-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/agen-style.css">
+  <link rel="stylesheet" href="/css/custom-style.css">
+  <script src="/script/admin-script.js"></script>
 </head>
-
 <body>
   <header>
     <div class="navbar-left">
-      <img src="img/logo2.png" alt="Logo Perusahaan">
+      <img src="/img/logo2.png" alt="Logo Perusahaan">
     </div>
     <div class="navbar-right">
       <span>
         <%= user.email %>
       </span>
-      <%- (!user?'<a href="/">Login</a>':'<a href="/logout">Logout</a>') %>
+      <%- (!user ? '<a href="/">Login</a>' : '<a href="/logout">Logout</a>') %>
     </div>
   </header>
   <div class="container">
-
     <div class="info">
       <h1>Penerimaan Paket</h1>
-      <a class="btn-paket" href="/list-paket">List Paket</a>
+      <a class="btn-paket" href="/deliveries">List Paket</a>
     </div>
-    <form action="#" method="post" class="form-container">
+    <form action="/save" method="post" class="form-container">
       <div class="left-form">
         <p>Masukkan data pengirim</p>
         <div class="form-flex">
-          <label for="nama-pengirim">Nama Pengirim</label>
-          <input type="text" name="nama-pengirim">
+          <label for="nama_pengirim">Nama Pengirim</label>
+          <input type="text" id="nama_pengirim" name="nama_pengirim" required>
         </div>
         <div class="form-flex">
-          <label for="handphone-pengirim">No. HP</label>
-          <input type="text" name="handphone-pengirim">
+          <label for="no_hp_pengirim">No. HP</label>
+          <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" required>
         </div>
         <div class="form-flex">
           <label for="deskripsi">Deskripsi</label>
-          <input type="text" name="deskripsi">
+          <input type="text" id="deskripsi" name="deskripsi">
         </div>
         <div class="form-flex">
           <label for="berat">Berat</label>
-          <input type="text" name="berat">
+          <input type="text" id="berat" name="berat">
         </div>
         <div class="form-flex">
           <label for="dimensi">Dimensi</label>
-          <input type="text" name="dimensi">
+          <input type="text" id="dimensi" name="dimensi">
         </div>
         <div class="form-flex">
-          <label for="jlh-kiriman">Jumlah Kiriman</label>
-          <input type="text" name="jlh-kiriman">
+          <label for="jumlah_kiriman">Jumlah Kiriman</label>
+          <input type="text" id="jumlah_kiriman" name="jumlah_kiriman">
         </div>
       </div>
       <div class="line-center"></div>
       <div class="right-form">
         <p>Masukkan data penerima</p>
         <div class="form-flex">
-          <label for="nama-penerima">Nama Penerima</label>
-          <input type="text" name="nama-penerima">
+          <label for="nama_penerima">Nama Penerima</label>
+          <input type="text" id="nama_penerima" name="nama_penerima" required>
         </div>
         <div class="form-flex">
-          <label for="handphone-penerima">No. HP</label>
-          <input type="text" name="handphone-penerima">
+          <label for="no_hp_penerima">No. HP</label>
+          <input type="text" id="no_hp_penerima" name="no_hp_penerima" required>
         </div>
         <div class="form-flex">
-          <label for="alamat">Alamat Tujuan</label>
-          <textarea id="alamat" name="alamat"></textarea>
+          <label for="alamat_tujuan">Alamat Tujuan</label>
+          <textarea id="alamat_tujuan" name="alamat_tujuan" required></textarea>
         </div>
         <p>Memilih zona pengiriman</p>
         <div class="opsi">
           <select id="kecamatan" name="kecamatan">
             <option value="">-- Pilih Kecamatan --</option>
+            <option>Medan Tuntungan</option>
           </select>
           <select id="kelurahan" name="kelurahan">
             <option value="">-- Pilih Kelurahan --</option>
+            <option>Simpang Selayang</option>
           </select>
         </div>
-        <button type="button" class="button">Konfirmasi</button>
+        <button type="submit" class="button">Konfirmasi</button>
       </div>
-
     </form>
   </div>
-
 </body>
-
 </html>
