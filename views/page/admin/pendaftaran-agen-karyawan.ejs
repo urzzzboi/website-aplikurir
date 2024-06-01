@@ -22,6 +22,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <form class="form-pendaftaran" action="/pendaftaran" method="post">
       <p>Menambahkan akun agen & karyawan</p>
 
@@ -29,11 +30,18 @@
       <input type="text" placeholder="Password" value="" />
       <input type="text" placeholder="Re-password" value="" />
       <select id="opsi-status">
+=======
+    <form class="form-pendaftaran" action="/tambahagen" method="post">
+      <p>Menambahkan akun agen & karyawan</p>
+      <input type="text" id="email" name="email" placeholder="Email" value="" />
+      <input type="text" id="password" name="password" placeholder="Password" value="" />
+      <select id="status" name="status">
+>>>>>>> bac2b4d2ba79c946b34ad54763c0a2f535545cbb
         <option value="">-- Opsi Status --</option>
-        <option value="agen">Agen</option>
-        <option value="Karyawan">Karyawan</option>
+        <option>agen</option>
+        <option>karyawan</option>
       </select>
-      <button class="green-btn">Tambah</button>
+      <button type="submit" class="green-btn">Tambah</button>
     </form>
   </body>
 </html>

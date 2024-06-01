@@ -21,21 +21,31 @@
       </div>
     </div>
 
-    <form class="form-pendaftaran" action="/pendaftaran" method="get">
+    <form class="form-pendaftaran" action="/tambahkurir" method="post">
       <p>Menambahkan akun Kurir</p>
+<<<<<<< HEAD
       <input type="text" placeholder="Nama" value="" />
       <input type="text" placeholder="No. Handphone" value="" />
       <input type="text" placeholder="Email" value="" />
       <input type="text" placeholder="Password" value="" />
       <input type="text" placeholder="Re-password" value="" />
+=======
+      <input type="text" id="nama" name="nama" placeholder="Nama" value=""/>
+      <input type="text" id="handphone" name="handphone" placeholder="No. Handphone" value="" />
+      <input type="text" id="email" name="email" placeholder="Email" value="" />
+      <input type="text" id="password" name="password" placeholder="Password" value="" />
+
+>>>>>>> bac2b4d2ba79c946b34ad54763c0a2f535545cbb
       <select id="kecamatan" name="kecamatan">
         <option value="">-- Pilih Kecamatan --</option>
+        <option>Medan Tuntungan</option>
       </select>
       <select id="kelurahan" name="kelurahan">
         <option value="">-- Pilih Kelurahan --</option>
+        <option>Simpang Selayang</option>
       </select>
 
-      <button class="green-btn">Tambah</button>
+      <button type="submit" class="green-btn">Tambah</button>
     </form>
   </body>
 </html>
