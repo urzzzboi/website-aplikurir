@@ -4,57 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Paket</title>
-    <link rel="stylesheet" href="css/custom-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <title>Daftar Pengiriman</title>
 </head>
 
 <body>
-    <div class="header">
-        <div class="back-btn">
-            <a href="/agen">
-                <i class="fas fa-arrow-left fa-lg"></i><span class="btn-text">Kembali</span>
-            </a>
-        </div>
-    </div>
-    <main>
-        <div class="container">
-            <div class="info">
-                <h1>List of Deliveries</h1>
-                <a class="btn-paket" href="/">Create New Delivery</a>
-            </div>
-            <table>
+    <h1>Daftar Pengiriman</h1>
+    <p>User: <%= user.email %>
+    </p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama Pengirim</th>
+                <th>No HP Pengirim</th>
+                <th>Deskripsi</th>
+                <th>Berat</th>
+                <th>Dimensi</th>
+                <th>Jumlah Kiriman</th>
+                <th>Nama Penerima</th>
+                <th>No HP Penerima</th>
+                <th>Alamat Tujuan</th>
+                <th>Kecamatan</th>
+                <th>Kelurahan</th>
+                <th>Nomor Resi</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% deliveries.forEach(function(delivery) { %>
                 <tr>
-                    <th>ID</th>
-                    <th>Nama Pengirim</th>
-                    <th>No HP Pengirim</th>
-                    <th>Deskripsi</th>
-                    <th>Berat</th>
-                    <th>Dimensi</th>
-                    <th>Jumlah Kiriman</th>
-                    <th>Nama Penerima</th>
-                    <th>No HP Penerima</th>
-                    <th>Alamat Tujuan</th>
-                    <th>Created At</th>
+                    <td>
+                        <%= delivery.ID_Data_Penerimaan_Paket %>
+                    </td>
+                    <td>
+                        <%= delivery.Nama_Pengirim %>
+                    </td>
+                    <td>
+                        <%= delivery.No_HP_Pengirim%>
+                    </td>
+                    <td>
+                        <%= delivery.Deskripsi %>
+                    </td>
+                    <td>
+                        <%= delivery.Berat %>
+                    </td>
+                    <td>
+                        <%= delivery.Dimensi %>
+                    </td>
+                    <td>
+                        <%= delivery.Jumlah_Kiriman %>
+                    </td>
+                    <td>
+                        <%= delivery.Nama_Penerima %>
+                    </td>
+                    <td>
+                        <%= delivery.No_HP_Penerima %>
+                    </td>
+                    <td>
+                        <%= delivery.Alamat_Tujuan %>
+                    </td>
+                    <td>
+                        <%= delivery.kecamatan %>
+                    </td>
+                    <td>
+                        <%= delivery.kelurahan %>
+                    </td>
+                    <td>
+                        <%= delivery.nomor_resi %>
+                    </td>
+                    <td>
+                        <%= delivery.createdAt%>
+                    </td>
                 </tr>
-                <% deliveries.forEach(function(delivery) { %>
-                    <tr>
-                        <td><%= delivery.id %></td>
-                        <td><%= delivery.nama_pengirim %></td>
-                        <td><%= delivery.no_hp_pengirim %></td>
-                        <td><%= delivery.deskripsi %></td>
-                        <td><%= delivery.berat %></td>
-                        <td><%= delivery.dimensi %></td>
-                        <td><%= delivery.jumlah_kiriman %></td>
-                        <td><%= delivery.nama_penerima %></td>
-                        <td><%= delivery.no_hp_penerima %></td>
-                        <td><%= delivery.alamat_tujuan %></td>
-                        <td><%= delivery.created_at %></td>
-                    </tr>
                 <% }); %>
-            </table>
-        </div>
-    </main>
+        </tbody>
+    </table>
+</body>
 
 </html>
