@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <link rel="stylesheet" href="/css/custom-style.css">
   <script src="/script/admin-script.js"></script>
 </head>
+
 <body>
   <header>
     <div class="navbar-left">
@@ -18,7 +20,7 @@
       <span>
         <%= user.email %>
       </span>
-      <%- (!user ? '<a href="/">Login</a>' : '<a href="/logout">Logout</a>') %>
+      <%- (!user ? '<a href="/">Login</a>' : '<a href="/logout">Logout</a>' ) %>
     </div>
   </header>
   <div class="container">
@@ -26,63 +28,69 @@
       <h1>Penerimaan Paket</h1>
       <a class="btn-paket" href="/deliveries">List Paket</a>
     </div>
-    <form action="/save" method="post" class="form-container">
-      <div class="left-form">
-        <p>Masukkan data pengirim</p>
-        <div class="form-flex">
-          <label for="nama_pengirim">Nama Pengirim</label>
-          <input type="text" id="nama_pengirim" name="nama_pengirim" required>
-        </div>
-        <div class="form-flex">
-          <label for="no_hp_pengirim">No. HP</label>
-          <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" required>
-        </div>
-        <div class="form-flex">
-          <label for="deskripsi">Deskripsi</label>
-          <input type="text" id="deskripsi" name="deskripsi">
-        </div>
-        <div class="form-flex">
-          <label for="berat">Berat</label>
-          <input type="text" id="berat" name="berat">
-        </div>
-        <div class="form-flex">
-          <label for="dimensi">Dimensi</label>
-          <input type="text" id="dimensi" name="dimensi">
-        </div>
-        <div class="form-flex">
-          <label for="jumlah_kiriman">Jumlah Kiriman</label>
-          <input type="text" id="jumlah_kiriman" name="jumlah_kiriman">
-        </div>
+    <% if (typeof nomorResi !=='undefined' ) { %>
+      <div class="info">
+        <h2>Nomor Resi: <%= nomorResi %>
+        </h2>
       </div>
-      <div class="line-center"></div>
-      <div class="right-form">
-        <p>Masukkan data penerima</p>
-        <div class="form-flex">
-          <label for="nama_penerima">Nama Penerima</label>
-          <input type="text" id="nama_penerima" name="nama_penerima" required>
-        </div>
-        <div class="form-flex">
-          <label for="no_hp_penerima">No. HP</label>
-          <input type="text" id="no_hp_penerima" name="no_hp_penerima" required>
-        </div>
-        <div class="form-flex">
-          <label for="alamat_tujuan">Alamat Tujuan</label>
-          <textarea id="alamat_tujuan" name="alamat_tujuan" required></textarea>
-        </div>
-        <p>Memilih zona pengiriman</p>
-        <div class="opsi">
-          <select id="kecamatan" name="kecamatan">
-            <option value="">-- Pilih Kecamatan --</option>
-            <option>Medan Tuntungan</option>
-          </select>
-          <select id="kelurahan" name="kelurahan">
-            <option value="">-- Pilih Kelurahan --</option>
-            <option>Simpang Selayang</option>
-          </select>
-        </div>
-        <button type="submit" class="button">Konfirmasi</button>
-      </div>
-    </form>
+      <% } %>
+        <form action="/save" method="post" class="form-container">
+          <div class="left-form">
+            <p>Masukkan data pengirim</p>
+            <div class="form-flex">
+              <label for="nama_pengirim">Nama Pengirim</label>
+              <input type="text" id="nama_pengirim" name="nama_pengirim" required>
+            </div>
+            <div class="form-flex">
+              <label for="no_hp_pengirim">No. HP</label>
+              <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" required>
+            </div>
+            <div class="form-flex">
+              <label for="deskripsi">Deskripsi</label>
+              <input type="text" id="deskripsi" name="deskripsi">
+            </div>
+            <div class="form-flex">
+              <label for="berat">Berat</label>
+              <input type="text" id="berat" name="berat">
+            </div>
+            <div class="form-flex">
+              <label for="dimensi">Dimensi</label>
+              <input type="text" id="dimensi" name="dimensi">
+            </div>
+            <div class="form-flex">
+              <label for="jumlah_kiriman">Jumlah Kiriman</label>
+              <input type="text" id="jumlah_kiriman" name="jumlah_kiriman">
+            </div>
+          </div>
+          <div class="line-center"></div>
+          <div class="right-form">
+            <p>Masukkan data penerima</p>
+            <div class="form-flex">
+              <label for="nama_penerima">Nama Penerima</label>
+              <input type="text" id="nama_penerima" name="nama_penerima" required>
+            </div>
+            <div class="form-flex">
+              <label for="no_hp_penerima">No. HP</label>
+              <input type="text" id="no_hp_penerima" name="no_hp_penerima" required>
+            </div>
+            <div class="form-flex">
+              <label for="alamat_tujuan">Alamat Tujuan</label>
+              <textarea id="alamat_tujuan" name="alamat_tujuan" required></textarea>
+            </div>
+            <p>Memilih zona pengiriman</p>
+            <div class="opsi">
+              <select id="kecamatan" name="kecamatan">
+                <option value="">-- Pilih Kecamatan --</option>
+                <option>Medan Tuntungan</option>
+              </select>
+              <select id="kelurahan" name="kelurahan">
+                <option value="">-- Pilih Kelurahan --</option>
+                <option>Simpang Selayang</option>
+              </select>
+            </div>
+            <button type="submit" class="button">Konfirmasi</button>
+          </div>
+        </form>
   </div>
 </body>
-</html>
+

@@ -1,4 +1,37 @@
 import { sequelize } from "../models/model.js";
+import { QueryTypes } from 'sequelize';
+
+// Function untuk menghasilkan nomor resi unik dengan format "ak" + 10 angka
+const generateNomorResi = async () => {
+    const MAX_ATTEMPTS = 10; // Batasan jumlah percobaan
+    let attempts = 0;
+    let isUnique = false;
+    let nomorResi = '';
+
+    while (!isUnique && attempts < MAX_ATTEMPTS) {
+        attempts += 1;
+        // Generate 10 random digits
+        const randomNumbers = Math.floor(1000000000 + Math.random() * 9000000000); // 10 digit angka
+        nomorResi = `AK${randomNumbers}`;
+
+        const [results] = await sequelize.query(`SELECT COUNT(*) AS count FROM penerimaan_paket WHERE nomor_resi = ?`, {
+            replacements: [nomorResi],
+            type: QueryTypes.SELECT
+        });
+
+        console.log('Query Results:', results);
+
+        if (results && results.count === 0) {
+            isUnique = true;
+        }
+    }
+
+    if (!isUnique) {
+        throw new Error('Unable to generate a unique nomor resi after maximum attempts');
+    }
+
+    return nomorResi;
+};
 
 // Function untuk menampilkan form input
 export const renderForm = (req, res) => {
@@ -10,19 +43,21 @@ export const renderForm = (req, res) => {
 export const savePackage = async (req, res) => {
     const {
         nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi,
-        jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan
+        jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan
     } = req.body;
 
-    const query = `INSERT INTO penerimaan_paket 
-        (nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
     try {
+        const nomorResi = await generateNomorResi();
+
+        const query = `INSERT INTO penerimaan_paket 
+            (nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, nomor_resi)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
         await sequelize.query(query, {
-            replacements: [nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan],
-            type: sequelize.QueryTypes.INSERT
+            replacements: [nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, nomorResi],
+            type: QueryTypes.INSERT
         });
-        res.redirect('/agen');
+        res.render('page/halaman-agen', { user: req.session.user || "", nomorResi });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
@@ -35,7 +70,7 @@ export const getDeliveries = async (req, res) => {
     const query = 'SELECT * FROM penerimaan_paket';
 
     try {
-        const results = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
+        const results = await sequelize.query(query, { type: QueryTypes.SELECT });
         res.render('page/agen/list-paket', { deliveries: results, user });
     } catch (error) {
         console.error(error);
