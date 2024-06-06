@@ -9,12 +9,56 @@
   <link rel="stylesheet" href="/css/agen-style.css" />
   <link rel="stylesheet" href="/css/custom-style.css" />
   <script src="/script/admin-script.js"></script>
-  <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 80%;
+      height: 80%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .close {
+      color: #aaa;
+      align-self: flex-end;
+      font-size: 28px;
+      font-weight: bold;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -34,116 +78,120 @@
       <h1>Penerimaan Paket</h1>
       <a class="btn-paket" href="/list-paket">List Paket</a>
     </div>
-    <% if (typeof nomorResi !=='undefined' ) { %>
+    <% if (typeof nomorResi !== 'undefined') { %>
       <div class="info">
-        <h2>Nomor Resi: <%= nomorResi %>
-        </h2>
+        <h2>Nomor Resi: <%= nomorResi %></h2>
       </div>
-      <% } %>
-        <form action="/save" method="post" class="form-container">
-          <div class="left-form">
-            <p>Masukkan data pengirim</p>
-            <div class="form-flex">
-              <label for="nama_pengirim">Nama Pengirim</label>
-              <input type="text" id="nama_pengirim" name="nama_pengirim" required />
-            </div>
-            <div class="form-flex">
-              <label for="no_hp_pengirim">No. HP</label>
-              <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" required />
-            </div>
-            <div class="form-flex">
-              <label for="deskripsi">Deskripsi</label>
-              <input type="text" id="deskripsi" name="deskripsi" />
-            </div>
-            <div class="form-flex">
-              <label for="berat">Berat</label>
-              <input type="text" id="berat" name="berat" />
-            </div>
-            <div class="form-flex">
-              <label for="dimensi">Dimensi</label>
-              <input type="text" id="dimensi" name="dimensi" />
-            </div>
-            <div class="form-flex">
-              <label for="jumlah_kiriman">Jumlah Kiriman</label>
-              <input type="text" id="jumlah_kiriman" name="jumlah_kiriman" />
-            </div>
-          </div>
-          <div class="line-center"></div>
-          <div class="right-form">
-            <p>Masukkan data penerima</p>
-            <div class="form-flex">
-              <label for="nama_penerima">Nama Penerima</label>
-              <input type="text" id="nama_penerima" name="nama_penerima" required />
-            </div>
-            <div class="form-flex">
-              <label for="no_hp_penerima">No. HP</label>
-              <input type="text" id="no_hp_penerima" name="no_hp_penerima" required />
-            </div>
-            <div class="form-flex">
-              <label for="alamat_tujuan">Alamat Tujuan</label>
-              <textarea id="alamat_tujuan" name="alamat_tujuan" required></textarea>
-            </div>
-            <p>Memilih zona pengiriman</p>
-            <div class="opsi">
-              <select id="kecamatan" name="kecamatan">
-                <option value="">-- Pilih Kecamatan --</option>
-                <option>Medan Tuntungan</option>
-              </select>
-              <select id="kelurahan" name="kelurahan">
-                <option value="">-- Pilih Kelurahan --</option>
-                <option>Simpang Selayang</option>
-              </select>
-            </div>
-            <button type="submit" class="button">Konfirmasi</button>
-          </div>
-        </form>
+    <% } %>
+    <form action="/save" method="post" class="form-container">
+      <div class="left-form">
+        <p>Masukkan data pengirim</p>
+        <div class="form-flex">
+          <label for="nama_pengirim">Nama Pengirim</label>
+          <input type="text" id="nama_pengirim" name="nama_pengirim" required />
+        </div>
+        <div class="form-flex">
+          <label for="no_hp_pengirim">No. HP</label>
+          <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" required />
+        </div>
+        <div class="form-flex">
+          <label for="deskripsi">Deskripsi</label>
+          <input type="text" id="deskripsi" name="deskripsi" />
+        </div>
+        <div class="form-flex">
+          <label for="berat">Berat</label>
+          <input type="text" id="berat" name="berat" />
+        </div>
+        <div class="form-flex">
+          <label for="dimensi">Dimensi</label>
+          <input type="text" id="dimensi" name="dimensi" />
+        </div>
+        <div class="form-flex">
+          <label for="jumlah_kiriman">Jumlah Kiriman</label>
+          <input type="text" id="jumlah_kiriman" name="jumlah_kiriman" />
+        </div>
+      </div>
+      <div class="line-center"></div>
+      <div class="right-form">
+        <p>Masukkan data penerima</p>
+        <div class="form-flex">
+          <label for="nama_penerima">Nama Penerima</label>
+          <input type="text" id="nama_penerima" name="nama_penerima" required />
+        </div>
+        <div class="form-flex">
+          <label for="no_hp_penerima">No. HP</label>
+          <input type="text" id="no_hp_penerima" name="no_hp_penerima" required />
+        </div>
+        <div class="form-flex">
+          <label for="alamat_tujuan">Alamat Tujuan</label>
+          <textarea id="alamat_tujuan" name="alamat_tujuan" required></textarea>
+        </div>
+        <button type="button" id="confirm-address">Konfirmasi Alamat</button>
+        <p>Memilih zona pengiriman</p>
+        <div class="opsi">
+          <select id="kecamatan" name="kecamatan">
+            <option value="">-- Pilih Kecamatan --</option>
+            <option>Medan Tuntungan</option>
+          </select>
+          <select id="kelurahan" name="kelurahan">
+            <option value="">-- Pilih Kelurahan --</option>
+            <option>Simpang Selayang</option>
+          </select>
+        </div>
+        <button type="submit" class="button">Konfirmasi</button>
+      </div>
+    </form>
   </div>
-  <div id="map" style="height: 80vh"></div>
-    <input type="text" id="address" placeholder="Enter address" />
-    <button type="button" id="show-on-map">Show on Map</button>
-    <script>
-      let map;
-      let marker;
 
-      function initMap() {
-        map = L.map("map").setView([3.585242, 98.675598], 13);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap contributors",
-        }).addTo(map);
+  <div id="addressModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="map"></div>
+    </div>
+  </div>
 
-        map.on("click", function (e) {
-          if (marker) {
-            map.removeLayer(marker);
-          }
-          marker = L.marker(e.latlng).addTo(map);
+  <script>
+    let map;
+    let marker;
 
-          axios
-            .get(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
-            )
-            .then((response) => {
-              const address = response.data.display_name;
-              document.getElementById(
-                "alamat_tujuan"
-              ).innerText = `${address}`;
-            })
-            .catch((error) => {
-              console.error("Error fetching data:", error);
-              alert("Error fetching data. Please try again.");
-            });
-        });
-      }
+    function initMap() {
+      map = L.map("map").setView([3.585242, 98.675598], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
 
-      document.getElementById("show-on-map").addEventListener("click", () => {
-        const address = document.getElementById("address").value;
-        if (address) {
-          axios
-            .get(
-              `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-                address
-              )}`
-            )
-            .then((response) => {
+      map.on("click", function (e) {
+        if (marker) {
+          map.removeLayer(marker);
+        }
+        marker = L.marker(e.latlng).addTo(map);
+
+        axios
+          .get(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
+          )
+          .then((response) => {
+            const address = response.data.display_name;
+            document.getElementById("alamat_tujuan").value = address;
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            alert("Error fetching data. Please try again.");
+          });
+      });
+    }
+
+    document.getElementById("confirm-address").addEventListener("click", () => {
+      const address = document.getElementById("alamat_tujuan").value;
+      if (address) {
+        axios
+          .get(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+              address
+            )}`
+          )
+          .then((response) => {
+            if (response.data.length > 0) {
               const { lat, lon } = response.data[0];
               const latLng = [parseFloat(lat), parseFloat(lon)];
               map.setView(latLng, 13);
@@ -151,18 +199,38 @@
                 map.removeLayer(marker);
               }
               marker = L.marker(latLng).addTo(map);
-            })
-            .catch((error) => {
-              console.error("Error fetching data:", error);
-              alert("Error fetching data. Please try again.");
-            });
-        } else {
-          alert("Please enter an address first");
-        }
-      });
+            } else {
+              alert("Alamat tidak ditemukan. Coba lagi.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            alert("Error fetching data. Please try again.");
+          });
 
-      window.addEventListener("load", initMap);
-    </script>
+        const modal = document.getElementById("addressModal");
+        modal.style.display = "block";
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+      } else {
+        alert("Masukkan alamat terlebih dahulu.");
+      }
+    });
+
+    document.getElementsByClassName("close")[0].onclick = function () {
+      document.getElementById("addressModal").style.display = "none";
+    };
+
+    window.onclick = function (event) {
+      const modal = document.getElementById("addressModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    window.addEventListener("load", initMap);
+  </script>
 </body>
 
 </html>
