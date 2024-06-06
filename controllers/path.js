@@ -42,8 +42,12 @@ const pilihagenkaryawan = (req, res) => {
     res.render('page/admin/pendaftaran-agen-karyawan');
 }
 
+const test = (req, res) =>{
+    res.render('coba');
+}
 
 
 
 
-export default { halamanAdmin, halamanAgen, halamanKaryawan, halamanPenentuan, halamanPendaftaran, halamanRiwayat, halamanAkun, halamanPengantaran, halamanPaket, pilihagenkaryawan, pilihkurir, };
+
+export default { halamanAdmin, halamanAgen, halamanKaryawan, halamanPenentuan, halamanPendaftaran, halamanRiwayat, halamanAkun, halamanPengantaran, halamanPaket, pilihagenkaryawan, pilihkurir, test};

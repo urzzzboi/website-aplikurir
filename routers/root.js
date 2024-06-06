@@ -24,7 +24,7 @@ router.get('/list-pengantaran', path_controller.halamanPengantaran);
 router.get('/list-paket', getDeliveries); // Perbarui rute ini agar menggunakan getDeliveries dari package.js
 router.get('/pendaftaran-kurir', path_controller.pilihkurir);
 router.get('/pendaftaran-agen-karyawan', path_controller.pilihagenkaryawan);
-
+router.get('/coba', path_controller.test);
 
 // Package routes
 router.post('/save', savePackage);
