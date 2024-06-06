@@ -2,12 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Pengiriman</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Paket</title>
+    <link rel="stylesheet" href="css/pendaftaran-styles.css" />
+    <link rel="stylesheet" href="css/custom-style.css" />
+    <script src="script/admin-script.js"></script>
+    <script src="script/fetch.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
 <body>
+    <div class="header">
+        <div class="back-btn">
+            <a onclick="goBack()">
+                <i class="fas fa-arrow-left fa-lg"></i><span class="btn-text">Kembali</span>
+            </a>
+        </div>
+    </div>
+    
     <h1>Daftar Pengiriman</h1>
     <p>User: <%= user.email %>
     </p>
