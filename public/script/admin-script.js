@@ -207,5 +207,56 @@ function showFields() {
     }
 }
 
+// Mendapatkan lokasi pengguna saat ini
+function getCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
 
+function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
 
+    // Pemanggilan fungsi untuk mencari alamat terdekat
+    searchNearestAddress(latitude, longitude);
+}
+
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+}
+
+// Fungsi untuk mencari alamat terdekat berdasarkan koordinat
+function searchNearestAddress(latitude, longitude) {
+    axios
+        .get(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+        )
+        .then((response) => {
+            const address = response.data.display_name;
+            // Tampilkan alamat terdekat di elemen HTML yang sesuai
+            document.getElementById("alamat_tujuan").value = address;
+        })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+            alert("Error fetching data. Please try again.");
+        });
+}
+
+// Panggil fungsi untuk mendapatkan lokasi pengguna saat ini
+getCurrentLocation();
