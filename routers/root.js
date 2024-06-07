@@ -2,7 +2,7 @@ import express from 'express';
 import user_controller from '../controllers/user.js';
 import path_controller from '../controllers/path.js';
 import { renderForm, savePackage, getDeliveries } from '../controllers/package.js';
-import { render2Form, savePendaftaran, getpendaftaran } from '../controllers/pendaftaran.js';
+import { render2Form, savePendaftaran, showListKurir, deleteKurir } from '../controllers/pendaftaran.js';
 import { render3Form, savePendaftaran2, getpendaftaran2 } from '../controllers/pendaftaran2.js';
 
 const router = express.Router();
@@ -32,7 +32,10 @@ router.post('/save', savePackage);
 // Pendaftaran kurir routes
 router.get('/kurir', render2Form); // Perbarui rute agar tidak bentrok
 router.post('/tambahkurir', savePendaftaran);
-router.get('/list_akun', getpendaftaran);
+router.get('/list-akun', showListKurir);
+router.get('/delete-kurir/:id_kurir', deleteKurir);
+// router.get('/list_akun', getpendaftaran);
+// router.get('/list-akun', showListKurir);
 
 // Pendaftaran agen/karyawan routes
 router.get('/agen-karyawan', render3Form); // Perbarui rute agar tidak bentrok

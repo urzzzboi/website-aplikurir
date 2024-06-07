@@ -78,18 +78,4 @@ export const getDeliveries = async (req, res) => {
     }
 };
 
-export const getFormPage = async (req, res) => {
-    try {
-        const kecamatanQuery = 'SELECT * FROM kecamatan';
-        const kecamatan = await sequelize.query(kecamatanQuery, { type: QueryTypes.SELECT });
-
-        const kelurahanQuery = 'SELECT * FROM kelurahan';
-        const kelurahan = await sequelize.query(kelurahanQuery, { type: QueryTypes.SELECT });
-
-        res.render('page/halaman-agen', { kecamatan, kelurahan, user: req.session.user || "" });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
-    }
-};
 
