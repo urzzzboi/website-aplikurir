@@ -43,18 +43,19 @@ export const renderForm = (req, res) => {
 export const savePackage = async (req, res) => {
     const {
         nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi,
-        jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan
+        jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan,
+        latitude, longitude
     } = req.body;
 
     try {
         const nomorResi = await generateNomorResi();
 
         const query = `INSERT INTO penerimaan_paket 
-            (nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, nomor_resi)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            (nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, nomor_resi, latitude, longitude )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
         await sequelize.query(query, {
-            replacements: [nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, nomorResi],
+            replacements: [nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi, jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, nomorResi, latitude, longitude],
             type: QueryTypes.INSERT
         });
         res.render('page/halaman-agen', { user: req.session.user || "", nomorResi });
@@ -77,5 +78,6 @@ export const getDeliveries = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
 
 
