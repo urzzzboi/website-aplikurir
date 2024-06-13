@@ -7,7 +7,6 @@ const app = express();
 const hostname = '192.168.1.105';
 const port = 8081;
 
-// Middleware untuk sesi dan parsing body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
