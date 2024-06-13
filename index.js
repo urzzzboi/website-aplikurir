@@ -17,7 +17,7 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-app.post('/login', async (req, res) => {
+app.post('/loginKurir', async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log('Email:', email, 'Password:', password);
@@ -57,7 +57,7 @@ app.get('/dataPenerimaan', async (req, res) => {
     res.send(results);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Tidak menampilkan data dari table data_penerimaan_paket');
+    res.status(500).send('Tidak menampilkan data dari data penerimaan_paket');
   }
 });
 
