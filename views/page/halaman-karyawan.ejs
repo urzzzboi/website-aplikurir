@@ -1,22 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Karyawan Gedung</title>
-    <link rel="icon" href="img/logo-icon.png" type="image/x-icon">
-    <script src="script/admin-script.js"></script>
-    <link rel="stylesheet" href="css/custom-style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Karyawan Gedung</title>
+  <link rel="icon" href="/img/logo-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/custom-style.css">
+  <script src="/script/admin-script.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 20px;
+    }
+
+    aside.sidebar {
+      width: 50%;
+      padding: 10px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin: 10px 0;
+    }
+
+    .sidebar a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    section.details {
+      width: 50%;
+      padding: 10px;
+    }
+
+    .details p {
+      margin-bottom: 10px;
+    }
+
+    .total-packages {
+      margin-top: 20px;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    .total-packages span {
+      padding: 5px;
+      border: 2px solid yellow;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+      text-align: center;
+      width: 50px;
+    }
+
+    .package-item {
+      background-color: rgb(235, 243, 232);
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .line-bottom {
+      width: auto;
+      height: 3px;
+      background-color: rgb(134, 167, 137);
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    .package-list {
+      max-height: 350px;
+      overflow-y: auto;
+      border: none;
+      margin-bottom: 10px;
+      padding-right: 15px;
+    }
+
+    /* Custom scrollbar styles for Webkit browsers */
+    .package-list::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    .package-list::-webkit-scrollbar-thumb {
+      background: rgb(134, 167, 137);
+      border: 2px solid rgb(235, 243, 232);
+      border-radius: 10px;
+    }
+
+    .package-list::-webkit-scrollbar-track {
+      background: rgb(235, 243, 232);
+      border-radius: 10px;
+    }
+
+    .noresi {
+      font-size: 14pt;
+      font-weight: 600;
+      color: rgb(134, 167, 137);
+    }
+
+    .label {
+      font-size: 10pt;
+      font-weight: 600;
+      color: rgb(134, 167, 137);
+    }
+
+    .name {
+      font-size: 10pt;
+      font-weight: 700;
+      color: black;
+    }
+
+    .detail-item label {
+      font-size: 10pt;
+      font-weight: 600;
+      color: black;
+    }
+
+    .detail-item {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .detail {
+      width: 150px;
+      font-weight: bold;
+    }
+
+    .value {
+      font-weight: bold;
+      flex: 1;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <div class="navbar-left">
-            <img src="img/logo2.png" alt="Logo Perusahaan">
+  <header class="header">
+    <div class="navbar-left">
+      <a href="/">
+        <img src="/img/logo2.png" alt="Logo Perusahaan">
+      </a>
+    </div>
+    <div class="navbar-right">
+      <span>
+        <%= user ? user.email : '' %>
+      </span>
+      <%- (!user ? '<a href="/">Login</a>' : '<a href="/logout">Logout</a>' ) %>
+    </div>
+  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>List Data Pengiriman Paket</h2>
+      <div class="package-list">
+        <% packages.forEach(pkg=> { %>
+          <div class="package-item">
+            <a href="/package/<%= pkg.ID_Data_Penerimaan_Paket %>">
+              <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
+              <span class="label">Nama Pengirim:</span> <span class="name">
+                <%= pkg.Nama_Pengirim %>
+              </span> | <span class="label"> Nama Penerima:</span> <span class="name">
+                <%= pkg.Nama_Penerima %>
+              </span>
+            </a>
           </div>
-        <div class="navbar-right">
-            <span><%= user.email %></span>
-                <%- (!user?'<a href="/">Login</a>':'<a href="/logout">Logout</a>') %>
-          </div>
-    </header>
+          <% }) %>
+      </div>
+      <div class="line-bottom"></div>
+      <div class="total-packages">
+        Jumlah paket yang masuk: <span>
+          <%= packages.length %>
+        </span>
+      </div>
+    </aside>
+    <div class="line-center"></div>
+    <section class="details">
+      <% if (selectedPackage) { %>
+        <h2>Data Paket</h2>
+        <div class="line-bottom"></div>
+        <div class="detail-item">
+          <span class="detail">No. Resi</span> :  <span class="value"> 
+            <%= selectedPackage.nomor_resi %>
+          </span>
+        </div>
+        <div class="line-bottom"></div>
+        <div class="detail-item">
+          <span class="detail">Nama Pengirim</span> : <span class="value">
+            <%= selectedPackage.Nama_Pengirim %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">No. HP Pengirim</span> : <span class="value">
+            <%= selectedPackage.No_HP_Pengirim %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Deskripsi</span> : <span class="value">
+            <%= selectedPackage.Deskripsi %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Berat (kg)</span> : <span class="value">
+            <%= selectedPackage.Berat %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Dimensi (cm)</span> : <span class="value">
+            <%= selectedPackage.Dimensi %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Jumlah Kiriman</span> : <span class="value">
+            <%= selectedPackage.Jumlah_Kiriman %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Kecamatan</span> : <span class="value">
+            <%= selectedPackage.kecamatan %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Kelurahan</span> : <span class="value">
+            <%= selectedPackage.kelurahan %>
+          </span>
+        </div>
+        <div class="line-bottom"></div>
+        <div class="detail-item">
+          <span class="detail">Nama Penerima</span> : <span class="value">
+            <%= selectedPackage.Nama_Penerima %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">No. HP Penerima</span> : <span class="value">
+            <%= selectedPackage.No_HP_Penerima %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Alamat</span> : <span class="value">
+            <%= selectedPackage.Alamat_Tujuan %>
+          </span>
+        </div>
+        <% } else { %>
+          <h2>Silakan pilih paket dari daftar di sebelah kiri.</h2>
+          <% } %>
+    </section>
+
+  </div>
 </body>
+
 </html>
