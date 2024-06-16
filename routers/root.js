@@ -5,6 +5,7 @@ import { renderForm, savePackage, getDeliveries } from '../controllers/package.j
 import { render2Form, saveKurir } from '../controllers/regisKurir.js';
 import { render3Form, saveUser, } from '../controllers/regisUser.js';
 import { deleteUser, fetchUsers, renderInitialView } from '../controllers/regisList.js';
+import { getAllPackages, getPackageById } from '../controllers/packageController.js';
 import { getPenentuanKurirData } from '../controllers/kurir.js';
 
 const router = express.Router();
@@ -17,7 +18,7 @@ router.get('/logout', user_controller.logout);
 // Path routes
 router.get('/admin', path_controller.halamanAdmin);
 router.get('/agen', renderForm);
-router.get('/karyawan', path_controller.halamanKaryawan);
+router.get('/karyawan', getAllPackages);  // Menggunakan getAllPackages untuk route /karyawan
 //router.get('/penentuan-kurir', path_controller.halamanPenentuan);
 router.get('/pendaftaran', path_controller.halamanPendaftaran);
 router.get('/riwayat', path_controller.halamanRiwayat);
@@ -30,6 +31,7 @@ router.get('/coba', path_controller.test);
 
 // Package routes
 router.post('/save', savePackage);
+router.get('/package/:id', getPackageById);  // Menggunakan getPackageById untuk route /package/:id
 
 // Pendaftaran kurir routes
 router.get('/kurir', render2Form);
