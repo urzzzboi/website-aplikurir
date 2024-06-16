@@ -167,10 +167,12 @@
           <div class="package-item">
             <a href="/package/<%= pkg.ID_Data_Penerimaan_Paket %>">
               <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
-              <span class="label">Nama Pengirim:</span> <span class="name">
-                <%= pkg.Nama_Pengirim %>
-              </span> | <span class="label"> Nama Penerima:</span> <span class="name">
-                <%= pkg.Nama_Penerima %>
+              <span class="label">Kecamatan :</span> <span class="name">
+                <%= pkg.kecamatan %>
+              </span> | <span class="label"> Kelurahan :</span> <span class="name">
+                <%= pkg.kelurahan %>
+              </span> | <span class="label"> Alamat Tujuan : </span> <span class="name">
+                <%= pkg.Alamat_Tujuan %>
               </span>
             </a>
           </div>
@@ -224,16 +226,7 @@
             <%= selectedPackage.Jumlah_Kiriman %>
           </span>
         </div>
-        <div class="detail-item">
-          <span class="detail">Kecamatan</span> : <span class="value">
-            <%= selectedPackage.kecamatan %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Kelurahan</span> : <span class="value">
-            <%= selectedPackage.kelurahan %>
-          </span>
-        </div>
+        
         <div class="line-bottom"></div>
         <div class="detail-item">
           <span class="detail">Nama Penerima</span> : <span class="value">
@@ -248,6 +241,16 @@
         <div class="detail-item">
           <span class="detail">Alamat</span> : <span class="value">
             <%= selectedPackage.Alamat_Tujuan %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Kecamatan</span> : <span class="value">
+            <%= selectedPackage.kecamatan %>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail">Kelurahan</span> : <span class="value">
+            <%= selectedPackage.kelurahan %>
           </span>
         </div>
         <% } else { %>
