@@ -4,7 +4,9 @@ import userRoutes from './routers/root.js';
 import { sequelize } from "./models/model.js";
 
 const app = express();
+// const hostname = '172.22.171.125';
 const hostname = '192.168.1.105';
+
 const port = 8081;
 
 app.use(express.json());
@@ -60,6 +62,8 @@ app.get('/dataPenerimaan', async (req, res) => {
     res.status(500).send('Tidak menampilkan data dari data penerimaan_paket');
   }
 });
+
+
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
