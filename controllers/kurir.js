@@ -1,18 +1,18 @@
 import { sequelize } from "../models/model.js";
 import { QueryTypes } from 'sequelize';
 
-export const getPenentuanKurirData = async (req, res) => {
-    const user = req.session.user || { email: 'user@example.com' }; // Ganti sesuai dengan data user yang ada di session
-    const query = 'SELECT * FROM penerimaan_paket';
-
+export const getPaketByKelurahan = async (req, res) => {
     try {
-        const results = await sequelize.query(query, { type: QueryTypes.SELECT });
-        res.render('page/agen/list-paket', { deliveries: results, user });
-    } catch (error) {
-        console.error(error);SS
-        res.status(500).send('Server error');
+        const { kelurahan } = req.query;
+        const results = await sequelize.query('SELECT Nama_Penerima, No_HP_Penerima, Alamat_Tujuan, nomor_resi FROM penerimaan_paket WHERE kelurahan = ?', {
+            replacements: [kelurahan],
+            type: sequelize.QueryTypes.SELECT
+        });
+        res.json(results);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Tidak dapat mengambil data dari tabel penerimaan_paket');
     }
-        };
-    
+};
 
 
