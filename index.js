@@ -4,7 +4,7 @@ import userRoutes from './routers/root.js';
 import { sequelize } from "./models/model.js";
 
 const app = express();
-const hostname = '192.168.1.105';
+const hostname = '127.0.0.1';
 const port = 8081;
 
 app.use(express.json());
@@ -22,7 +22,7 @@ app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     console.log('Email:', email, 'Password:', password);
     const [user] = await sequelize.query(
-      'SELECT * FROM data_kurir WHERE email = :email AND password = :password', 
+      'SELECT * FROM data_users WHERE email = :email AND password = :password', 
       { 
         replacements: { email, password }, 
         type: sequelize.QueryTypes.SELECT 
@@ -48,6 +48,16 @@ app.get('/dataKurir', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send('Tidak menampilkan data dari table data_kurir');
+  }
+});
+
+app.get('/dataPenerimaan', async (req, res) => {
+  try {
+    const results = await sequelize.query('SELECT * FROM penerimaan_paket', { type: sequelize.QueryTypes.SELECT });
+    res.send(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Tidak menampilkan data dari table data_penerimaan_paket');
   }
 });
 

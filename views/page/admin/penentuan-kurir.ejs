@@ -15,9 +15,8 @@
 
 <body>
     <div class="header">
-        <div class="back-btn" >
-            <a
-            onclick="goBack()">
+        <div class="back-btn">
+            <a onclick="goBack()">
                 <i class="fas fa-arrow-left fa-lg"></i><span class="btn-text">Kembali</span>
             </a>
         </div>
@@ -32,7 +31,39 @@
             <div class="opsi-kelurahan">
                 <select id="kelurahan"></select>
             </div>
+            <div class="confirm-section">
+                <button id="confirmKecamatanKelurahan" class="confirm-btn">Konfirmasi Zona</button>
+            </div>
             <h3>Menentukan kurir yang mengantar paket.</h3>
+            <div class="list-resi" id="listResi">
+                <!-- Mulai iterasi untuk setiap paket dari database -->
+                <% if (deliveries&& deliveries.length> 0) { %>
+                    <% deliveries.forEach(delivery=> { %>
+                        <div class="resi-box">
+                            <div class="resi-content">
+                                <div class="resi-info">
+                                    <h1>Nama Penerima: <%= delivery.Nama_Penerima %>
+                                    </h1>
+                                    <p>Alamat Tujuan: <span>
+                                            <%= delivery.Alamat_Tujuan %>
+                                        </span></p>
+                                    <p>No. HP: <span>
+                                            <%= delivery.No_HP_Penerima %>
+                                        </span></p>
+                                </div>
+                                <div class="resi-number">
+                                    <p>No. Resi: <span>
+                                            <%= delivery.nomor_resi %>
+                                        </span></p>
+                                    <input type="checkbox" id="checkbox" name="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <% } else { %>
+                                <p>Tidak ada data paket.</p>
+                                <% } %>
+            </div>
             <div class="kurir-list" id="kurirList">
             </div>
         </div>
@@ -45,5 +76,46 @@
         </div>
     </div>
 </body>
+
+</html>
+
+<script>
+     // Mendapatkan elemen select
+        const kecamatanSelect = document.getElementById('kecamatan');
+        const kelurahanSelect = document.getElementById('kelurahan');
+
+        // Memuat data dari file JSON
+        fetch('/data/lokasi.json')
+            .then(response => response.json())
+            .then(data => {
+                // Mengisi opsi kecamatan
+                for (let kecamatan in data) {
+                    let option = document.createElement('option');
+                    option.value = kecamatan;
+                    option.textContent = kecamatan;
+                    kecamatanSelect.appendChild(option);
+                }
+
+                // Event listener ketika kecamatan dipilih
+                kecamatanSelect.addEventListener('change', function () {
+                    // Menghapus opsi kelurahan sebelumnya
+                    kelurahanSelect.innerHTML = '<option value="">--Pilih Kelurahan--</option>';
+
+                    // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
+                    let kelurahans = data[this.value];
+                    if (kelurahans) {
+                        kelurahans.forEach(function (kelurahan) {
+                            let option = document.createElement('option');
+                            option.value = kelurahan;
+                            option.textContent = kelurahan;
+                            kelurahanSelect.appendChild(option);
+                        });
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    
+
+</script>
 
 </html>

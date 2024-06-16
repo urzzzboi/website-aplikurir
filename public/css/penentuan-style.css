@@ -1,3 +1,24 @@
+.confirm-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.confirm-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(134, 167, 137);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-btn:hover {
+    background-color: darkgreen;
+}
+
 .kurir-button {
     flex: 0 0 auto;
     margin-right: 10px;
@@ -29,43 +50,73 @@
     color: rgb(30, 30, 30);
 }
 
+.list-resi {
+    margin-top: 20px;
+}
+
 .resi-box {
     margin-bottom: 10px;
-    margin-right: 15px;
+    padding: 10px;
+    border: 1px solid #86a789;
     border-radius: 5px;
-    padding: 5px 10px;
-    position: relative;
-    background-color: rgb(235, 243, 232);
+    background-color: #ebf3e8;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resi-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.resi-info {
+    flex: 1;
+}
+
+.resi-number {
+    margin-left: 20px;
+    text-align: right;
+}
+
+.resi-number p {
+    margin: 0;
+}
+
+.resi-number input {
+    margin-top: 10px;
+    transform: scale(1.5);
+    /* Membesarkan checkbox */
+    -webkit-transform: scale(1.5);
+    /* Membesarkan checkbox untuk browser webkit */
+    transform-origin: 0 0;
+    /* Mengatur titik asal transformasi */
+    -webkit-transform-origin: 0 0;
+    /* Mengatur titik asal transformasi untuk browser webkit */
+    margin-right: 20px;
 }
 
 .resi-box h1 {
     font-size: 14pt;
     font-weight: bold;
-    color: rgb(30, 30, 30);
+    color: #1e1e1e;
     margin: 5px 0;
 }
 
 .resi-box p {
     margin: 5px 0;
-    color: rgb(134, 167, 137);
+    color: #86a789;
     font-weight: 600;
     font-size: 10pt;
 }
 
 .resi-box span {
-    color: rgb(30, 30, 30);
+    color: #1e1e1e;
     font-weight: normal;
     font-size: 10pt;
 }
-
-.resi-box p:first-child {
-    margin-top: 0;
-}
-
-.resi-box p:last-child {
-    margin-bottom: 0;
-}
-
 .list-resi .checkbox {
     display: flex;
     width: 100%;
