@@ -31,39 +31,12 @@
             <div class="opsi-kelurahan">
                 <select id="kelurahan"></select>
             </div>
-            <div class="confirm-section">
-                <button id="confirmKecamatanKelurahan" class="confirm-btn">Konfirmasi Zona</button>
+                <div class="confirm-section">
+                <button id="confirmKecamatanKelurahan" class="confirm-btn" onclick="fetchPaketByKelurahan()">Konfirmasi
+                    Zona</button>
             </div>
             <h3>Menentukan kurir yang mengantar paket.</h3>
             <div class="list-resi" id="listResi">
-                <!-- Mulai iterasi untuk setiap paket dari database -->
-                <% if (deliveries&& deliveries.length> 0) { %>
-                    <% deliveries.forEach(delivery=> { %>
-                        <div class="resi-box">
-                            <div class="resi-content">
-                                <div class="resi-info">
-                                    <h1>Nama Penerima: <%= delivery.Nama_Penerima %>
-                                    </h1>
-                                    <p>Alamat Tujuan: <span>
-                                            <%= delivery.Alamat_Tujuan %>
-                                        </span></p>
-                                    <p>No. HP: <span>
-                                            <%= delivery.No_HP_Penerima %>
-                                        </span></p>
-                                </div>
-                                <div class="resi-number">
-                                    <p>No. Resi: <span>
-                                            <%= delivery.nomor_resi %>
-                                        </span></p>
-                                    <input type="checkbox" id="checkbox" name="checkbox">
-                                </div>
-                            </div>
-                        </div>
-                        <% }) %>
-                            <% } else { %>
-                                <p>Tidak ada data paket.</p>
-                                <% } %>
-            </div>
             <div class="kurir-list" id="kurirList">
             </div>
         </div>
@@ -114,6 +87,48 @@
                 });
             })
             .catch(error => console.error('Error fetching data:', error));
+
+    // script/fetch.js
+    async function fetchPaketByKelurahan() {
+        const kelurahan = document.getElementById('kelurahan').value;
+        const response = await fetch(`/penentuan-kurir/data?kelurahan=${kelurahan}`);
+        const packages = await response.json();
+        const listResi = document.getElementById('listResi');
+        listResi.innerHTML = ''; // Clear existing content
+
+        if (packages.length > 0) {
+            packages.forEach(package => {
+                const resiBox = document.createElement('div');
+                resiBox.className = 'resi-box';
+
+                const resiContent = document.createElement('div');
+                resiContent.className = 'resi-content';
+
+                const resiInfo = document.createElement('div');
+                resiInfo.className = 'resi-info';
+                resiInfo.innerHTML = `
+                <h1>Nama Penerima: ${package.Nama_Penerima}</h1>
+                <p>Alamat Tujuan: <span>${package.Alamat_Tujuan}</span></p>
+                <p>No. HP: <span>${package.No_HP_Penerima}</span></p>
+            `;
+
+                const resiNumber = document.createElement('div');
+                resiNumber.className = 'resi-number';
+                resiNumber.innerHTML = `
+                <p>No. Resi: <span>${package.nomor_resi}</span></p>
+                <input type="checkbox" id="checkbox" name="checkbox">
+            `;
+
+                resiContent.appendChild(resiInfo);
+                resiContent.appendChild(resiNumber);
+                resiBox.appendChild(resiContent);
+                listResi.appendChild(resiBox);
+            });
+        } else {
+            listResi.innerHTML = '<p>Tidak ada data paket untuk kelurahan ini.</p>';
+        }
+    }
+
     
 
 </script>

@@ -72,12 +72,10 @@ export const getDeliveries = async (req, res) => {
 
     try {
         const results = await sequelize.query(query, { type: QueryTypes.SELECT });
-        res.render('page/admin/penentuan-kurir', { deliveries: results, user });
+        res.render('page/agen/list-paket', { deliveries: results, user });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
     }
 };
-
-
 
