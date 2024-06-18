@@ -6,8 +6,8 @@ import { render2Form, saveKurir } from '../controllers/regisKurir.js';
 import { render3Form, saveUser, } from '../controllers/regisUser.js';
 import { deleteUser, fetchUsers, renderInitialView } from '../controllers/regisList.js';
 import { getAllPackages, getPackageById } from '../controllers/packageController.js';
-import { getPenentuanKurirData } from '../controllers/kurir.js';
-import { getPaketByKelurahans } from '../controllers/kurir.js';
+import { getPaketByKelurahan, getKurirByKelurahan, assignPaketToKurir } from '../controllers/kurir.js';
+
 
 const router = express.Router();
 
@@ -27,6 +27,8 @@ router.get('/list-akun', path_controller.halamanAkun);
 router.get('/list-pengantaran', path_controller.halamanPengantaran);
 router.get('/list-paket', getDeliveries);
 router.get('/penentuan-kurir/data', getPaketByKelurahan);
+router.get('/penentuan-kurir/kurir', getKurirByKelurahan);
+router.post('/penentuan-kurir/assign', assignPaketToKurir);
 router.get('/pendaftaran-kurir', path_controller.pilihkurir);
 router.get('/pendaftaran-agen-karyawan', path_controller.pilihagenkaryawan);
 router.get('/coba', path_controller.test);
@@ -48,7 +50,6 @@ router.post('/fetch-users', fetchUsers);
 
 // Rute untuk menghapus pengguna
 router.post('/delete-user/:id', deleteUser); 
-
 
 
 export default router;

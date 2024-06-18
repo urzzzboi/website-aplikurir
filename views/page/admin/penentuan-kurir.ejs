@@ -12,7 +12,63 @@
     <script src="script/admin-script.js"></script>
     <script src="script/fetch.js"></script>
 </head>
+<style>
+       /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .kurir-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: green;
+            color: white;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .kurir-button p {
+            margin: 0;
+        }
+
+        .kurir-button:hover {
+            background-color: darkgreen;
+        }
+</style>
 <body>
     <div class="header">
         <div class="back-btn">
@@ -35,7 +91,7 @@
                 <button id="confirmKecamatanKelurahan" class="confirm-btn" onclick="fetchPaketByKelurahan()">Konfirmasi
                     Zona</button>
             </div>
-            <h3>Menentukan kurir yang mengantar paket.</h3>
+            <h3>List.</h3>
             <div class="list-resi" id="listResi">
             <div class="kurir-list" id="kurirList">
             </div>
@@ -44,10 +100,16 @@
         <div class="right-panel2">
             <div class="confirmation">
                 <button id="confirmButtom" class="confirm-btn" value="list-pengantaran"
-                    onclick="goToPage(this.value)">Konfirmasi</button>
+                    onclick="fetchKurirByKelurahan()">Konfirmasi</button>
             </div>
         </div>
     </div>
+        <div id="kurirModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modalContent"></div>
+            </div>
+        </div>
 </body>
 
 </html>
@@ -89,48 +151,115 @@
             .catch(error => console.error('Error fetching data:', error));
 
     // script/fetch.js
-    async function fetchPaketByKelurahan() {
-        const kelurahan = document.getElementById('kelurahan').value;
-        const response = await fetch(`/penentuan-kurir/data?kelurahan=${kelurahan}`);
-        const packages = await response.json();
-        const listResi = document.getElementById('listResi');
-        listResi.innerHTML = ''; // Clear existing content
+            let selectedPaketIds = [];
 
-        if (packages.length > 0) {
-            packages.forEach(package => {
-                const resiBox = document.createElement('div');
-                resiBox.className = 'resi-box';
+            async function fetchPaketByKelurahan() {
+                const kelurahan = document.getElementById('kelurahan').value;
+                const response = await fetch(`/penentuan-kurir/data?kelurahan=${kelurahan}`);
+                const packages = await response.json();
+                const listResi = document.getElementById('listResi');
+                listResi.innerHTML = ''; // Clear existing content
 
-                const resiContent = document.createElement('div');
-                resiContent.className = 'resi-content';
+                if (packages.length > 0) {
+                    packages.forEach(package => {
+                        const resiBox = document.createElement('div');
+                        resiBox.className = 'resi-box';
 
-                const resiInfo = document.createElement('div');
-                resiInfo.className = 'resi-info';
-                resiInfo.innerHTML = `
-                <h1>Nama Penerima: ${package.Nama_Penerima}</h1>
-                <p>Alamat Tujuan: <span>${package.Alamat_Tujuan}</span></p>
-                <p>No. HP: <span>${package.No_HP_Penerima}</span></p>
-            `;
+                        const resiContent = document.createElement('div');
+                        resiContent.className = 'resi-content';
 
-                const resiNumber = document.createElement('div');
-                resiNumber.className = 'resi-number';
-                resiNumber.innerHTML = `
-                <p>No. Resi: <span>${package.nomor_resi}</span></p>
-                <input type="checkbox" id="checkbox" name="checkbox">
-            `;
+                        const resiInfo = document.createElement('div');
+                        resiInfo.className = 'resi-info';
+                        resiInfo.innerHTML = `
+                        <h1>Nama Penerima: ${package.Nama_Penerima}</h1>
+                        <p>Alamat Tujuan: <span>${package.Alamat_Tujuan}</span></p>
+                        <p>No. HP: <span>${package.No_HP_Penerima}</span></p>
+                    `;
 
-                resiContent.appendChild(resiInfo);
-                resiContent.appendChild(resiNumber);
-                resiBox.appendChild(resiContent);
-                listResi.appendChild(resiBox);
-            });
-        } else {
-            listResi.innerHTML = '<p>Tidak ada data paket untuk kelurahan ini.</p>';
-        }
-    }
+                        const resiNumber = document.createElement('div');
+                        resiNumber.className = 'resi-number';
+                        resiNumber.innerHTML = `
+                        <p>No. Resi: <span>${package.nomor_resi}</span></p>
+                        <input type="checkbox" id="checkbox-${package.ID_Data_Penerimaan_Paket}" name="checkbox" value="${package.ID_Data_Penerimaan_Paket}">
+                    `;
 
-    
+                        resiContent.appendChild(resiInfo);
+                        resiContent.appendChild(resiNumber);
+                        resiBox.appendChild(resiContent);
+                        listResi.appendChild(resiBox);
+                    });
+                } else {
+                    listResi.innerHTML = '<p>Tidak ada data paket untuk kelurahan ini.</p>';
+                }
+            }
 
+            async function fetchKurirByKelurahan() {
+                const kelurahan = document.getElementById('kelurahan').value;
+                const response = await fetch(`/penentuan-kurir/kurir?kelurahan=${kelurahan}`);
+                const kurirs = await response.json();
+                let kurirList = '';
+
+                if (kurirs.length > 0) {
+                    kurirs.forEach(kurir => {
+                        kurirList += `
+                        <button class="kurir-button" onclick="selectKurir(${kurir.id_kurir})">
+                            <p>Nama: ${kurir.nama}</p>
+                            <p>No. HP: ${kurir.handphone}</p>
+                        </button>
+                    `;
+                    });
+                } else {
+                    kurirList = '<p>Tidak ada kurir untuk kelurahan ini.</p>';
+                }
+
+                const modalContent = document.getElementById('modalContent');
+                modalContent.innerHTML = kurirList;
+                document.getElementById('kurirModal').style.display = 'block';
+            }
+
+            function selectKurir(kurirId) {
+                const checkboxes = document.querySelectorAll('input[name="checkbox"]:checked');
+                selectedPaketIds = Array.from(checkboxes).map(checkbox => checkbox.value);
+
+                if (selectedPaketIds.length === 0) {
+                    alert('Silakan pilih setidaknya satu paket.');
+                    return;
+                }
+
+                const data = {
+                    kurirId,
+                    paketIds: selectedPaketIds
+                };
+
+                fetch('/penentuan-kurir/assign', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Paket berhasil diassign ke kurir.');
+                            location.reload();
+                            fetchPaketByKelurahan(); 
+                        } else {
+                            alert('Gagal mengassign paket.');
+                        }
+                        closeModal();
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function closeModal() {
+                document.getElementById('kurirModal').style.display = 'none';
+            }
+
+            async function confirmZone() {
+                await fetchPaketByKelurahan();
+                await fetchKurirByKelurahan();
+            }
 </script>
 
 </html>
