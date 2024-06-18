@@ -7,142 +7,8 @@
   <title>Halaman Karyawan Gedung</title>
   <link rel="icon" href="/img/logo-icon.png" type="image/x-icon">
   <link rel="stylesheet" href="/css/custom-style.css">
+  <link rel="stylesheet" href="/css/karyawan-style.css">
   <script src="/script/admin-script.js" defer></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin: 20px;
-    }
-
-    aside.sidebar {
-      width: 50%;
-      padding: 10px;
-    }
-
-    .sidebar ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .sidebar li {
-      margin: 10px 0;
-    }
-
-    .sidebar a {
-      color: #333;
-      text-decoration: none;
-    }
-
-    section.details {
-      width: 50%;
-      padding: 10px;
-    }
-
-    .details p {
-      margin-bottom: 10px;
-    }
-
-    .total-packages {
-      margin-top: 20px;
-      font-weight: bold;
-      padding: 10px;
-    }
-
-    .total-packages span {
-      padding: 5px;
-      border: 2px solid yellow;
-      color: black;
-      font-weight: bold;
-      border-radius: 5px;
-      text-align: center;
-      width: 50px;
-    }
-
-    .package-item {
-      background-color: rgb(235, 243, 232);
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-
-    .line-bottom {
-      width: auto;
-      height: 3px;
-      background-color: rgb(134, 167, 137);
-      border: none;
-      margin-bottom: 10px;
-    }
-
-    .package-list {
-      max-height: 350px;
-      overflow-y: auto;
-      border: none;
-      margin-bottom: 10px;
-      padding-right: 15px;
-    }
-
-    /* Custom scrollbar styles for Webkit browsers */
-    .package-list::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    .package-list::-webkit-scrollbar-thumb {
-      background: rgb(134, 167, 137);
-      border: 2px solid rgb(235, 243, 232);
-      border-radius: 10px;
-    }
-
-    .package-list::-webkit-scrollbar-track {
-      background: rgb(235, 243, 232);
-      border-radius: 10px;
-    }
-
-    .noresi {
-      font-size: 14pt;
-      font-weight: 600;
-      color: rgb(134, 167, 137);
-    }
-
-    .label {
-      font-size: 10pt;
-      font-weight: 600;
-      color: rgb(134, 167, 137);
-    }
-
-    .name {
-      font-size: 10pt;
-      font-weight: 700;
-      color: black;
-    }
-
-    .detail-item label {
-      font-size: 10pt;
-      font-weight: 600;
-      color: black;
-    }
-
-    .detail-item {
-      display: flex;
-      margin-bottom: 10px;
-    }
-
-    .detail {
-      width: 150px;
-      font-weight: bold;
-    }
-
-    .value {
-      font-weight: bold;
-      flex: 1;
-    }
-  </style>
 </head>
 
 <body>
@@ -254,7 +120,7 @@
           </span>
         </div>
         <% } else { %>
-          <h2>Silakan pilih paket dari daftar di sebelah kiri.</h2>
+          <h2>Silakan pilih paket dari daftar di sebelah kiri</h2>
           <% } %>
     </section>
 

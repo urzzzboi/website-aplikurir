@@ -1,0 +1,173 @@
+/* riwayat.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.sidebar h1 {
+    margin-left: 20px;
+    font-size: 26pt;
+    color: #6f946d;
+}
+
+input[type="date"] {
+    margin-left: 20px;
+    font-size: 12pt;
+    font-weight: bold;
+    border-radius: 5%;
+    box-shadow: black;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+aside.sidebar {
+    width: 50%;
+    padding: 10px;
+}
+
+.sidebar a {
+    color: #333;
+    text-decoration: none;
+}
+
+.kurir-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    border: none;
+    margin-bottom: 10px;
+    padding-right: 15px;
+}
+
+.kurir-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.kurir-list::-webkit-scrollbar-thumb {
+    background: rgb(134, 167, 137);
+    border: 2px solid rgb(235, 243, 232);
+    border-radius: 10px;
+}
+
+.kurir-list::-webkit-scrollbar-track {
+    background: rgb(235, 243, 232);
+    border-radius: 10px;
+}
+
+.kurir {
+    background-color: rgb(235, 243, 232);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.kurir:hover {
+    background-color: #d1e7d1;
+}
+
+.kurir.selected {
+    background-color: #a3cfa3;
+}
+
+.kurir-name {
+    margin: 0;
+    font-weight: bold;
+}
+
+.kurir-date {
+    margin: 5px 0 0 0;
+    color: #888;
+}
+
+.kurir-details {
+    width: 70%;
+    background-color: #ffffff;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.kurir-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 50%;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px 0px rgba(30, 30, 30, 0.75);
+}
+
+.kurir-info .kurir-name {
+    margin-right: 40%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.kurir-info .kurir-phone {
+    /* margin-left: 10px; */
+    color: #555;
+}
+
+.packages-list {
+    max-height: 350px;
+    overflow-y: auto;
+    border: none;
+    margin-bottom: 10px;
+    padding-right: 15px;
+}
+
+.package {
+    background-color: rgb(235, 243, 232);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.packages-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.packages-list::-webkit-scrollbar-thumb {
+    background: rgb(134, 167, 137);
+    border: 2px solid rgb(235, 243, 232);
+    border-radius: 10px;
+}
+
+.packages-list::-webkit-scrollbar-track {
+    background: rgb(235, 243, 232);
+    border-radius: 10px;
+}
+
+.package p {
+    margin: 5px 0;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.selesai {
+    color: green;
+}
+
+.status.gagal {
+    color: red;
+}

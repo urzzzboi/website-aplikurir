@@ -22,7 +22,7 @@ export const fetchUsers = (req, res) => {
         query = 'SELECT * FROM data_kurir';
         fields = ['nama', 'handphone', 'email', 'password', 'kecamatan', 'kelurahan'];
     } else if (userType === 'agen' || userType === 'karyawan') {
-        query = 'SELECT id, email, password, status FROM data_users WHERE status =?';
+        query = 'SELECT id, email, password, status FROM data_users WHERE status = ?';
         fields = ['email', 'password', 'status'];
     } else {
         return res.render('page/admin/list-akun', { users: [], fields: [], userType: null });
@@ -40,7 +40,7 @@ export const fetchUsers = (req, res) => {
 };
 
 // Function untuk menghapus pengguna dari database
-export const deleteUser = (req, res) => {
+export const deleteUser = async (req, res) => {
     const userId = req.params.id;
     const userType = req.body.userType;
 
@@ -53,27 +53,49 @@ export const deleteUser = (req, res) => {
         return res.status(400).send('User ID and user type are required');
     }
 
-    let query = '';
-    let replacements = [userId];
+    let transaction;
 
-    // Menentukan query SQL berdasarkan tipe pengguna
-    if (userType === 'kurir') {
-        query = 'DELETE FROM data_kurir WHERE id_kurir = ?';
-    } else if (userType === 'agen' || userType === 'karyawan') {
-        query = 'DELETE FROM data_users WHERE id = ?';
-    } else {
-        console.error('Invalid user type');
-        return res.status(400).send('Invalid user type');
+    try {
+        // Memulai transaksi
+        transaction = await sequelize.transaction();
+
+        if (userType === 'kurir') {
+            // Hapus entri terkait di riwayat terlebih dahulu
+            await sequelize.query(
+                'DELETE FROM riwayat WHERE id_kurir = ?',
+                { type: sequelize.QueryTypes.DELETE, replacements: [userId], transaction }
+            );
+
+            // Hapus entri terkait di pengantaran_paket
+            await sequelize.query(
+                'DELETE FROM pengantaran_paket WHERE id_data_kurir = ?',
+                { type: sequelize.QueryTypes.DELETE, replacements: [userId], transaction }
+            );
+
+            // Hapus dari data_kurir
+            await sequelize.query(
+                'DELETE FROM data_kurir WHERE id_kurir = ?',
+                { type: sequelize.QueryTypes.DELETE, replacements: [userId], transaction }
+            );
+        } else if (userType === 'agen' || userType === 'karyawan') {
+            // Hapus dari data_users
+            await sequelize.query(
+                'DELETE FROM data_users WHERE id = ?',
+                { type: sequelize.QueryTypes.DELETE, replacements: [userId], transaction }
+            );
+        } else {
+            console.error('Invalid user type');
+            return res.status(400).send('Invalid user type');
+        }
+
+        // Commit transaksi jika semua operasi berhasil
+        await transaction.commit();
+        console.log(`User with ID: ${userId} successfully deleted`);
+        fetchUsers(req, res); // Memperbarui daftar pengguna setelah menghapus
+    } catch (error) {
+        // Rollback transaksi jika terjadi kesalahan
+        if (transaction) await transaction.rollback();
+        console.error('Error deleting user:', error);
+        res.status(500).send('Failed to delete user');
     }
-
-    // Menjalankan query ke database
-    sequelize.query(query, { type: sequelize.QueryTypes.DELETE, replacements: replacements })
-        .then(() => {
-            console.log(`User with ID: ${userId} successfully deleted`);
-            fetchUsers(req, res); // Memperbarui daftar pengguna setelah menghapus
-        })
-        .catch(error => {
-            console.error('Error deleting user:', error);
-            res.status(500).send('Failed to delete user');
-        });
 };

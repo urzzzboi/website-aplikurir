@@ -67,15 +67,29 @@ export const savePackage = async (req, res) => {
 
 // Function untuk menampilkan daftar pengiriman
 export const getDeliveries = async (req, res) => {
-    const user = req.session.user || { email: 'user@example.com' }; // Ganti sesuai dengan data user yang ada di session
-    const query = 'SELECT * FROM penerimaan_paket';
-
     try {
-        const results = await sequelize.query(query, { type: QueryTypes.SELECT });
-        res.render('page/agen/list-paket', { deliveries: results, user });
+        const [deliveries] = await sequelize.query('SELECT * FROM penerimaan_paket');
+        res.render('page/agen/list-paket', { deliveries, selectedDeliverie: null });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+        console.error('Error fetching deliveries:', error);
+        res.status(500).send('Internal Server Error');
     }
 };
+
+export const getDeliverieById = async (req, res) => {
+    const deliverieId = req.params.id;
+    try {
+        const [deliveries] = await sequelize.query('SELECT * FROM penerimaan_paket');
+        const [selectedDeliverieArray] = await sequelize.query(
+            'SELECT * FROM penerimaan_paket WHERE ID_Data_Penerimaan_Paket = ?',
+            { replacements: [deliverieId] }
+        );
+        const selectedDeliverie = selectedDeliverieArray[0];
+        res.render('page/agen/list-paket', { deliveries, selectedDeliverie });
+    } catch (error) {
+        console.error('Error fetching deliverie:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 
