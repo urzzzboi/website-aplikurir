@@ -1,12 +1,13 @@
 import express from 'express';
 import user_controller from '../controllers/user.js';
 import path_controller from '../controllers/path.js';
-import { renderForm, savePackage, getDeliveries} from '../controllers/package.js';
+import { renderForm, savePackage, getDeliveries, getDeliverieById} from '../controllers/package.js';
 import { render2Form, saveKurir } from '../controllers/regisKurir.js';
 import { render3Form, saveUser, } from '../controllers/regisUser.js';
 import { deleteUser, fetchUsers, renderInitialView } from '../controllers/regisList.js';
 import { getAllPackages, getPackageById } from '../controllers/packageController.js';
 import { getPaketByKelurahan, getKurirByKelurahan, assignPaketToKurir } from '../controllers/kurir.js';
+import { getHistory } from '../controllers/historyController.js';
 
 
 const router = express.Router();
@@ -22,7 +23,7 @@ router.get('/agen', renderForm);
 router.get('/karyawan', getAllPackages);  // Menggunakan getAllPackages untuk route /karyawan
 router.get('/penentuan-kurir', path_controller.halamanPenentuan);
 router.get('/pendaftaran', path_controller.halamanPendaftaran);
-router.get('/riwayat', path_controller.halamanRiwayat);
+router.get('/riwayat', getHistory);
 router.get('/list-akun', path_controller.halamanAkun);
 router.get('/list-pengantaran', path_controller.halamanPengantaran);
 router.get('/list-paket', getDeliveries);
@@ -35,6 +36,7 @@ router.get('/coba', path_controller.test);
 
 // Package routes
 router.post('/save', savePackage);
+router.get('/deliverie/:id', getDeliverieById);
 router.get('/package/:id', getPackageById);  // Menggunakan getPackageById untuk route /package/:id
 
 // Pendaftaran kurir routes
