@@ -4,7 +4,9 @@ import userRoutes from './routers/root.js';
 import { sequelize } from "./models/model.js";
 
 const app = express();
-const hostname = '127.0.0.1';
+const hostname = '127.0.0.1'
+// const hostname = '172.22.171.125';
+// const hostname = '192.168.1.105';
 const port = 8081;
 
 app.use(express.json());
@@ -17,59 +19,67 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-app.post('/loginKurir', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log('Email:', email, 'Password:', password);
-    const [user] = await sequelize.query(
-      'SELECT * FROM data_users WHERE email = :email AND password = :password', 
-      { 
-        replacements: { email, password }, 
-        type: sequelize.QueryTypes.SELECT 
-      }
-    );
+app.get('/dataPengantaran', (req, res) => {
+  const query = `
+    SELECT 
+      pp.ID_Data_Pengantaran_Paket,
+      pp.ID_Data_Riwayat,
+      pp.id_kurir,
+      pp.ID_Data_Penerimaan_Paket,
+      dk.nama AS nama_kurir,
+      dk.handphone AS handphone_kurir,
+      dk.email AS email_kurir,
+      dk.password AS password_kurir,
+      pk.Nama_Pengirim,
+      pk.No_HP_Pengirim,
+      pk.Deskripsi,
+      pk.Berat,
+      pk.Dimensi,
+      pk.Jumlah_Kiriman,
+      pk.Nama_Penerima,
+      pk.No_HP_Penerima,
+      pk.Alamat_Tujuan,
+      pk.kecamatan,
+      pk.kelurahan,
+      pk.nomor_resi,
+      pk.createdAt AS penerimaan_createdAt,
+      pk.latitude,
+      pk.longitude
+    FROM pengantaran_paket pp
+    JOIN penerimaan_paket pk ON pp.ID_Data_Penerimaan_Paket = pk.ID_Data_Penerimaan_Paket
+    JOIN data_kurir dk ON pp.id_kurir = dk.id_kurir
+  `;
 
-    if (user) {
-      req.session.userId = user.id;
-      res.send(user);
-    } else {
-      res.status(401).send('Email atau password salah');
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Terjadi kesalahan pada server');
-  }
+  sequelize.query(query, { type: sequelize.QueryTypes.SELECT })
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
 });
 
-app.get('/dataKurir', async (req, res) => {
-  try {
-    const results = await sequelize.query('SELECT * FROM data_kurir', { type: sequelize.QueryTypes.SELECT });
-    res.send(results);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Tidak menampilkan data dari table data_kurir');
-  }
-});
+app.get('/dataPenerimaan', (req, res) => {
+  sequelize.query('SELECT * FROM penerimaan_paket', { type: sequelize.QueryTypes.SELECT })
+   .then(result => {
+      res.send(result);
+    })
+   .catch(err => {
+      console.log(err);
+    });
+})
 
-app.get('/dataPenerimaan', async (req, res) => {
-  try {
-    const results = await sequelize.query('SELECT * FROM penerimaan_paket', { type: sequelize.QueryTypes.SELECT });
-    res.send(results);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Tidak menampilkan data dari data penerimaan_paket');
-  }
-});
+app.get('/dataKurir', (req, res) => {
+  sequelize.query('SELECT * FROM data_kurir', { type: sequelize.QueryTypes.SELECT })
+   .then(result => {
+      res.send(result);
+    })
+   .catch(err => {
+      console.log(err);
+    });
+})
 
-app.get('/dataPenerimaan', async (req, res) => {
-  try {
-    const results = await sequelize.query('SELECT * FROM penerimaan_paket', { type: sequelize.QueryTypes.SELECT });
-    res.send(results);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Tidak menampilkan data dari table data_penerimaan_paket');
-  }
-});
 
 
 app.set('view engine', 'ejs');
