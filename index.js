@@ -4,14 +4,9 @@ import userRoutes from "./routers/root.js";
 import { sequelize } from "./models/model.js";
 
 const app = express();
-const hostname = '127.0.0.1'
 // const hostname = '172.22.171.125';
-<<<<<<< HEAD
 // const hostname = "192.168.1.105";
 const hostname = " 192.168.12.207";
-=======
-// const hostname = '192.168.1.105';
->>>>>>> a9612f3eace617c5dcbb99673d09b4e180928d3b
 const port = 8081;
 
 app.use(express.json());
