@@ -113,23 +113,23 @@ app.get("/dataPengantaran/:idKurir", (req, res) => {
       console.log(err);
     });
 });
-app.get("/dataRiwayat/:idKurir", (req, res) => {
+app.get("/riwayat/:idKurir", (req, res) => {
   const idKurir = req.params.idKurir;
   sequelize
     .query(
       `SELECT 
-        pr.id_data_riwayat,
+        pr.id_data_riwayat ,
         pr.id_kurir,
         pr.waktu_pengiriman,
-        pr.tanggal_pengiriman
-        pr.status_pengiriman
-        pr.nomor_resi
-        pr.Alamat_Tujuan
-        pr.Nama_Pengiriman
+        pr.tanggal_pengiriman,
+        pr.status_pengiriman,
+        pr.nomor_resi,
+        pr.Alamat_Tujuan,
+        pr.Nama_Pengiriman,
         dk.nama AS nama_kurir,
         dk.handphone AS handphone_kurir,
         dk.email,
-        dk.password,
+        dk.password
       FROM riwayat pr
       JOIN data_kurir dk ON pr.id_kurir = dk.id_kurir
       WHERE dk.id_kurir = :idKurir`,
