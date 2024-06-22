@@ -5,8 +5,8 @@ import { sequelize } from "./models/model.js";
 
 const app = express();
 // const hostname = '172.22.171.125';
-// const hostname = "192.168.1.105";
-const hostname = " 192.168.12.207";
+const hostname = "192.168.1.105";
+// const hostname = " 192.168.12.207";
 const port = 8081;
 
 app.use(express.json());
@@ -113,10 +113,31 @@ app.get("/dataPengantaran/:idKurir", (req, res) => {
       console.log(err);
     });
 });
-
-app.get("/dataKurir", (req, res) => {
+app.get("/dataRiwayat/:idKurir", (req, res) => {
+  const idKurir = req.params.idKurir;
   sequelize
-    .query("SELECT * FROM data_kurir", { type: sequelize.QueryTypes.SELECT })
+    .query(
+      `SELECT 
+        pr.id_data_riwayat,
+        pr.id_kurir,
+        pr.waktu_pengiriman,
+        pr.tanggal_pengiriman
+        pr.status_pengiriman
+        pr.nomor_resi
+        pr.Alamat_Tujuan
+        pr.Nama_Pengiriman
+        dk.nama AS nama_kurir,
+        dk.handphone AS handphone_kurir,
+        dk.email,
+        dk.password,
+      FROM riwayat pr
+      JOIN data_kurir dk ON pr.id_kurir = dk.id_kurir
+      WHERE dk.id_kurir = :idKurir`,
+      {
+        replacements: { idKurir: idKurir },
+        type: sequelize.QueryTypes.SELECT,
+      }
+    )
     .then((result) => {
       res.send(result);
     })
@@ -125,11 +146,9 @@ app.get("/dataKurir", (req, res) => {
     });
 });
 
-app.get("/dataPenerimaan", (req, res) => {
+app.get("/dataRiwayat2", (req, res) => {
   sequelize
-    .query("SELECT * FROM penerimaan_paket", {
-      type: sequelize.QueryTypes.SELECT,
-    })
+    .query("SELECT * FROM riwayat", { type: sequelize.QueryTypes.SELECT })
     .then((result) => {
       res.send(result);
     })
@@ -137,7 +156,6 @@ app.get("/dataPenerimaan", (req, res) => {
       console.log(err);
     });
 });
-
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
