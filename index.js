@@ -114,17 +114,17 @@ app.get("/dataPengantaran/:idKurir", (req, res) => {
     });
 });
 app.post('/riwayat', (req, res) => {
-  const { id_kurir, nomor_resi, Alamat_Tujuan, Nama_Pengiriman, status_pengiriman } = req.body;
+  const { id_kurir, nomor_resi, Alamat_Tujuan, Nama_Penerima, status_pengiriman } = req.body;
 
   sequelize.query(`
-    INSERT INTO riwayat (id_kurir, nomor_resi, alamat_tujuan, nama_pengiriman, status_pengiriman, waktu_pengiriman, tanggal_pengiriman)
-    VALUES (:id_kurir, :nomor_resi, :Alamat_Tujuan, :Nama_Pengiriman, :status_pengiriman, NOW(), CURDATE())
+    INSERT INTO riwayat (id_kurir, nomor_resi, alamat_tujuan, nama_penerima, status_pengiriman, waktu_pengiriman, tanggal_pengiriman)
+    VALUES (:id_kurir, :nomor_resi, :Alamat_Tujuan, :Nama_Penerima, :status_pengiriman, NOW(), CURDATE())
   `, {
     replacements: {
       id_kurir,
       nomor_resi,
       Alamat_Tujuan,
-      Nama_Pengiriman,
+      Nama_Penerima,
       status_pengiriman,
     },
     type: sequelize.QueryTypes.INSERT
@@ -138,14 +138,14 @@ app.post('/riwayat', (req, res) => {
   });
 });
 
-app.delete('/pengantaran_paket/:id', async (req, res) => {
+app.delete('/dataPengantaran2/:id', async (req, res) => {
   const idPengantaran = req.params.id;
   
   try {
     const result = await sequelize.query(
-      'DELETE FROM pengantaran_paket WHERE Id_pengantaran_paket = :idPengantaran',
+      `DELETE FROM pengantaran_paket WHERE Id_pengantaran_paket = ?`,
       {
-        replacements: { idPengantaran },
+        replacements: [idPengantaran],
         type: sequelize.QueryTypes.DELETE
       }
     );
