@@ -3,7 +3,9 @@ import { sequelize } from '../models/model.js';
 export const getHistory = async (req, res) => {
     try {
         // Ambil semua kurir
-        const [kurirs] = await sequelize.query('SELECT * FROM data_kurir');
+        const kurirs = await sequelize.query('SELECT * FROM data_kurir', {
+            type: sequelize.QueryTypes.SELECT
+        });
 
         // Urutkan kurirs berdasarkan nama
         kurirs.sort((a, b) => a.nama.localeCompare(b.nama));
@@ -19,15 +21,15 @@ export const getHistory = async (req, res) => {
 
         if (selectedKurirId) {
             // Ambil detail kurir yang dipilih
-            [selectedKurir] = await sequelize.query('SELECT * FROM data_kurir WHERE id_kurir = :selectedKurirId', {
-                replacements: { selectedKurirId }
+            selectedKurir = await sequelize.query('SELECT * FROM data_kurir WHERE id_kurir = :selectedKurirId', {
+                replacements: { selectedKurirId },
+                type: sequelize.QueryTypes.SELECT
             });
 
             // Ambil daftar paket yang dikirim oleh kurir yang dipilih berdasarkan tanggal
             let query = `
-                SELECT p.nomor_resi, p.Nama_Penerima, p.Alamat_Tujuan, r.status_pengiriman
-                FROM penerimaan_paket p
-                JOIN riwayat r ON p.ID_Data_Penerimaan_Paket = r.ID_Data_Penerimaan_Paket
+                SELECT r.nomor_resi, r.Nama_Penerima, r.Alamat_Tujuan, r.status_pengiriman
+                FROM riwayat r
                 WHERE r.id_kurir = :selectedKurirId
             `;
 
@@ -38,8 +40,9 @@ export const getHistory = async (req, res) => {
                 queryParams.filterDate = filterDate;
             }
 
-            [packages] = await sequelize.query(query, {
-                replacements: queryParams
+            packages = await sequelize.query(query, {
+                replacements: queryParams,
+                type: sequelize.QueryTypes.SELECT
             });
         }
 
@@ -50,6 +53,7 @@ export const getHistory = async (req, res) => {
             filterDate
         });
     } catch (error) {
-        res.status(500).send(error.message);
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
 };
