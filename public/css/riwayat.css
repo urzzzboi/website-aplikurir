@@ -15,7 +15,7 @@ body {
 .sidebar h1 {
     margin-left: 20px;
     font-size: 26pt;
-    color: #6f946d;
+    color: rgb(134, 167, 137);
 }
 
 input[type="date"] {
@@ -165,7 +165,7 @@ aside.sidebar {
 }
 
 .status.selesai {
-    color: green;
+    color: rgb(134, 167, 137);
 }
 
 .status.gagal {
