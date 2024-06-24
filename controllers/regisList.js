@@ -54,7 +54,7 @@ export const deleteUser = async (req, res) => {
                 { type: sequelize.QueryTypes.DELETE, replacements: [userId], transaction }
             );
             await sequelize.query(
-                'DELETE FROM pengantaran_paket WHERE id_data_kurir = ?',
+                'DELETE FROM pengantaran_paket WHERE kurir_id = ?',
                 { type: sequelize.QueryTypes.DELETE, replacements: [userId], transaction }
             );
             await sequelize.query(
