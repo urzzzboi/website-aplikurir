@@ -20,7 +20,7 @@ export const getPackageById = async (req, res) => {
       { replacements: [packageId] }
     );
     const selectedPackage = selectedPackageArray[0];
-    const user = req.session.user; // Ensure user is retrieved from the session
+    const user = req.session.user;
     res.render('page/halaman-karyawan', { packages, selectedPackage, user });
   } catch (error) {
     console.error('Error fetching package:', error);

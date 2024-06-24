@@ -20,7 +20,7 @@ router.get('/logout', user_controller.logout);
 // Path routes
 router.get('/admin', path_controller.halamanAdmin);
 router.get('/agen', renderForm);
-router.get('/karyawan', getAllPackages);  // Menggunakan getAllPackages untuk route /karyawan
+router.get('/karyawan', getAllPackages);
 router.get('/penentuan-kurir', path_controller.halamanPenentuan);
 router.get('/pendaftaran', path_controller.halamanPendaftaran);
 router.get('/riwayat', getHistory);
@@ -37,7 +37,7 @@ router.get('/coba', path_controller.test);
 // Package routes
 router.post('/save', savePackage);
 router.get('/deliverie/:id', getDeliverieById);
-router.get('/package/:id', getPackageById);  // Menggunakan getPackageById untuk route /package/:id
+router.get('/package/:id', getPackageById);
 
 // Pendaftaran kurir routes
 router.get('/kurir', render2Form);

@@ -2,7 +2,7 @@ import { sequelize } from "../models/model.js";
 
 // Function untuk menampilkan form input
 export const render3Form = (req, res) => {
-    const user = req.session.user || { email: 'user@example.com' }; // Ganti sesuai dengan data user yang ada di session
+    const user = req.session.user || { email: 'user@example.com' };
     res.render('page/admin/pendaftaran-agen-karyawan', { user });
 };
 

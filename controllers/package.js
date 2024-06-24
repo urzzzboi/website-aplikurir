@@ -3,15 +3,14 @@ import { QueryTypes } from 'sequelize';
 
 // Function untuk menghasilkan nomor resi unik dengan format "ak" + 10 angka
 const generateNomorResi = async () => {
-    const MAX_ATTEMPTS = 10; // Batasan jumlah percobaan
+    const MAX_ATTEMPTS = 10;
     let attempts = 0;
     let isUnique = false;
     let nomorResi = '';
 
     while (!isUnique && attempts < MAX_ATTEMPTS) {
         attempts += 1;
-        // Generate 10 random digits
-        const randomNumbers = Math.floor(1000000000 + Math.random() * 9000000000); // 10 digit angka
+        const randomNumbers = Math.floor(1000000000 + Math.random() * 9000000000);
         nomorResi = `AK${randomNumbers}`;
 
         const [results] = await sequelize.query(`SELECT COUNT(*) AS count FROM penerimaan_paket WHERE nomor_resi = ?`, {
@@ -35,7 +34,7 @@ const generateNomorResi = async () => {
 
 // Function untuk menampilkan form input
 export const renderForm = (req, res) => {
-    const user = req.session.user || { email: 'user@example.com' }; // Ganti sesuai dengan data user yang ada di session
+    const user = req.session.user || { email: 'user@example.com' };
     res.render('page/halaman-agen', { user });
 };
 

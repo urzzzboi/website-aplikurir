@@ -1,4 +1,3 @@
-// main.js
 document.addEventListener('DOMContentLoaded', () => {
     const kurirElements = document.querySelectorAll('.kurir');
     const filterDateElement = document.getElementById('filterDate');

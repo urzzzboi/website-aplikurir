@@ -1,5 +1,4 @@
 import { sequelize } from "../models/model.js";
-import { QueryTypes } from 'sequelize';
 
 export const getPaketByKelurahan = async (req, res) => {
     try {
