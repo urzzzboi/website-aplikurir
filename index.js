@@ -5,7 +5,7 @@ import { sequelize } from "./models/model.js";
 
 const app = express();
 // const hostname = '172.22.171.125';
-const hostname = "192.168.1.105";
+const hostname = '192.168.1.105';
 // const hostname = " 192.168.12.207";
 const port = 8081;
 
@@ -95,13 +95,15 @@ app.post("/riwayat", (req, res) => {
     Alamat_Tujuan,
     Nama_Penerima,
     status_pengiriman,
+    waktu_pengiriman, 
+    tanggal_pengiriman,
   } = req.body;
 
   sequelize
     .query(
       `
     INSERT INTO riwayat (id_kurir, nomor_resi, Alamat_Tujuan, Nama_Penerima, status_pengiriman, waktu_pengiriman, tanggal_pengiriman)
-    VALUES (:id_kurir, :nomor_resi, :Alamat_Tujuan, :Nama_Penerima, :status_pengiriman, NOW(), CURDATE())
+    VALUES (:id_kurir, :nomor_resi, :Alamat_Tujuan, :Nama_Penerima, :status_pengiriman, :waktu_pengiriman, :tanggal_pengiriman)
   `,
       {
         replacements: {
@@ -110,6 +112,8 @@ app.post("/riwayat", (req, res) => {
           Alamat_Tujuan,
           Nama_Penerima,
           status_pengiriman,
+          waktu_pengiriman, 
+          tanggal_pengiriman,
         },
         type: sequelize.QueryTypes.INSERT,
       }
