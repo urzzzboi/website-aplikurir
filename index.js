@@ -95,13 +95,15 @@ app.post("/riwayat", (req, res) => {
     Alamat_Tujuan,
     Nama_Penerima,
     status_pengiriman,
+    waktu_pengiriman, 
+    tanggal_pengiriman,
   } = req.body;
 
   sequelize
     .query(
       `
     INSERT INTO riwayat (id_kurir, nomor_resi, Alamat_Tujuan, Nama_Penerima, status_pengiriman, waktu_pengiriman, tanggal_pengiriman)
-    VALUES (:id_kurir, :nomor_resi, :Alamat_Tujuan, :Nama_Penerima, :status_pengiriman, NOW(), CURDATE())
+    VALUES (:id_kurir, :nomor_resi, :Alamat_Tujuan, :Nama_Penerima, :status_pengiriman, :waktu_pengiriman, :tanggal_pengiriman)
   `,
       {
         replacements: {
@@ -110,6 +112,8 @@ app.post("/riwayat", (req, res) => {
           Alamat_Tujuan,
           Nama_Penerima,
           status_pengiriman,
+          waktu_pengiriman, 
+          tanggal_pengiriman,
         },
         type: sequelize.QueryTypes.INSERT,
       }
