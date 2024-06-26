@@ -41,10 +41,11 @@ export const renderForm = (req, res) => {
 // Function untuk menyimpan data
 export const savePackage = async (req, res) => {
     const {
-        nama_pengirim, no_hp_pengirim, deskripsi, berat, dimensi,
-        jumlah_kiriman, nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan,
-        latitude, longitude
+        nama_pengirim, no_hp_pengirim, deskripsi, berat, panjang, lebar, jumlah_kiriman,
+        nama_penerima, no_hp_penerima, alamat_tujuan, kecamatan, kelurahan, latitude, longitude
     } = req.body;
+
+    const dimensi = panjang * lebar;  // Kalkulasi dimensi
 
     try {
         const nomorResi = await generateNomorResi();
@@ -90,5 +91,3 @@ export const getDeliverieById = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 }
-
-

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  <script src="/script/dimensi.js"></script>
   <style>
     #map {
       height: 100%;
@@ -103,8 +104,16 @@
           <input type="text" id="berat" name="berat" />
         </div>
         <div class="form-flex">
+          <label for="panjang">Panjang</label>
+          <input type="text" id="panjang" name="panjang" oninput="hitungDimensi()" />
+        </div>
+        <div class="form-flex">
+          <label for="lebar">Lebar</label>
+          <input type="text" id="lebar" name="lebar" oninput="hitungDimensi()" />
+        </div>
+        <div class="form-flex">
           <label for="dimensi">Dimensi</label>
-          <input type="text" id="dimensi" name="dimensi" />
+          <input type="text" id="dimensi" name="dimensi" readonly />
         </div>
         <div class="form-flex">
           <label for="jumlah_kiriman">Jumlah Kiriman</label>
