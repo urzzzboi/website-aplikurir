@@ -42,8 +42,9 @@
 }
 
 .kurir-button:hover,
-.kurir-button.active {
+.kurir-button.active,  .kurir-button p.active{
     background-color: rgb(134, 167, 137);
+    color: rgb(235, 243, 232);
 }
 
 .kurir-button i {
