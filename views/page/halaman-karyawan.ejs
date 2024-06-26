@@ -25,105 +25,106 @@
       <%- (!user ? '<a href="/">Login</a>' : '<a href="/logout">Logout</a>' ) %>
     </div>
   </header>
-  <div class="container">
-    <aside class="sidebar">
-      <h2>List Data Pengiriman Paket</h2>
-      <div class="package-list">
-        <% packages.forEach(pkg=> { %>
-          <div class="package-item">
-            <a href="/package/<%= pkg.ID_Data_Penerimaan_Paket %>">
-              <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
-              <span class="label">Kecamatan :</span> <span class="name">
-                <%= pkg.kecamatan %>
-              </span> | <span class="label"> Kelurahan :</span> <span class="name">
-                <%= pkg.kelurahan %>
-              </span> | <span class="label"> Alamat Tujuan : </span> <span class="name">
-                <%= pkg.Alamat_Tujuan %>
-              </span>
-            </a>
+  <div class="main">
+    <div class="container">
+      <aside class="sidebar">
+        <h2>List Data Pengiriman Paket</h2>
+        <div class="package-list">
+          <% packages.forEach(pkg=> { %>
+            <div class="package-item">
+              <a href="/package/<%= pkg.ID_Data_Penerimaan_Paket %>">
+                <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
+                <span class="label">Kecamatan:</span> <span class="name">
+                  <%= pkg.kecamatan %>
+                </span> | <span class="label"> Kelurahan:</span> <span class="name">
+                  <%= pkg.kelurahan %>
+                </span> | <span class="label" style="text-align: justify;"> Alamat Tujuan: </span> <span class="name">
+                  <%= pkg.Alamat_Tujuan %>
+                </span>
+              </a>
+            </div>
+            <% }) %>
+        </div>
+        <div class="line-bottom"></div>
+        <div class="total-packages">
+          Jumlah paket yang masuk: <span>
+            <%= packages.length %>
+          </span>
+        </div>
+      </aside>
+      <div class="line-center"></div>
+      <section class="details">
+        <% if (selectedPackage) { %>
+          <h2>Data Paket</h2>
+          <div class="line-bottom"></div>
+          <div class="detail-item">
+            <span class="detail">No. Resi</span> :&nbsp; <span class="value">
+              <%= selectedPackage.nomor_resi %>
+            </span>
           </div>
-          <% }) %>
-      </div>
-      <div class="line-bottom"></div>
-      <div class="total-packages">
-        Jumlah paket yang masuk: <span>
-          <%= packages.length %>
-        </span>
-      </div>
-    </aside>
-    <div class="line-center"></div>
-    <section class="details">
-      <% if (selectedPackage) { %>
-        <h2>Data Paket</h2>
-        <div class="line-bottom"></div>
-        <div class="detail-item">
-          <span class="detail">No. Resi</span> :  <span class="value"> 
-            <%= selectedPackage.nomor_resi %>
-          </span>
-        </div>
-        <div class="line-bottom"></div>
-        <div class="detail-item">
-          <span class="detail">Nama Pengirim</span> : <span class="value">
-            <%= selectedPackage.Nama_Pengirim %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">No. HP Pengirim</span> : <span class="value">
-            <%= selectedPackage.No_HP_Pengirim %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Deskripsi</span> : <span class="value">
-            <%= selectedPackage.Deskripsi %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Berat (kg)</span> : <span class="value">
-            <%= selectedPackage.Berat %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Dimensi (cm)</span> : <span class="value">
-            <%= selectedPackage.Dimensi %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Jumlah Kiriman</span> : <span class="value">
-            <%= selectedPackage.Jumlah_Kiriman %>
-          </span>
-        </div>
-        
-        <div class="line-bottom"></div>
-        <div class="detail-item">
-          <span class="detail">Nama Penerima</span> : <span class="value">
-            <%= selectedPackage.Nama_Penerima %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">No. HP Penerima</span> : <span class="value">
-            <%= selectedPackage.No_HP_Penerima %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Alamat</span> : <span class="value">
-            <%= selectedPackage.Alamat_Tujuan %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Kecamatan</span> : <span class="value">
-            <%= selectedPackage.kecamatan %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="detail">Kelurahan</span> : <span class="value">
-            <%= selectedPackage.kelurahan %>
-          </span>
-        </div>
-        <% } else { %>
-          <h2>Silakan pilih paket dari daftar di sebelah kiri</h2>
-          <% } %>
-    </section>
+          <div class="line-bottom"></div>
+          <div class="detail-item">
+            <span class="detail">Nama Pengirim</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Nama_Pengirim %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">No. HP Pengirim</span> :&nbsp; <span class="value">
+              <%= selectedPackage.No_HP_Pengirim %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Deskripsi</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Deskripsi %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Berat (kg)</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Berat %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Dimensi (cm)</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Dimensi %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Jumlah Kiriman</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Jumlah_Kiriman %>
+            </span>
+          </div>
 
+          <div class="line-bottom"></div>
+          <div class="detail-item">
+            <span class="detail">Nama Penerima</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Nama_Penerima %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">No. HP Penerima</span> :&nbsp; <span class="value">
+              <%= selectedPackage.No_HP_Penerima %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Alamat</span> :&nbsp; <span class="value">
+              <%= selectedPackage.Alamat_Tujuan %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Kecamatan</span> :&nbsp; <span class="value">
+              <%= selectedPackage.kecamatan %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Kelurahan</span> :&nbsp; <span class="value">
+              <%= selectedPackage.kelurahan %>
+            </span>
+          </div>
+          <% } else { %>
+   
+            <% } %>
+      </section>
+    </div>
   </div>
 </body>
 

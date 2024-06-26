@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="/css/agen-style.css" />
   <link rel="stylesheet" href="/css/custom-style.css" />
   <script src="/script/admin-script.js"></script>
+  <script src="/script/dimensi.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
-  <script src="/script/dimensi.js"></script>
   <style>
     #map {
       height: 100%;
@@ -25,20 +25,23 @@
       z-index: 1;
       left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
+      bottom: 10;
+      width: 50%;
+      height: 95vh;
       overflow: auto;
+
       background-color: rgb(0, 0, 0);
       background-color: rgba(0, 0, 0, 0.4);
     }
 
     .modal-content {
       background-color: #fefefe;
-      margin: 15% auto;
+      align-items: center;
+      margin: 5px;
       padding: 0;
-      border: 1px solid #888;
-      width: 80%;
-      height: 80%;
+      border: 5px solid rgb(134, 167, 137);
+      width: 98%;
+      height: 97%;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -58,6 +61,28 @@
       color: black;
       text-decoration: none;
       cursor: pointer;
+    }
+
+    .button2 {
+      padding: 10px 40px;
+      border: none;
+      background-color: rgb(134, 167, 137);
+      color: rgb(235, 243, 232);
+      cursor: pointer;
+      font-size: 12pt;
+      font-weight: bold;
+      box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+    }
+
+    .button2:active {
+      transform: translateY(4px);
+      box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .alamat-button {
+      display: inline;
+      text-align: right;
     }
   </style>
 </head>
@@ -79,45 +104,48 @@
       <h1>Penerimaan Paket</h1>
       <a class="btn-paket" href="/list-paket">List Paket</a>
     </div>
-    <% if (typeof nomorResi !== 'undefined') { %>
+    <% if (typeof nomorResi !=='undefined' ) { %>
       <div class="info">
-        <h2>Nomor Resi: <%= nomorResi %></h2>
+        <h2>Nomor Resi: <%= nomorResi %>
+        </h2>
       </div>
-    <% } %>
-    <form action="/save" method="post" class="form-container">
-      <div class="left-form">
-        <p>Masukkan data pengirim</p>
-        <div class="form-flex">
-          <label for="nama_pengirim">Nama Pengirim</label>
-          <input type="text" id="nama_pengirim" name="nama_pengirim" required />
-        </div>
-        <div class="form-flex">
-          <label for="no_hp_pengirim">No. HP</label>
-          <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" required />
-        </div>
-        <div class="form-flex">
-          <label for="deskripsi">Deskripsi</label>
-          <input type="text" id="deskripsi" name="deskripsi" />
-        </div>
-        <div class="form-flex">
-          <label for="berat">Berat</label>
-          <input type="text" id="berat" name="berat" />
-        </div>
+      <% } %>
+        <form action="/save" method="post" class="form-container">
+          <div class="left-form">
+            <p>Masukkan data pengirim</p>
+            <div class="form-flex">
+              <label for="nama_pengirim">Nama Pengirim</label>
+              <input type="text" id="nama_pengirim" name="nama_pengirim" placeholder="Nama Pengirim" required />
+            </div>
+            <div class="form-flex">
+              <label for="no_hp_pengirim">No. HP</label>
+              <input type="text" id="no_hp_pengirim" name="no_hp_pengirim" placeholder="Nomor Handphone Pengirim"
+                required />
+            </div>
+            <div class="form-flex">
+              <label for="deskripsi">Deskripsi</label>
+              <input type="text" id="deskripsi" name="deskripsi" placeholder="Deskripsi paket yang akan dikirim" />
+            </div>
+            <div class="form-flex">
+              <label for="berat">Berat (kg)</label>
+              <input type="text" id="berat" name="berat" placeholder="Berat paket" />
+            </div>
         <div class="form-flex">
           <label for="panjang">Panjang</label>
-          <input type="text" id="panjang" name="panjang" oninput="hitungDimensi()" />
+          <input type="text" id="panjang" name="panjang" placeholder="Panjang paket" oninput="hitungDimensi()" />
         </div>
         <div class="form-flex">
           <label for="lebar">Lebar</label>
-          <input type="text" id="lebar" name="lebar" oninput="hitungDimensi()" />
+          <input type="text" id="lebar" name="lebar" placeholder="Lebar paket" oninput="hitungDimensi()" />
         </div>
         <div class="form-flex">
-          <label for="dimensi">Dimensi</label>
-          <input type="text" id="dimensi" name="dimensi" readonly />
+          <label for="dimensi">Dimensi (cm)</label>
+          <input type="text" id="dimensi" name="dimensi" placeholder="Dimensi paket" />
         </div>
         <div class="form-flex">
           <label for="jumlah_kiriman">Jumlah Kiriman</label>
-          <input type="text" id="jumlah_kiriman" name="jumlah_kiriman" />
+          <input type="text" id="jumlah_kiriman" name="jumlah_kiriman"
+            placeholder="Jumlah paket yang akan dikirim" />
         </div>
       </div>
       <div class="line-center"></div>
@@ -125,37 +153,43 @@
         <p>Masukkan data penerima</p>
         <div class="form-flex">
           <label for="nama_penerima">Nama Penerima</label>
-          <input type="text" id="nama_penerima" name="nama_penerima" required />
+          <input type="text" id="nama_penerima" name="nama_penerima" placeholder="Nama Penerima" required />
         </div>
         <div class="form-flex">
           <label for="no_hp_penerima">No. HP</label>
-          <input type="text" id="no_hp_penerima" name="no_hp_penerima" required />
+          <input type="text" id="no_hp_penerima" name="no_hp_penerima" placeholder="Nomor Handphone Penerima"
+            required />
         </div>
         <div class="form-flex">
           <label for="alamat_tujuan">Alamat Tujuan</label>
-          <textarea id="alamat_tujuan" name="alamat_tujuan" required></textarea>
+          <textarea id="alamat_tujuan" name="alamat_tujuan"
+            placeholder="Alamat Tujuan (Masukkan terlebih dahulu kota alamat yang akan dituju)" required></textarea>
         </div>
-        <button type="button" id="confirm-address">Konfirmasi Alamat</button>
+        <div class="alamat-button">
+          <button class="button2" type="button" id="confirm-address">Konfirmasi Alamat</button>
+        </div>
         <p>Memilih zona pengiriman</p>
         <div class="opsi">
           <select id="kecamatan" name="kecamatan">
+            <option value="">-- Pilih Kecamatan --</option>
           </select>
           <select id="kelurahan" name="kelurahan">
+            <option value="">-- Pilih Kelurahan --</option>
           </select>
         </div>
         <input type="hidden" id="latitude" name="latitude" />
         <input type="hidden" id="longitude" name="longitude" />
-        <button type="submit" class="button">Konfirmasi</button>
+        <button type="submit" class="button">+ Tambah</button>
       </div>
     </form>
-  </div>
+</div>
 
-  <div id="addressModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="map"></div>
-    </div>
-  </div>
+<div id="addressModal" class="modal">
+<div class="modal-content">
+  <span class="close">&times;</span>
+  <div id="map"></div>
+</div>
+</div>
 
   <script>
   // Mendapatkan elemen select

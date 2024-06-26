@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <script src="/script/admin-script.js" defer></script>
+  <style>
+    .value{
+      font-weight: normal;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,7 +26,7 @@
       </a>
     </div>
   </div>
-  <main>
+  <div class="main">
     <div class="container">
       <aside class="sidebar">
         <h2>List Data Pengiriman Paket</h2>
@@ -30,11 +35,11 @@
             <div class="package-item">
               <a href="/deliverie/<%= pkg.ID_Data_Penerimaan_Paket %>">
                 <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
-                <span class="label">Kecamatan :</span> <span class="name">
+                <span class="label">Kecamatan:</span> <span class="name">
                   <%= pkg.kecamatan %>
-                </span>|<span class="label"> Kelurahan :</span> <span class="name">
+                </span>|<span class="label"> Kelurahan:</span> <span class="name">
                   <%= pkg.kelurahan %>
-                </span><br> <span class="label"> Alamat Tujuan : </span> <span class="name">
+                </span><br> <span class="label" style="text-align: justify;"> Alamat Tujuan: </span> <span class="name">
                   <%= pkg.Alamat_Tujuan %>
                 </span>
               </a>
@@ -48,70 +53,70 @@
           <h2>Data Paket</h2>
           <div class="line-bottom"></div>
           <div class="detail-item">
-            <span class="detail">No. Resi</span> : <span class="value">
+            <span class="detail">No. Resi</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.nomor_resi %>
             </span>
           </div>
           <div class="line-bottom"></div>
           <div class="detail-item">
-            <span class="detail">Nama Pengirim</span> : <span class="value">
+            <span class="detail">Nama Pengirim</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Nama_Pengirim %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">No. HP Pengirim</span> : <span class="value">
+            <span class="detail">No. HP Pengirim</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.No_HP_Pengirim %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Deskripsi</span> : <span class="value">
+            <span class="detail">Deskripsi</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Deskripsi %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Berat (kg)</span> : <span class="value">
+            <span class="detail">Berat (kg)</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Berat %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Dimensi (cm)</span> : <span class="value">
+            <span class="detail">Dimensi (cm)</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Dimensi %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Jumlah Kiriman</span> : <span class="value">
+            <span class="detail">Jumlah Kiriman</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Jumlah_Kiriman %>
             </span>
           </div>
 
           <div class="line-bottom"></div>
           <div class="detail-item">
-            <span class="detail">Nama Penerima</span> : <span class="value">
+            <span class="detail">Nama Penerima</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Nama_Penerima %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">No. HP Penerima</span> : <span class="value">
+            <span class="detail">No. HP Penerima</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.No_HP_Penerima %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Alamat</span> : <span class="value">
+            <span class="detail">Alamat</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.Alamat_Tujuan %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Kecamatan</span> : <span class="value">
+            <span class="detail">Kecamatan</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.kecamatan %>
             </span>
           </div>
           <div class="detail-item">
-            <span class="detail">Kelurahan</span> : <span class="value">
+            <span class="detail">Kelurahan</span> :&nbsp; <span class="value">
               <%= selectedDeliverie.kelurahan %>
             </span>
           </div>
           <% } else { %>
-            <h2>Silakan pilih paket dari daftar di sebelah kiri</h2>
+           
             <% } %>
       </section>
 
