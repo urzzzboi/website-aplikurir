@@ -2,204 +2,121 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Karyawan Gedung</title>
-    <link rel="icon" href="/img/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/custom-style.css">
-    <link rel="stylesheet" href="/css/karyawan-style.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        } */
-
-        .header {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .header h1 {
-            flex-grow: 1;
-            font-size: 24px;
-        }
-
-        .header a {
-            text-decoration: none;
-            color: #333;
-        }
-
-        .button-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .button-container button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #e0e0e0;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .button-container button.active,
-        .button-container button:hover {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        .user-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .user-list li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px;
-            /* Mengurangi padding */
-            margin-bottom: 8px;
-            /* Menambahkan margin bawah */
-            background-color: #e8f5e9;
-            border-radius: 5px;
-        }
-
-        .user-list li span {
-            font-size: 18px;
-        }
-
-        .user-list li button {
-            background: none;
-            border: none;
-            color: red;
-            cursor: pointer;
-        }
-    </style>
-    <script src="/script/admin-script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Karyawan Gedung</title>
+  <link rel="icon" href="/img/logo-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/custom-style.css">
+  <link rel="stylesheet" href="/css/karyawan-style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="/script/admin-script.js" defer></script>
 </head>
 
 <body>
-    <div class="header">
-        <div class="back-btn">
-            <a href="/agen">
-                <i class="fas fa-arrow-left fa-lg"></i><span class="btn-text">Kembali</span>
-            </a>
-        </div>
+  <div class="header">
+    <div class="back-btn">
+      <a href="/agen">
+        <i class="fas fa-arrow-left fa-lg"></i><span class="btn-text">Kembali</span>
+      </a>
     </div>
-    <main>
-        <div class="container">
-            <aside class="sidebar">
-              <h2>List Data Pengiriman Paket</h2>
-              <div class="package-list">
-                <% deliveries.forEach(pkg=> { %>
-                  <div class="package-item">
-                    <a href="/deliverie/<%= pkg.ID_Data_Penerimaan_Paket %>">
-                      <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
-                      <span class="label">Kecamatan :</span> <span class="name">
-                        <%= pkg.kecamatan %>
-                      </span> | <span class="label"> Kelurahan :</span> <span class="name">
-                        <%= pkg.kelurahan %>
-                      </span> | <span class="label"> Alamat Tujuan : </span> <span class="name">
-                        <%= pkg.Alamat_Tujuan %>
-                      </span>
-                    </a>
-                  </div>
-                  <% }) %>
-              </div>
-            </aside>
-            <div class="line-center"></div>
-            <section class="details">
-              <% if (selectedDeliverie) { %>
-                <h2>Data Paket</h2>
-                <div class="line-bottom"></div>
-                <div class="detail-item">
-                  <span class="detail">No. Resi</span> :  <span class="value"> 
-                    <%= selectedDeliverie.nomor_resi %>
-                  </span>
-                </div>
-                <div class="line-bottom"></div>
-                <div class="detail-item">
-                  <span class="detail">Nama Pengirim</span> : <span class="value">
-                    <%= selectedDeliverie.Nama_Pengirim %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">No. HP Pengirim</span> : <span class="value">
-                    <%= selectedDeliverie.No_HP_Pengirim %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Deskripsi</span> : <span class="value">
-                    <%= selectedDeliverie.Deskripsi %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Berat (kg)</span> : <span class="value">
-                    <%= selectedDeliverie.Berat %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Dimensi (cm)</span> : <span class="value">
-                    <%= selectedDeliverie.Dimensi %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Jumlah Kiriman</span> : <span class="value">
-                    <%= selectedDeliverie.Jumlah_Kiriman %>
-                  </span>
-                </div>
-                
-                <div class="line-bottom"></div>
-                <div class="detail-item">
-                  <span class="detail">Nama Penerima</span> : <span class="value">
-                    <%= selectedDeliverie.Nama_Penerima %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">No. HP Penerima</span> : <span class="value">
-                    <%= selectedDeliverie.No_HP_Penerima %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Alamat</span> : <span class="value">
-                    <%= selectedDeliverie.Alamat_Tujuan %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Kecamatan</span> : <span class="value">
-                    <%= selectedDeliverie.kecamatan %>
-                  </span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail">Kelurahan</span> : <span class="value">
-                    <%= selectedDeliverie.kelurahan %>
-                  </span>
-                </div>
-                <% } else { %>
-                  <h2>Silakan pilih paket dari daftar di sebelah kiri</h2>
-                  <% } %>
-            </section>
-        
+  </div>
+  <main>
+    <div class="container">
+      <aside class="sidebar">
+        <h2>List Data Pengiriman Paket</h2>
+        <div class="package-list">
+          <% deliveries.forEach(pkg=> { %>
+            <div class="package-item">
+              <a href="/deliverie/<%= pkg.ID_Data_Penerimaan_Paket %>">
+                <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
+                <span class="label">Kecamatan :</span> <span class="name">
+                  <%= pkg.kecamatan %>
+                </span>|<span class="label"> Kelurahan :</span> <span class="name">
+                  <%= pkg.kelurahan %>
+                </span><br> <span class="label"> Alamat Tujuan : </span> <span class="name">
+                  <%= pkg.Alamat_Tujuan %>
+                </span>
+              </a>
+            </div>
+            <% }) %>
+        </div>
+      </aside>
+      <div class="line-center"></div>
+      <section class="details">
+        <% if (selectedDeliverie) { %>
+          <h2>Data Paket</h2>
+          <div class="line-bottom"></div>
+          <div class="detail-item">
+            <span class="detail">No. Resi</span> : <span class="value">
+              <%= selectedDeliverie.nomor_resi %>
+            </span>
           </div>
-    </main>
+          <div class="line-bottom"></div>
+          <div class="detail-item">
+            <span class="detail">Nama Pengirim</span> : <span class="value">
+              <%= selectedDeliverie.Nama_Pengirim %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">No. HP Pengirim</span> : <span class="value">
+              <%= selectedDeliverie.No_HP_Pengirim %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Deskripsi</span> : <span class="value">
+              <%= selectedDeliverie.Deskripsi %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Berat (kg)</span> : <span class="value">
+              <%= selectedDeliverie.Berat %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Dimensi (cm)</span> : <span class="value">
+              <%= selectedDeliverie.Dimensi %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Jumlah Kiriman</span> : <span class="value">
+              <%= selectedDeliverie.Jumlah_Kiriman %>
+            </span>
+          </div>
+
+          <div class="line-bottom"></div>
+          <div class="detail-item">
+            <span class="detail">Nama Penerima</span> : <span class="value">
+              <%= selectedDeliverie.Nama_Penerima %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">No. HP Penerima</span> : <span class="value">
+              <%= selectedDeliverie.No_HP_Penerima %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Alamat</span> : <span class="value">
+              <%= selectedDeliverie.Alamat_Tujuan %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Kecamatan</span> : <span class="value">
+              <%= selectedDeliverie.kecamatan %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail">Kelurahan</span> : <span class="value">
+              <%= selectedDeliverie.kelurahan %>
+            </span>
+          </div>
+          <% } else { %>
+            <h2>Silakan pilih paket dari daftar di sebelah kiri</h2>
+            <% } %>
+      </section>
+
+    </div>
+  </main>
 
 </body>
 
