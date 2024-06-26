@@ -56,23 +56,23 @@
             border: none;
             height: 60vh;
     }
-    .user-list::-webkit-scrollbar {
+    .list-alamat::-webkit-scrollbar {
             width: 10px;
             height: 10px;
         }
 
-        .user-list::-webkit-scrollbar-thumb {
+        .list-alamat::-webkit-scrollbar-thumb {
             background: rgb(134, 167, 137);
             border: 2px solid rgb(235, 243, 232);
             border-radius: 10px;
         }
 
-        .user-list::-webkit-scrollbar-track {
+        .list-alamat::-webkit-scrollbar-track {
             background: rgb(235, 243, 232);
             border-radius: 10px;
         }
 
-        .user-list::-webkit-scrollbar-thumb:hover {
+        .list-alamat::-webkit-scrollbar-thumb:hover {
             background: rgb(134, 167, 145);
         }
 </style>
@@ -222,8 +222,8 @@
             kurirs.forEach(kurir => {
                 kurirList += `
                         <button class="kurir-button" onclick="selectKurir(${kurir.id_kurir})">
-                            <p>Nama: ${kurir.nama}</p>
-                            <p>No. HP: ${kurir.handphone}</p>
+                            <p><b style= "color: rgb(134, 167, 145);">Nama:</b> ${kurir.nama} &nbsp;</p>
+                            <p><b style= "color: rgb(134, 167, 145);> | No. HP:</b> ${kurir.handphone}</p>
                         </button>
                     `;
             });
