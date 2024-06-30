@@ -3,6 +3,7 @@ import session from "express-session";
 import userRoutes from "./routers/root.js";
 import { sequelize } from "./models/model.js";
 
+//ini express
 const app = express();
 // const hostname = '172.22.171.125';
 const hostname = '192.168.1.105';

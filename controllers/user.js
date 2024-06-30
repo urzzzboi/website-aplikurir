@@ -48,7 +48,7 @@ const auth = (req, res, next) => {
       }
     })
     .catch((err) => {
-      req.session.err = "Error database";
+      req.session.err = "Email atau Password tidak boleh kosong";
       req.session.user = {
         email: data.email,
         password: data.password,

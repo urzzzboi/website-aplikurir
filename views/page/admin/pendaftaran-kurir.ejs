@@ -30,8 +30,10 @@
       <input type="text" id="password" name="password" placeholder="Password" value="" />
 
       <select id="kecamatan" name="kecamatan">
+        <option value="">-- Pilih Kecamatan --</option>
       </select>
       <select id="kelurahan" name="kelurahan">
+        <option value="">-- Pilih Kelurahan --</option>
       </select>
 
       <button type="submit" class="green-btn">Tambah</button>
@@ -57,7 +59,7 @@
       // Event listener ketika kecamatan dipilih
       kecamatanSelect.addEventListener('change', function () {
         // Menghapus opsi kelurahan sebelumnya
-        kelurahanSelect.innerHTML = '<option value="">--Pilih Kelurahan--</option>';
+        kelurahanSelect.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
 
         // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
         let kelurahans = data[this.value];
