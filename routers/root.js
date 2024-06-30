@@ -8,6 +8,7 @@ import { deleteUser, fetchUsers, renderInitialView } from '../controllers/regisL
 import { getAllPackages, getPackageById } from '../controllers/packageController.js';
 import { getPaketByKelurahan, getKurirByKelurahan, assignPaketToKurir } from '../controllers/kurir.js';
 import { getHistory } from '../controllers/historyController.js';
+import { getKurirWithPaket } from '../controllers/kurir.js';
 
 
 const router = express.Router();
@@ -53,5 +54,7 @@ router.post('/fetch-users', fetchUsers);
 // Rute untuk menghapus pengguna
 router.post('/delete-user/:id', deleteUser); 
 
+router.get('/list-pengantaran-paket', path_controller.listPengantaran);
+router.get('/list-pengantaran-paket/data', getKurirWithPaket);
 
 export default router;

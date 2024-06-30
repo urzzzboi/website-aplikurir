@@ -46,8 +46,10 @@ const test = (req, res) =>{
     res.render('coba');
 }
 
+const listPengantaran = (req, res) => {
+    res.render('page/admin/list-pengantaran-paket');
+}
 
 
 
-
-export default { halamanAdmin, halamanAgen, halamanKaryawan, halamanPenentuan, halamanPendaftaran, halamanRiwayat, halamanAkun, halamanPengantaran, halamanPaket, pilihagenkaryawan, pilihkurir, test};
+export default { halamanAdmin, halamanAgen, halamanKaryawan, halamanPenentuan, halamanPendaftaran, halamanRiwayat, halamanAkun, halamanPengantaran, halamanPaket, pilihagenkaryawan, pilihkurir, test, listPengantaran};

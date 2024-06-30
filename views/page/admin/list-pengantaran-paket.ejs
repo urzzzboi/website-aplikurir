@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Pengantaran Paket</title>
+    <link rel="stylesheet" href="css/penentuan-style.css">
+    <link rel="stylesheet" href="css/custom-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="script/admin-script.js"></script>
+    <script src="script/fetch.js"></script>
+
+    <style>
+        .kurir-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+
+        .kurir-box h2 {
+            margin: 0 0 10px;
+        }
+
+        .paket-list p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="back-btn">
+            <a onclick="goBack()">
+                <i class="fas fa-arrow-left fa-lg"></i><span class="btn-text">Kembali</span>
+            </a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="left-panel">
+            <h1>List Pengantaran Paket</h1>
+            <h3>Menampilkan daftar kurir beserta paket yang diassign.</h3>
+                <div class="opsi-kecamatan">
+                    <select id="kecamatan">
+                        <option value="">-- Pilih Kecamatan --</option>
+                    </select>
+                </div>
+                <div class="opsi-kelurahan">
+                    <select id="kelurahan">
+                        <option value="">-- Pilih Kelurahan --</option>
+                    </select>
+                </div>
+            <div class="confirm-section">
+                <button id="confirmKecamatanKelurahan" class="confirm-btn"
+                    onclick="fetchKurirWithPaket()">Konfirmasi</button>
+            </div>
+            <div id="kurirPaketList"></div>
+        </div>
+    </div>
+</body>
+    <script>
+        // Mendapatkan elemen select
+        const kecamatanSelect = document.getElementById('kecamatan');
+        const kelurahanSelect = document.getElementById('kelurahan');
+
+        // Memuat data dari file JSON
+        fetch('/data/lokasi.json')
+            .then(response => response.json())
+            .then(data => {
+                // Mengisi opsi kecamatan
+                for (let kecamatan in data) {
+                    let option = document.createElement('option');
+                    option.value = kecamatan;
+                    option.textContent = kecamatan;
+                    kecamatanSelect.appendChild(option);
+                }
+
+                // Event listener ketika kecamatan dipilih
+                kecamatanSelect.addEventListener('change', function () {
+                    // Menghapus opsi kelurahan sebelumnya
+                    kelurahanSelect.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
+
+                    // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
+                    let kelurahans = data[this.value];
+                    if (kelurahans) {
+                        kelurahans.forEach(function (kelurahan) {
+                            let option = document.createElement('option');
+                            option.value = kelurahan;
+                            option.textContent = kelurahan;
+                            kelurahanSelect.appendChild(option);
+                        });
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        async function fetchKurirWithPaket() {
+            const kecamatan = document.getElementById('kecamatan').value;
+            const kelurahan = document.getElementById('kelurahan').value;
+            const response = await fetch(`/list-pengantaran-paket/data?kecamatan=${kecamatan}&kelurahan=${kelurahan}`);
+            const data = await response.json();
+            const listContainer = document.getElementById('kurirPaketList');
+            listContainer.innerHTML = ''; // Clear existing content
+
+            if (data.length > 0) {
+                data.forEach(item => {
+                    const kurirBox = document.createElement('div');
+                    kurirBox.className = 'kurir-box';
+                    kurirBox.innerHTML = `
+                            <h2>Kurir: ${item.nama} (${item.handphone})</h2>
+                            <div class="paket-list">
+                                <p>No. Resi: ${item.nomor_resi}</p>
+                                <p>Nama Penerima: ${item.Nama_Penerima}</p>
+                                <p>Alamat Tujuan: ${item.Alamat_Tujuan}</p>
+                                <p>No. HP: ${item.No_HP_Penerima}</p>
+                            </div>
+                        `;
+                    listContainer.appendChild(kurirBox);
+                });
+            } else {
+                listContainer.innerHTML = '<p>Tidak ada data pengantaran paket untuk kecamatan dan kelurahan ini.</p>';
+            }
+        }
+    </script>
+
+</html>

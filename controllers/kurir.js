@@ -43,3 +43,20 @@ export const assignPaketToKurir = async (req, res) => {
         res.status(500).send(error.message);
     }
 };
+
+export const getKurirWithPaket = async (req, res) => {
+    const { kecamatan, kelurahan } = req.query;
+    try {
+        const [results, metadata] = await sequelize.query(
+            `SELECT k.id_kurir, k.nama, k.handphone, p.ID_Data_Penerimaan_Paket, p.nomor_resi, p.Nama_Penerima, p.Alamat_Tujuan, p.No_HP_Penerima 
+             FROM data_kurir k 
+             LEFT JOIN pengantaran_paket pp ON k.id_kurir = pp.kurir_id 
+             LEFT JOIN penerimaan_paket p ON pp.paket_id = p.ID_Data_Penerimaan_Paket
+             WHERE k.kecamatan = ? AND k.kelurahan = ?`,
+            { replacements: [kecamatan, kelurahan] }
+        );
+        res.json(results);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
