@@ -12,10 +12,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <script src="/script/admin-script.js" defer></script>
   <style>
-    .value{
+    .value {
       font-weight: normal;
     }
+
+    .search-bar {
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -35,6 +48,9 @@
             <%= deliveries.length %>
           </span>
         </div>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Cari berdasarkan nomor resi...">
+        </div>
         <div class="package-list">
           <% deliveries.forEach(pkg=> { %>
             <div class="package-item">
@@ -42,9 +58,11 @@
                 <span class="noresi">No. Resi: <%= pkg.nomor_resi %></span><br>
                 <span class="label">Kecamatan:</span> <span class="name">
                   <%= pkg.kecamatan %>
-                </span>|<span class="label"> Kelurahan:</span> <span class="name">
+                </span> |
+                <span class="label">Kelurahan:</span> <span class="name">
                   <%= pkg.kelurahan %>
-                </span><br> <span class="label" style="text-align: justify;"> Alamat Tujuan: </span> <span class="name">
+                </span><br>
+                <span class="label" style="text-align: justify;">Alamat Tujuan:</span> <span class="name">
                   <%= pkg.Alamat_Tujuan %>
                 </span>
               </a>
@@ -93,7 +111,6 @@
               <%= selectedDeliverie.Jumlah_Kiriman %>
             </span>
           </div>
-
           <div class="line-bottom"></div>
           <div class="detail-item">
             <span class="detail">Nama Penerima</span> :&nbsp; <span class="value">
@@ -121,13 +138,29 @@
             </span>
           </div>
           <% } else { %>
-           
+            <!-- Display a message if no delivery is selected -->
+            <p>Pilih paket untuk melihat detail.</p>
             <% } %>
       </section>
-
     </div>
-  </main>
-
+    </main>
 </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('searchInput');
+      const packageItems = document.querySelectorAll('.package-item');
 
+      searchInput.addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        packageItems.forEach(item => {
+          const noResi = item.querySelector('.noresi').textContent.toLowerCase();
+          if (noResi.includes(query)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </html>
