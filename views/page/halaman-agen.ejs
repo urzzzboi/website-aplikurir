@@ -217,7 +217,7 @@
     const kelurahanSelect = document.getElementById('kelurahan');
 
     // Memuat data kecamatan dan kelurahan
-    fetch('/data-kecamatan-kelurahan.json')
+    fetch('/data/lokasi.json')
       .then(response => response.json())
       .then(data => {
         // Mengisi opsi kecamatan
