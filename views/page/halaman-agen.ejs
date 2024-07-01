@@ -83,6 +83,22 @@
       display: inline;
       text-align: right;
     }
+
+    .search-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .search-container input[type="text"] {
+      width: 70%;
+      padding: 10px;
+    }
+
+    .search-container button {
+      margin-left: 10px;
+    }
   </style>
 </head>
 
@@ -186,8 +202,10 @@
   <div id="addressModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <input type="text" id="search-address" placeholder="Cari Alamat" style="width: 80%; margin: 10px;" />
-      <button class="button2" type="button" id="search-address-button">Cari</button>
+      <div class="search-container">
+        <input type="text" id="search-address" placeholder="Cari Alamat" />
+        <button class="button2" type="button" id="search-address-button">Cari</button>
+      </div>
       <div id="map"></div>
       <button class="button2" type="button" id="confirm-map-address" style="margin: 10px;">Konfirmasi Alamat</button>
     </div>
@@ -198,8 +216,8 @@
     const kecamatanSelect = document.getElementById('kecamatan');
     const kelurahanSelect = document.getElementById('kelurahan');
 
-    // Memuat data dari file JSON
-    fetch('/data/lokasi.json')
+    // Memuat data kecamatan dan kelurahan
+    fetch('/data-kecamatan-kelurahan.json')
       .then(response => response.json())
       .then(data => {
         // Mengisi opsi kecamatan
@@ -231,6 +249,7 @@
 
     let map;
     let marker;
+    let selectedAddress = '';
 
     function initMap() {
       map = L.map("map").setView([3.5951646965262394, 98.6715265542528], 16);
@@ -249,8 +268,7 @@
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
           )
           .then((response) => {
-            const address = response.data.display_name;
-            document.getElementById("alamat_tujuan").value = address;
+            selectedAddress = response.data.display_name;
             document.getElementById("latitude").value = e.latlng.lat;
             document.getElementById("longitude").value = e.latlng.lng;
           })
@@ -270,13 +288,9 @@
     });
 
     document.getElementById("confirm-map-address").addEventListener("click", () => {
-      const address = document.getElementById("alamat_tujuan").value;
-      if (address) {
-        const modal = document.getElementById("addressModal");
-        modal.style.display = "none";
-      } else {
-        alert("Pilih alamat pada peta terlebih dahulu.");
-      }
+      const modal = document.getElementById("addressModal");
+      document.getElementById("alamat_tujuan").value = selectedAddress;
+      modal.style.display = "none";
     });
 
     document.getElementById("search-address-button").addEventListener("click", () => {
@@ -297,6 +311,7 @@
                 map.removeLayer(marker);
               }
               marker = L.marker(latLng).addTo(map);
+              selectedAddress = response.data[0].display_name;
               document.getElementById("latitude").value = lat;
               document.getElementById("longitude").value = lon;
             } else {
