@@ -216,17 +216,17 @@
   const kecamatanSelect = document.getElementById("kecamatan");
   const kelurahanSelect = document.getElementById("kelurahan");
 
-  // Mendapatkan data kecamatan dan kelurahan
-  fetch('/data-kecamatan-kelurahan.json')
-    .then(response => response.json())
-    .then(data => {
-      // Mengisi opsi kecamatan
-      for (let kecamatan in data) {
-        let option = document.createElement('option');
-        option.value = kecamatan;
-        option.textContent = kecamatan;
-        kecamatanSelect.appendChild(option);
-      }
+    // Memuat data kecamatan dan kelurahan
+    fetch('/data/lokasi.json')
+      .then(response => response.json())
+      .then(data => {
+        // Mengisi opsi kecamatan
+        for (let kecamatan in data) {
+          let option = document.createElement('option');
+          option.value = kecamatan;
+          option.textContent = kecamatan;
+          kecamatanSelect.appendChild(option);
+        }
 
       // Event listener ketika kecamatan dipilih
       kecamatanSelect.addEventListener('change', function () {
