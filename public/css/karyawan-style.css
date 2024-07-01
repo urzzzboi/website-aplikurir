@@ -34,10 +34,14 @@
     margin-bottom: 10px;
   }
 
+  .search-bar{
+    margin-top: 10px;
+  }
+
   .total-packages {
     margin-top: 20px;
     font-weight: bold;
-    padding: 10px;
+    margin-bottom: 20px;
   }
 
   .total-packages span {
@@ -66,7 +70,7 @@
   }
 
   .package-list {
-    max-height: 320px;
+    max-height: 300px;
     overflow-y: auto;
     border: none;
     margin-bottom: 10px;
