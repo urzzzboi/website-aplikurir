@@ -43,13 +43,13 @@
     <div class="container">
       <aside class="sidebar">
         <h2>List Data Pengiriman Paket</h2>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Cari berdasarkan nomor resi...">
+        </div>
         <div class="total-packages">
           Jumlah paket yang masuk: <span>
             <%= deliveries.length %>
           </span>
-        </div>
-        <div class="search-bar">
-          <input type="text" id="searchInput" placeholder="Cari berdasarkan nomor resi...">
         </div>
         <div class="package-list">
           <% deliveries.forEach(pkg=> { %>
@@ -64,6 +64,9 @@
                 </span><br>
                 <span class="label" style="text-align: justify;">Alamat Tujuan:</span> <span class="name">
                   <%= pkg.Alamat_Tujuan %>
+                </span><br>
+                <span class="label">Tanggal:</span> <span class="tanggal">
+                  <%= pkg.createdAt %>
                 </span>
               </a>
             </div>
@@ -138,29 +141,48 @@
             </span>
           </div>
           <% } else { %>
-            <!-- Display a message if no delivery is selected -->
             <p>Pilih paket untuk melihat detail.</p>
             <% } %>
       </section>
     </div>
     </main>
 </body>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('searchInput');
-      const packageItems = document.querySelectorAll('.package-item');
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const packageItems = document.querySelectorAll('.package-item');
+  const packageList = document.querySelector('.package-list');
 
-      searchInput.addEventListener('input', function () {
-        const query = this.value.toLowerCase();
-        packageItems.forEach(item => {
-          const noResi = item.querySelector('.noresi').textContent.toLowerCase();
-          if (noResi.includes(query)) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-      });
+  searchInput.addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    packageItems.forEach(item => {
+      const noResi = item.querySelector('.noresi').textContent.toLowerCase();
+      if (noResi.includes(query)) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
     });
-  </script>
+  });
+
+  function sortPackagesByDateNewestFirst() {
+    const itemsArray = Array.from(packageItems);
+
+    itemsArray.sort((a, b) => {
+      const dateA = new Date(a.querySelector('.tanggal').textContent);
+      const dateB = new Date(b.querySelector('.tanggal').textContent);
+
+      return dateB - dateA;
+    });
+
+    packageList.innerHTML = '';
+
+    itemsArray.forEach(item => {
+      packageList.appendChild(item);
+    });
+  }
+  sortPackagesByDateNewestFirst();
+});
+</script>
+
 </html>
