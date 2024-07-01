@@ -138,11 +138,13 @@ h3 {
   padding-top: 30px;
 }
 
-.right-panel {
+.right-panel,
+.left-panel {
   justify-content: center;
 }
 
-.right-panel2 {
+.right-panel2,
+.left-panel2 {
   display: flex;
   flex-direction: column;
   justify-content: end;

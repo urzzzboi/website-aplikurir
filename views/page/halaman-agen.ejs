@@ -125,7 +125,7 @@
         </h2>
       </div>
       <% } %>
-        <form action="/save" method="post" class="form-container">
+        <form id="packageForm" action="/save" method="post" class="form-container">
           <div class="left-form">
             <p>Masukkan data pengirim</p>
             <div class="form-flex">
@@ -145,200 +145,221 @@
               <label for="berat">Berat (kg)</label>
               <input type="text" id="berat" name="berat" placeholder="Berat paket" />
             </div>
-            <div class="form-flex">
-              <label for="panjang">Panjang</label>
-              <input type="text" id="panjang" name="panjang" placeholder="Panjang paket" oninput="hitungDimensi()" />
-            </div>
-            <div class="form-flex">
-              <label for="lebar">Lebar</label>
-              <input type="text" id="lebar" name="lebar" placeholder="Lebar paket" oninput="hitungDimensi()" />
-            </div>
-            <div class="form-flex">
-              <label for="dimensi">Dimensi (cm)</label>
-              <input type="text" id="dimensi" name="dimensi" placeholder="Dimensi paket" />
-            </div>
-            <div class="form-flex">
-              <label for="jumlah_kiriman">Jumlah Kiriman</label>
-              <input type="text" id="jumlah_kiriman" name="jumlah_kiriman"
-                placeholder="Jumlah paket yang akan dikirim" />
-            </div>
-          </div>
-          <div class="line-center"></div>
-          <div class="right-form">
-            <p>Masukkan data penerima</p>
-            <div class="form-flex">
-              <label for="nama_penerima">Nama Penerima</label>
-              <input type="text" id="nama_penerima" name="nama_penerima" placeholder="Nama Penerima" required />
-            </div>
-            <div class="form-flex">
-              <label for="no_hp_penerima">No. HP</label>
-              <input type="text" id="no_hp_penerima" name="no_hp_penerima" placeholder="Nomor Handphone Penerima"
-                required />
-            </div>
-            <div class="form-flex">
-              <label for="alamat_tujuan">Alamat Tujuan</label>
-              <textarea id="alamat_tujuan" name="alamat_tujuan"
-                placeholder="Alamat Tujuan (Masukkan terlebih dahulu kota alamat yang akan dituju)" required></textarea>
-            </div>
-            <div class="alamat-button">
-              <button class="button2" type="button" id="open-map">Buka Peta</button>
-            </div>
-            <p>Memilih zona pengiriman</p>
-            <div class="opsi">
-              <select id="kecamatan" name="kecamatan">
-                <option value="">-- Pilih Kecamatan --</option>
-              </select>
-              <select id="kelurahan" name="kelurahan">
-                <option value="">-- Pilih Kelurahan --</option>
-              </select>
-            </div>
-            <input type="hidden" id="latitude" name="latitude" />
-            <input type="hidden" id="longitude" name="longitude" />
-            <button type="submit" class="button">+ Tambah</button>
-          </div>
-        </form>
-  </div>
-
-  <div id="addressModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="search-container">
-        <input type="text" id="search-address" placeholder="Cari Alamat" />
-        <button class="button2" type="button" id="search-address-button">Cari</button>
+        <div class="form-flex">
+          <label for="panjang">Panjang</label>
+          <input type="text" id="panjang" name="panjang" placeholder="Panjang paket" oninput="hitungDimensi()" />
+        </div>
+        <div class="form-flex">
+          <label for="lebar">Lebar</label>
+          <input type="text" id="lebar" name="lebar" placeholder="Lebar paket" oninput="hitungDimensi()" />
+        </div>
+        <div class="form-flex">
+          <label for="dimensi">Dimensi (cm)</label>
+          <input type="text" id="dimensi" name="dimensi" placeholder="Dimensi paket" />
+        </div>
+        <div class="form-flex">
+          <label for="jumlah_kiriman">Jumlah Kiriman</label>
+          <input type="text" id="jumlah_kiriman" name="jumlah_kiriman"
+            placeholder="Jumlah paket yang akan dikirim" />
+        </div>
       </div>
-      <div id="map"></div>
-      <button class="button2" type="button" id="confirm-map-address" style="margin: 10px;">Konfirmasi Alamat</button>
+      <div class="line-center"></div>
+      <div class="right-form">
+        <p>Masukkan data penerima</p>
+        <div class="form-flex">
+          <label for="nama_penerima">Nama Penerima</label>
+          <input type="text" id="nama_penerima" name="nama_penerima" placeholder="Nama Penerima" required />
+        </div>
+        <div class="form-flex">
+          <label for="no_hp_penerima">No. HP</label>
+          <input type="text" id="no_hp_penerima" name="no_hp_penerima" placeholder="Nomor Handphone Penerima"
+            required />
+        </div>
+        <div class="form-flex">
+          <label for="alamat_tujuan">Alamat Tujuan</label>
+          <textarea id="alamat_tujuan" name="alamat_tujuan"
+            placeholder="Alamat Tujuan (Masukkan terlebih dahulu kota alamat yang akan dituju)" required></textarea>
+        </div>
+        <div class="alamat-button">
+          <button class="button2" type="button" id="open-map">Buka Peta</button>
+        </div>
+        <p>Memilih zona pengiriman</p>
+        <div class="opsi">
+          <select id="kecamatan" name="kecamatan">
+            <option value="">-- Pilih Kecamatan --</option>
+          </select>
+          <select id="kelurahan" name="kelurahan">
+            <option value="">-- Pilih Kelurahan --</option>
+          </select>
+        </div>
+        <input type="hidden" id="latitude" name="latitude" />
+        <input type="hidden" id="longitude" name="longitude" />
+        <button type="submit" class="button">+ Tambah</button>
+      </div>
+    </form>
+</div>
+
+<div id="addressModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="search-container">
+      <input type="text" id="search-address" placeholder="Cari Alamat" />
+      <button class="button2" type="button" id="search-address-button">Cari</button>
     </div>
+    <div id="map"></div>
+    <button class="button2" type="button" id="confirm-map-address" style="margin: 10px;">Konfirmasi Alamat</button>
   </div>
+</div>
 
   <script>
-    // Mendapatkan elemen select
-    const kecamatanSelect = document.getElementById('kecamatan');
-    const kelurahanSelect = document.getElementById('kelurahan');
+  // Mendapatkan elemen select
+  const kecamatanSelect = document.getElementById("kecamatan");
+  const kelurahanSelect = document.getElementById("kelurahan");
 
-    // Memuat data kecamatan dan kelurahan
-    fetch('/data-kecamatan-kelurahan.json')
-      .then(response => response.json())
-      .then(data => {
-        // Mengisi opsi kecamatan
-        for (let kecamatan in data) {
-          let option = document.createElement('option');
-          option.value = kecamatan;
-          option.textContent = kecamatan;
-          kecamatanSelect.appendChild(option);
-        }
+  // Mendapatkan data kecamatan dan kelurahan
+  fetch('/data-kecamatan-kelurahan.json')
+    .then(response => response.json())
+    .then(data => {
+      // Mengisi opsi kecamatan
+      for (let kecamatan in data) {
+        let option = document.createElement('option');
+        option.value = kecamatan;
+        option.textContent = kecamatan;
+        kecamatanSelect.appendChild(option);
+      }
 
-        // Event listener ketika kecamatan dipilih
-        kecamatanSelect.addEventListener('change', function () {
-          // Menghapus opsi kelurahan sebelumnya
-          kelurahanSelect.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
+      // Event listener ketika kecamatan dipilih
+      kecamatanSelect.addEventListener('change', function () {
+        // Menghapus opsi kelurahan sebelumnya
+        kelurahanSelect.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
 
-          // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
-          let kelurahans = data[this.value];
-          if (kelurahans) {
-            kelurahans.forEach(function (kelurahan) {
-              let option = document.createElement('option');
-              option.value = kelurahan;
-              option.textContent = kelurahan;
-              kelurahanSelect.appendChild(option);
-            });
-          }
-        });
-      })
-      .catch(error => console.error('Error fetching data:', error));
-
-    let map;
-    let marker;
-    let selectedAddress = '';
-
-    function initMap() {
-      map = L.map("map").setView([3.5951646965262394, 98.6715265542528], 16);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap contributors",
-      }).addTo(map);
-
-      map.on("click", function (e) {
-        if (marker) {
-          map.removeLayer(marker);
-        }
-        marker = L.marker(e.latlng).addTo(map);
-
-        axios
-          .get(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
-          )
-          .then((response) => {
-            selectedAddress = response.data.display_name;
-            document.getElementById("latitude").value = e.latlng.lat;
-            document.getElementById("longitude").value = e.latlng.lng;
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-            alert("Error fetching data. Please try again.");
+        // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
+        let kelurahans = data[this.value];
+        if (kelurahans) {
+          kelurahans.forEach(function (kelurahan) {
+            let option = document.createElement('option');
+            option.value = kelurahan;
+            option.textContent = kelurahan;
+            kelurahanSelect.appendChild(option);
           });
+        }
       });
-    }
+    })
+    .catch(error => console.error('Error fetching data:', error));
 
-    document.getElementById("open-map").addEventListener("click", () => {
-      const modal = document.getElementById("addressModal");
-      modal.style.display = "block";
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 300);
+  let map;
+  let marker;
+  let selectedAddress = '';
+
+  function initMap() {
+    map = L.map("map").setView([3.5951646965262394, 98.6715265542528], 16);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+
+    map.on("click", function (e) {
+      if (marker) {
+        map.removeLayer(marker);
+      }
+      marker = L.marker(e.latlng).addTo(map);
+
+      axios
+        .get(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
+        )
+        .then((response) => {
+          selectedAddress = response.data.display_name;
+          document.getElementById("latitude").value = e.latlng.lat;
+          document.getElementById("longitude").value = e.latlng.lng;
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          alert("Error fetching data. Please try again.");
+        });
     });
+  }
 
-    document.getElementById("confirm-map-address").addEventListener("click", () => {
-      const modal = document.getElementById("addressModal");
-      document.getElementById("alamat_tujuan").value = selectedAddress;
-      modal.style.display = "none";
-    });
+  document.getElementById("open-map").addEventListener("click", () => {
+    const modal = document.getElementById("addressModal");
+    modal.style.display = "block";
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 300);
+  });
 
-    document.getElementById("search-address-button").addEventListener("click", () => {
-      const searchAddress = document.getElementById("search-address").value;
-      if (searchAddress) {
-        axios
-          .get(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-              searchAddress
-            )}`
-          )
-          .then((response) => {
-            if (response.data.length > 0) {
-              const { lat, lon } = response.data[0];
-              const latLng = [parseFloat(lat), parseFloat(lon)];
-              map.setView(latLng, 13);
-              if (marker) {
-                map.removeLayer(marker);
-              }
-              marker = L.marker(latLng).addTo(map);
-              selectedAddress = response.data[0].display_name;
-              document.getElementById("latitude").value = lat;
-              document.getElementById("longitude").value = lon;
-            } else {
-              alert("Alamat tidak ditemukan. Coba lagi.");
+  document.getElementById("confirm-map-address").addEventListener("click", () => {
+    const modal = document.getElementById("addressModal");
+    document.getElementById("alamat_tujuan").value = selectedAddress;
+    modal.style.display = "none";
+  });
+
+  document.getElementById("search-address-button").addEventListener("click", () => {
+    const searchAddress = document.getElementById("search-address").value;
+    const medanBoundingBox = '98.5610,3.5182,98.7442,3.7064'; // Batas koordinat Medan (southwest_lng, southwest_lat, northeast_lng, northeast_lat)
+
+    if (searchAddress) {
+      axios
+        .get(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+            searchAddress
+          )}&bounded=1&viewbox=${medanBoundingBox}`
+        )
+        .then((response) => {
+          if (response.data.length > 0) {
+            const { lat, lon } = response.data[0];
+            const latLng = [parseFloat(lat), parseFloat(lon)];
+            map.setView(latLng, 13);
+            if (marker) {
+              map.removeLayer(marker);
             }
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-            alert("Error fetching data. Please try again.");
-          });
-      } else {
-        alert("Masukkan alamat yang ingin dicari.");
+            marker = L.marker(latLng).addTo(map);
+            selectedAddress = response.data[0].display_name;
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = lon;
+          } else {
+            alert("Alamat tidak ditemukan. Coba lagi.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          alert("Error fetching data. Please try again.");
+        });
+    } else {
+      alert("Masukkan alamat yang ingin dicari.");
+    }
+  });
+
+  document.getElementsByClassName("close")[0].onclick = function () {
+    document.getElementById("addressModal").style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    const modal = document.getElementById("addressModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  window.addEventListener("load", initMap);
+
+  document.getElementById("packageForm").addEventListener("submit", function (event) {
+    const requiredFields = [
+      { id: "nama_pengirim", name: "Nama Pengirim" },
+      { id: "no_hp_pengirim", name: "No. HP Pengirim" },
+      { id: "nama_penerima", name: "Nama Penerima" },
+      { id: "no_hp_penerima", name: "No. HP Penerima" },
+      { id: "alamat_tujuan", name: "Alamat Tujuan" },
+    ];
+
+    for (let field of requiredFields) {
+      if (!document.getElementById(field.id).value.trim()) {
+        event.preventDefault();
+        alert(`Harap isi kolom ${field.name} terlebih dahulu.`);
+        document.getElementById(field.id).focus();
+        break;
       }
-    });
-
-    document.getElementsByClassName("close")[0].onclick = function () {
-      document.getElementById("addressModal").style.display = "none";
-    };
-
-    window.onclick = function (event) {
-      const modal = document.getElementById("addressModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
-
-    window.addEventListener("load", initMap);
+    }
+  });
   </script>
 </body>
 
