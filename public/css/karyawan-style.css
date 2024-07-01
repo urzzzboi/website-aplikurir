@@ -108,6 +108,12 @@
     color: black;
   }
 
+  .tanggal {
+    font-size: 10pt;
+    font-weight: 700;
+    color: black;
+  }
+
   .detail-item label {
     font-size: 10pt;
     font-weight: 600;
