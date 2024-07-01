@@ -6,9 +6,8 @@ import { render2Form, saveKurir } from '../controllers/regisKurir.js';
 import { render3Form, saveUser, } from '../controllers/regisUser.js';
 import { deleteUser, fetchUsers, renderInitialView } from '../controllers/regisList.js';
 import { getAllPackages, getPackageById } from '../controllers/packageController.js';
-import { getPaketByKelurahan, getKurirByKelurahan, assignPaketToKurir } from '../controllers/kurir.js';
+import { getPaketByKelurahan, getKurirByKelurahan, assignPaketToKurir, getKurirWithPaket, getListPengantaranPaketData } from '../controllers/kurir.js';
 import { getHistory } from '../controllers/historyController.js';
-import { getKurirWithPaket } from '../controllers/kurir.js';
 
 
 const router = express.Router();
@@ -56,5 +55,6 @@ router.post('/delete-user/:id', deleteUser);
 
 router.get('/list-pengantaran-paket', path_controller.listPengantaran);
 router.get('/list-pengantaran-paket/data', getKurirWithPaket);
+router.get('/list-pengantaran-paket/data', getListPengantaranPaketData);
 
 export default router;

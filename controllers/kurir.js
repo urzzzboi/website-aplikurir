@@ -60,3 +60,28 @@ export const getKurirWithPaket = async (req, res) => {
         res.status(500).send(error.message);
     }
 };
+
+export const getListPengantaranPaketData = (req, res) => {
+    const { kecamatan, kelurahan } = req.query;
+    const query = `
+        SELECT
+            dp.id_kurir, dk.nama, dk.handphone, pp.ID_Data_Penerimaan_Paket, pp.nomor_resi,
+            pp.Nama_Penerima, pp.Alamat_Tujuan, pp.No_HP_Penerima, pp.Deskripsi,
+            pp.Berat, pp.Dimensi, pp.Jumlah_Kiriman, pp.latitude, pp.longitude
+        FROM
+            data_kurir dk
+        LEFT JOIN
+            pengantaran_paket dp ON dk.id_kurir = dp.kurir_id
+        LEFT JOIN
+            penerimaan_paket pp ON dp.paket_id = pp.ID_Data_Penerimaan_Paket
+        WHERE
+            dk.kecamatan = ? AND dk.kelurahan = ?
+    `;
+
+    pool.query(query, [kecamatan, kelurahan], (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: 'Database query error' });
+        }
+        res.json(results);
+    });
+};
