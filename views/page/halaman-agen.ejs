@@ -139,28 +139,28 @@
             </div>
             <div class="form-flex">
               <label for="deskripsi">Deskripsi</label>
-              <input type="text" id="deskripsi" name="deskripsi" placeholder="Deskripsi paket yang akan dikirim" />
+              <input type="text" id="deskripsi" name="deskripsi" placeholder="Deskripsi paket yang akan dikirim" required/>
             </div>
             <div class="form-flex">
               <label for="berat">Berat (kg)</label>
-              <input type="text" id="berat" name="berat" placeholder="Berat paket" />
+              <input type="text" id="berat" name="berat" placeholder="Berat paket" required/>
             </div>
         <div class="form-flex">
           <label for="panjang">Panjang  (cm)</label>
-          <input type="text" id="panjang" name="panjang" placeholder="Panjang paket" oninput="hitungDimensi()" />
+          <input type="text" id="panjang" name="panjang" placeholder="Panjang paket" oninput="hitungDimensi()" required/>
         </div>
         <div class="form-flex">
           <label for="lebar">Lebar (cm)</label>
-          <input type="text" id="lebar" name="lebar" placeholder="Lebar paket" oninput="hitungDimensi()" />
+          <input type="text" id="lebar" name="lebar" placeholder="Lebar paket" oninput="hitungDimensi()" required/>
         </div>
         <div class="form-flex">
           <label for="dimensi">Dimensi (cm)</label>
-          <input type="text" id="dimensi" name="dimensi" placeholder="Dimensi paket" />
+          <input type="text" id="dimensi" name="dimensi" placeholder="Dimensi paket" required/>
         </div>
         <div class="form-flex">
           <label for="jumlah_kiriman">Jumlah Kiriman<br>(buah)</label>
           <input type="text" id="jumlah_kiriman" name="jumlah_kiriman"
-            placeholder="Jumlah paket yang akan dikirim" />
+            placeholder="Jumlah paket yang akan dikirim" required/>
         </div>
       </div>
       <div class="line-center"></div>
@@ -185,10 +185,10 @@
         </div>
         <p>Memilih zona pengiriman</p>
         <div class="opsi">
-          <select id="kecamatan" name="kecamatan">
+          <select id="kecamatan" name="kecamatan" required>
             <option value="">-- Pilih Kecamatan --</option>
           </select>
-          <select id="kelurahan" name="kelurahan">
+          <select id="kelurahan" name="kelurahan" required>
             <option value="">-- Pilih Kelurahan --</option>
           </select>
         </div>
