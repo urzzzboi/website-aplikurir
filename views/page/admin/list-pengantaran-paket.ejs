@@ -56,6 +56,34 @@
             display: none;
         }
 
+        .right-panel {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+            border: none;
+            height: 80vh;
+        }
+
+        .right-panel::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .right-panel::-webkit-scrollbar-thumb {
+            background: rgb(134, 167, 137);
+            border: 2px solid rgb(235, 243, 232);
+            border-radius: 10px;
+        }
+
+        .right-panel::-webkit-scrollbar-track {
+            background: rgb(235, 243, 232);
+            border-radius: 10px;
+        }
+
+        .right-panel::-webkit-scrollbar-thumb:hover {
+            background: rgb(134, 167, 145);
+        }
+
         /* Modal styles */
         .modal {
             display: none;
@@ -180,43 +208,44 @@
             })
             .catch(error => console.error('Error fetching data:', error));
 
-        async function fetchKurir() {
-            const kecamatan = kecamatanSelect.value;
-            const kelurahan = kelurahanSelect.value;
+            async function fetchKurir() {
+    const kecamatan = kecamatanSelect.value;
+    const kelurahan = kelurahanSelect.value;
 
-            const response = await fetch(`/list-pengantaran-paket/data?kecamatan=${kecamatan}&kelurahan=${kelurahan}`);
-            const data = await response.json();
+    const response = await fetch(`/list-pengantaran-paket/data?kecamatan=${kecamatan}&kelurahan=${kelurahan}`);
+    const data = await response.json();
+    console.log(data);  // Tambahkan ini untuk melihat data yang diterima
 
-            kurirListContainer.innerHTML = ''; // Clear existing content
-            paketListContainer.innerHTML = ''; // Clear existing content
+    kurirListContainer.innerHTML = ''; // Clear existing content
+    paketListContainer.innerHTML = ''; // Clear existing content
 
-            if (data.length > 0) {
-                const kurirMap = {};
+    if (data.length > 0) {
+        const kurirMap = {};
 
-                data.forEach(item => {
-                    if (!kurirMap[item.id_kurir]) {
-                        kurirMap[item.id_kurir] = {
-                            nama: item.nama,
-                            paket: []
-                        };
-                    }
-                    if (item.ID_Data_Penerimaan_Paket) {
-                        kurirMap[item.id_kurir].paket.push(item);
-                    }
-                });
-
-                for (let id_kurir in kurirMap) {
-                    const kurir = kurirMap[id_kurir];
-                    const kurirButton = document.createElement('button');
-                    kurirButton.className = 'kurir-button';
-                    kurirButton.innerHTML = `${kurir.nama}`;
-                    kurirButton.onclick = () => showPaketList(kurir.paket);
-                    kurirListContainer.appendChild(kurirButton);
-                }
-            } else {
-                kurirListContainer.innerHTML = '<p>Tidak ada data kurir untuk kecamatan dan kelurahan ini.</p>';
+        data.forEach(item => {
+            if (!kurirMap[item.id_kurir]) {
+                kurirMap[item.id_kurir] = {
+                    nama: item.nama,
+                    paket: []
+                };
             }
+            if (item.ID_Data_Penerimaan_Paket) {
+                kurirMap[item.id_kurir].paket.push(item);
+            }
+        });
+
+        for (let id_kurir in kurirMap) {
+            const kurir = kurirMap[id_kurir];
+            const kurirButton = document.createElement('button');
+            kurirButton.className = 'kurir-button';
+            kurirButton.innerHTML = `${kurir.nama}`;
+            kurirButton.onclick = () => showPaketList(kurir.paket);
+            kurirListContainer.appendChild(kurirButton);
         }
+    } else {
+        kurirListContainer.innerHTML = '<p>Tidak ada data kurir untuk kecamatan dan kelurahan ini.</p>';
+    }
+}
 
         function showPaketList(paket) {
             paketListContainer.innerHTML = ''; // Clear existing content

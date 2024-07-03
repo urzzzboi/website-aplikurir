@@ -48,7 +48,7 @@ export const getKurirWithPaket = async (req, res) => {
     const { kecamatan, kelurahan } = req.query;
     try {
         const [results, metadata] = await sequelize.query(
-            `SELECT k.id_kurir, k.nama, k.handphone, p.ID_Data_Penerimaan_Paket, p.nomor_resi, p.Nama_Penerima, p.Alamat_Tujuan, p.No_HP_Penerima 
+            `SELECT k.id_kurir, k.nama, k.handphone, p.ID_Data_Penerimaan_Paket, p.nomor_resi, p.Nama_Penerima, p.Alamat_Tujuan, p.No_HP_Penerima, p.Deskripsi, p.Berat, p.Dimensi, p.Jumlah_Kiriman 
              FROM data_kurir k 
              LEFT JOIN pengantaran_paket pp ON k.id_kurir = pp.kurir_id 
              LEFT JOIN penerimaan_paket p ON pp.paket_id = p.ID_Data_Penerimaan_Paket
@@ -65,9 +65,9 @@ export const getListPengantaranPaketData = (req, res) => {
     const { kecamatan, kelurahan } = req.query;
     const query = `
         SELECT
-            dp.id_kurir, dk.nama, dk.handphone, pp.ID_Data_Penerimaan_Paket, pp.nomor_resi,
+            dk.id_kurir, dk.nama, dk.handphone, pp.ID_Data_Penerimaan_Paket, pp.nomor_resi,
             pp.Nama_Penerima, pp.Alamat_Tujuan, pp.No_HP_Penerima, pp.Deskripsi,
-            pp.Berat, pp.Dimensi, pp.Jumlah_Kiriman, pp.latitude, pp.longitude
+            pp.Berat, pp.Dimensi, pp.Jumlah_Kiriman
         FROM
             data_kurir dk
         LEFT JOIN
@@ -80,8 +80,10 @@ export const getListPengantaranPaketData = (req, res) => {
 
     pool.query(query, [kecamatan, kelurahan], (error, results) => {
         if (error) {
+            console.error('Database query error:', error);
             return res.status(500).json({ error: 'Database query error' });
         }
+        console.log(results);
         res.json(results);
     });
 };
