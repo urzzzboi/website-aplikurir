@@ -6,7 +6,7 @@ import { sequelize } from "./models/model.js";
 //ini express
 const app = express();
 
-const hostname = "172.22.171.125";
+const hostname = "192.168.1.108";
 const port = 8081;
 
 app.use(express.json());
@@ -20,6 +20,7 @@ app.use(
     cookie: { secure: false },
   })
 );
+
 app.post("/dataPengantaranLogin", async (req, res) => {
   try {
     const { email, password } = req.body;

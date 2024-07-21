@@ -46,7 +46,7 @@
                     <% if (packages && packages.length > 0) { %>
                         <% packages.forEach(pkg => { %>
                             <div class="package">
-                                <p>Nomor Resi: <%= pkg.nomor_resi %></p>
+                                <p><b>Nomor Resi: <%= pkg.nomor_resi %></b></p>
                                 <p>Alamat: <%= pkg.Alamat_Tujuan %> | Penerima: <%= pkg.Nama_Penerima %></p>
                                 <p>Status Pengiriman: 
                                     <% if (pkg.status_pengiriman === 'Selesai') { %>
