@@ -25,7 +25,7 @@
         .paket-box {
             border: 1px solid #ccc;
             padding: 10px;
-            margin: 10px 0;
+            margin: 10px 5px;
             background-color: rgb(235, 243, 232);
             cursor: pointer;
         }
@@ -61,10 +61,12 @@
             overflow-y: auto;
             padding: 0;
             border: none;
+  
             height: 80vh;
         }
 
         .right-panel::-webkit-scrollbar {
+      
             width: 10px;
             height: 10px;
         }
@@ -107,9 +109,19 @@
             width: 80%;
         }
 
-        .confirm-section {
-            margin-top: 5px;
+        .confirm-section {   
+
+            width: 100%;
+
             margin-bottom: 20px;
+            justify-content: right;
+        }
+
+        .confirm-section .confirm-btn{
+            
+            justify-content: right;
+            align-items: end;
+      
         }
 
         .close {
@@ -155,7 +167,9 @@
                 <div class="confirm-section">
                     <button id="confirmKecamatanKelurahan" class="confirm-btn">Konfirmasi</button>
                 </div>
-                <div id="kurirList"></div>
+                <h3>List kurir yang mengantarkan paket</h3>
+                <hr>
+                <div id="kurirList" style="margin: 5px 0;"></div>
             </div>
             <div class="line-center"></div>
             <div class="right-panel" id="paketList">
@@ -208,44 +222,44 @@
             })
             .catch(error => console.error('Error fetching data:', error));
 
-            async function fetchKurir() {
-    const kecamatan = kecamatanSelect.value;
-    const kelurahan = kelurahanSelect.value;
+        async function fetchKurir() {
+            const kecamatan = kecamatanSelect.value;
+            const kelurahan = kelurahanSelect.value;
 
-    const response = await fetch(`/list-pengantaran-paket/data?kecamatan=${kecamatan}&kelurahan=${kelurahan}`);
-    const data = await response.json();
-    console.log(data);  // Tambahkan ini untuk melihat data yang diterima
+            const response = await fetch(`/list-pengantaran-paket/data?kecamatan=${kecamatan}&kelurahan=${kelurahan}`);
+            const data = await response.json();
+            console.log(data);  // Tambahkan ini untuk melihat data yang diterima
 
-    kurirListContainer.innerHTML = ''; // Clear existing content
-    paketListContainer.innerHTML = ''; // Clear existing content
+            kurirListContainer.innerHTML = ''; // Clear existing content
+            paketListContainer.innerHTML = ''; // Clear existing content
 
-    if (data.length > 0) {
-        const kurirMap = {};
+            if (data.length > 0) {
+                const kurirMap = {};
 
-        data.forEach(item => {
-            if (!kurirMap[item.id_kurir]) {
-                kurirMap[item.id_kurir] = {
-                    nama: item.nama,
-                    paket: []
-                };
+                data.forEach(item => {
+                    if (!kurirMap[item.id_kurir]) {
+                        kurirMap[item.id_kurir] = {
+                            nama: item.nama,
+                            paket: []
+                        };
+                    }
+                    if (item.ID_Data_Penerimaan_Paket) {
+                        kurirMap[item.id_kurir].paket.push(item);
+                    }
+                });
+
+                for (let id_kurir in kurirMap) {
+                    const kurir = kurirMap[id_kurir];
+                    const kurirButton = document.createElement('button');
+                    kurirButton.className = 'kurir-button';
+                    kurirButton.innerHTML = `${kurir.nama}`;
+                    kurirButton.onclick = () => showPaketList(kurir.paket);
+                    kurirListContainer.appendChild(kurirButton);
+                }
+            } else {
+                kurirListContainer.innerHTML = '<p>Tidak ada data kurir untuk kecamatan dan kelurahan ini.</p>';
             }
-            if (item.ID_Data_Penerimaan_Paket) {
-                kurirMap[item.id_kurir].paket.push(item);
-            }
-        });
-
-        for (let id_kurir in kurirMap) {
-            const kurir = kurirMap[id_kurir];
-            const kurirButton = document.createElement('button');
-            kurirButton.className = 'kurir-button';
-            kurirButton.innerHTML = `${kurir.nama}`;
-            kurirButton.onclick = () => showPaketList(kurir.paket);
-            kurirListContainer.appendChild(kurirButton);
         }
-    } else {
-        kurirListContainer.innerHTML = '<p>Tidak ada data kurir untuk kecamatan dan kelurahan ini.</p>';
-    }
-}
 
         function showPaketList(paket) {
             paketListContainer.innerHTML = ''; // Clear existing content
@@ -254,7 +268,7 @@
                     const paketBox = document.createElement('div');
                     paketBox.className = 'paket-box';
                     paketBox.innerHTML = `
-                                <p>No. Resi: ${item.nomor_resi}</p>
+                                <p><b>No. Resi: ${item.nomor_resi}</b></p>
                                 <p>Nama Penerima: ${item.Nama_Penerima}</p>
                                 <p>Alamat Tujuan: ${item.Alamat_Tujuan}</p>
                                 <p>No. HP: ${item.No_HP_Penerima}</p>
