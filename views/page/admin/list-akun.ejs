@@ -157,7 +157,12 @@
                     </form>
                 </aside>
                 <div class="line-center"></div>
-                <% if (typeof users !=='undefined' && users.length> 0) { %>
+                <% if (typeof success !== 'undefined') { %>
+                    <script>
+                        alert('<%= success %>');
+                    </script>
+                <% } %>
+                <% if (typeof users !== 'undefined' && users.length > 0) { %>
                     <div class="user-list">
                         <ul>
                             <% users.forEach(function(user) { %>
@@ -165,25 +170,21 @@
                                     <span><i class="fas fa-user"></i>
                                         <%= user.nama || user.email %>
                                     </span>
-                                    <form action="/delete-user/<%= userType === 'kurir' ? user.id_kurir : user.id %>"
-                                        method="post">
+                                    <form action="/delete-user/<%= userType === 'kurir' ? user.id_kurir : user.id %>" method="post">
                                         <input type="hidden" name="userType" value="<%= userType %>">
                                         <button type="submit"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </li>
-                                <% }); %>
+                            <% }); %>
                         </ul>
                     </div>
-                    <% } else { %>
-                        <p>Pilih jenis pengguna untuk melihat daftar akun.</p>
-                        <% } %>
-  <div class="kosong"></div>
+                <% } else { %>
+                    <p>Pilih jenis pengguna untuk melihat daftar akun.</p>
+                <% } %>
+                <div class="kosong"></div>
             </div>
-
         </div>
-
     </div>
-
 </body>
 
 </html>

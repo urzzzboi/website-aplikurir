@@ -22,11 +22,21 @@
         </a>
       </div>
     </div>
+    <% if (typeof success !== 'undefined' && success) { %>
+      <script>
+        alert('<%= success %>');
+      </script>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <script>
+        alert('<%= error %>');
+      </script>
+    <% } %>
     <form class="form-pendaftaran" action="/tambahagen" method="post">
       <p>Menambahkan akun agen & karyawan</p>
-      <input type="text" id="email" name="email" placeholder="Email" value="" />
-      <input type="text" id="password" name="password" placeholder="Password" value="" />
-      <select id="status" name="status">
+      <input type="email" id="email" name="email" placeholder="Email" value="" required/>
+      <input type="password" id="password" name="password" placeholder="Password" value="" required/>
+      <select id="status" name="status" required>
         <option value="">-- Opsi Status --</option>
         <option value="agen">agen</option>
         <option value="karyawan">karyawan</option>
