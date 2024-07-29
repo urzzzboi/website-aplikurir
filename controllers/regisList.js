@@ -72,7 +72,7 @@ export const deleteUser = async (req, res) => {
         }
         await transaction.commit();
         console.log(`User with ID: ${userId} successfully deleted`);
-        fetchUsers(req, res);
+        res.render('page/admin/list-akun', { success: 'Akun berhasil dihapus', userType: userType });
     } catch (error) {
         if (transaction) await transaction.rollback();
         console.error('Error deleting user:', error);

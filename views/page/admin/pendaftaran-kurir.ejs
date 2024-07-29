@@ -22,12 +22,24 @@
       </div>
     </div>
 
+    <% if (typeof error !== 'undefined') { %>
+      <script>
+        alert('<%= error %>');
+      </script>
+    <% } %>
+
+    <% if (typeof success !== 'undefined') { %>
+      <script>
+        alert('<%= success %>');
+      </script>
+    <% } %>
+
     <form class="form-pendaftaran" action="/tambahkurir" method="post">
       <p>Menambahkan akun Kurir</p>
       <input type="text" id="nama" name="nama" placeholder="Nama" value="" required/>
       <input type="text" id="handphone" name="handphone" placeholder="No. Handphone" value="" required/>
-      <input type="text" id="email" name="email" placeholder="Email" value="" required/>
-      <input type="text" id="password" name="password" placeholder="Password" value="" required/>
+      <input type="email" id="email" name="email" placeholder="Email" value="" required/>
+      <input type="password" id="password" name="password" placeholder="Password" value="" required/>
 
       <select id="kecamatan" name="kecamatan" required>
         <option value="">-- Pilih Kecamatan --</option>
@@ -40,40 +52,45 @@
     </form>
 
     <script>
-  // Mendapatkan elemen select
-  const kecamatanSelect = document.getElementById('kecamatan');
-  const kelurahanSelect = document.getElementById('kelurahan');
+      // Mendapatkan elemen select
+      const kecamatanSelect = document.getElementById('kecamatan');
+      const kelurahanSelect = document.getElementById('kelurahan');
 
-  // Memuat data dari file JSON
-  fetch('/data/lokasi.json')
-    .then(response => response.json())
-    .then(data => {
-      // Mengisi opsi kecamatan
-      for (let kecamatan in data) {
-        let option = document.createElement('option');
-        option.value = kecamatan;
-        option.textContent = kecamatan;
-        kecamatanSelect.appendChild(option);
-      }
-
-      // Event listener ketika kecamatan dipilih
-      kecamatanSelect.addEventListener('change', function () {
-        // Menghapus opsi kelurahan sebelumnya
-        kelurahanSelect.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
-
-        // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
-        let kelurahans = data[this.value];
-        if (kelurahans) {
-          kelurahans.forEach(function (kelurahan) {
+      // Memuat data dari file JSON
+      fetch('/data/lokasi.json')
+        .then(response => response.json())
+        .then(data => {
+          // Mengisi opsi kecamatan
+          for (let kecamatan in data) {
             let option = document.createElement('option');
-            option.value = kelurahan;
-            option.textContent = kelurahan;
-            kelurahanSelect.appendChild(option);
+            option.value = kecamatan;
+            option.textContent = kecamatan;
+            kecamatanSelect.appendChild(option);
+          }
+
+          // Event listener ketika kecamatan dipilih
+          kecamatanSelect.addEventListener('change', function () {
+            // Menghapus opsi kelurahan sebelumnya
+            kelurahanSelect.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
+
+            // Mendapatkan kelurahan berdasarkan kecamatan yang dipilih
+            let kelurahans = data[this.value];
+            if (kelurahans) {
+              let fragment = document.createDocumentFragment();
+              kelurahans.forEach(function (kelurahan) {
+                let option = document.createElement('option');
+                option.value = kelurahan;
+                option.textContent = kelurahan;
+                fragment.appendChild(option);
+              });
+              kelurahanSelect.appendChild(fragment);
+            }
           });
-        }
-      });
-    })
-    .catch(error => console.error('Error fetching data:', error));
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          alert('Gagal memuat data lokasi. Silakan coba lagi nanti.');
+        });
     </script>
   </body>
 </html>
