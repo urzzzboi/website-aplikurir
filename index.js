@@ -6,7 +6,7 @@ import { sequelize } from "./models/model.js";
 //ini express
 const app = express();
 
-const hostname = "192.168.100.4";
+const hostname = "192.168.242.135";
 const port = 8081;
 
 app.use(express.json());

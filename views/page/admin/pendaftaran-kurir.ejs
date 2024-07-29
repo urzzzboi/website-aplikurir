@@ -24,15 +24,15 @@
 
     <form class="form-pendaftaran" action="/tambahkurir" method="post">
       <p>Menambahkan akun Kurir</p>
-      <input type="text" id="nama" name="nama" placeholder="Nama" value=""/>
-      <input type="text" id="handphone" name="handphone" placeholder="No. Handphone" value="" />
-      <input type="text" id="email" name="email" placeholder="Email" value="" />
-      <input type="text" id="password" name="password" placeholder="Password" value="" />
+      <input type="text" id="nama" name="nama" placeholder="Nama" value="" required/>
+      <input type="text" id="handphone" name="handphone" placeholder="No. Handphone" value="" required/>
+      <input type="text" id="email" name="email" placeholder="Email" value="" required/>
+      <input type="text" id="password" name="password" placeholder="Password" value="" required/>
 
-      <select id="kecamatan" name="kecamatan">
+      <select id="kecamatan" name="kecamatan" required>
         <option value="">-- Pilih Kecamatan --</option>
       </select>
-      <select id="kelurahan" name="kelurahan">
+      <select id="kelurahan" name="kelurahan" required>
         <option value="">-- Pilih Kelurahan --</option>
       </select>
 
